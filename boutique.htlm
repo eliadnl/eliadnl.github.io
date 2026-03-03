@@ -23,98 +23,53 @@
 
     <h3>Colombes</h3>
     <div class="product">
-      <img src="images/colombes_vert_sticker.jpg" alt="Colombes Vert Sticker">
-      <p>Sticker Vert - 1,50€</p>
-      <button onclick="addToCart('Colombes Vert Sticker', 1.5)">Ajouter au panier</button>
-    </div>
-    <div class="product">
-      <img src="images/colombes_vert_carte.jpg" alt="Colombes Vert Carte">
+      <img src="images/carte colombe verte.png" alt="Carte Colombe Verte">
       <p>Carte Vert - 3€</p>
-      <button onclick="addToCart('Colombes Vert Carte', 3)">Ajouter au panier</button>
+      <button onclick="addToCart('Carte Colombe Verte', 3)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="images/colombes_bleu_sticker.jpg" alt="Colombes Bleu Sticker">
-      <p>Sticker Bleu - 1,50€</p>
-      <button onclick="addToCart('Colombes Bleu Sticker', 1.5)">Ajouter au panier</button>
-    </div>
-    <div class="product">
-      <img src="images/colombes_bleu_carte.jpg" alt="Colombes Bleu Carte">
+      <img src="images/carte colombe bleu.png" alt="Carte Colombe Bleu">
       <p>Carte Bleu - 3€</p>
-      <button onclick="addToCart('Colombes Bleu Carte', 3)">Ajouter au panier</button>
+      <button onclick="addToCart('Carte Colombe Bleu', 3)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="images/colombes_rose_sticker.jpg" alt="Colombes Rose Sticker">
-      <p>Sticker Rose - 1,50€</p>
-      <button onclick="addToCart('Colombes Rose Sticker', 1.5)">Ajouter au panier</button>
-    </div>
-    <div class="product">
-      <img src="images/colombes_rose_carte.jpg" alt="Colombes Rose Carte">
+      <img src="images/carte colombe rose.png" alt="Carte Colombe Rose">
       <p>Carte Rose - 3€</p>
-      <button onclick="addToCart('Colombes Rose Carte', 3)">Ajouter au panier</button>
+      <button onclick="addToCart('Carte Colombe Rose', 3)">Ajouter au panier</button>
     </div>
 
     <h3>Adoration</h3>
     <div class="product">
-      <img src="images/adoration_vert_sticker.jpg" alt="Adoration Vert Sticker">
-      <p>Sticker Vert - 1,50€</p>
-      <button onclick="addToCart('Adoration Vert Sticker', 1.5)">Ajouter au panier</button>
-    </div>
-    <div class="product">
-      <img src="images/adoration_vert_carte.jpg" alt="Adoration Vert Carte">
+      <img src="images/carte adoration verte.png" alt="Carte Adoration Verte">
       <p>Carte Vert - 3€</p>
-      <button onclick="addToCart('Adoration Vert Carte', 3)">Ajouter au panier</button>
+      <button onclick="addToCart('Carte Adoration Verte', 3)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="images/adoration_bleu_sticker.jpg" alt="Adoration Bleu Sticker">
-      <p>Sticker Bleu - 1,50€</p>
-      <button onclick="addToCart('Adoration Bleu Sticker', 1.5)">Ajouter au panier</button>
-    </div>
-    <div class="product">
-      <img src="images/adoration_bleu_carte.jpg" alt="Adoration Bleu Carte">
+      <img src="images/carte adoration bleu.png" alt="Carte Adoration Bleu">
       <p>Carte Bleu - 3€</p>
-      <button onclick="addToCart('Adoration Bleu Carte', 3)">Ajouter au panier</button>
+      <button onclick="addToCart('Carte Adoration Bleu', 3)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="images/adoration_rose_sticker.jpg" alt="Adoration Rose Sticker">
-      <p>Sticker Rose - 1,50€</p>
-      <button onclick="addToCart('Adoration Rose Sticker', 1.5)">Ajouter au panier</button>
-    </div>
-    <div class="product">
-      <img src="images/adoration_rose_carte.jpg" alt="Adoration Rose Carte">
+      <img src="images/carte adoration rose.png" alt="Carte Adoration Rose">
       <p>Carte Rose - 3€</p>
-      <button onclick="addToCart('Adoration Rose Carte', 3)">Ajouter au panier</button>
+      <button onclick="addToCart('Carte Adoration Rose', 3)">Ajouter au panier</button>
     </div>
 
     <h3>Bougies</h3>
     <div class="product">
-      <img src="images/bougies_vert_sticker.jpg" alt="Bougies Vert Sticker">
-      <p>Sticker Vert - 1,50€</p>
-      <button onclick="addToCart('Bougies Vert Sticker', 1.5)">Ajouter au panier</button>
-    </div>
-    <div class="product">
-      <img src="images/bougies_vert_carte.jpg" alt="Bougies Vert Carte">
+      <img src="images/carte bougies verte.png" alt="Carte Bougies Verte">
       <p>Carte Vert - 3€</p>
-      <button onclick="addToCart('Bougies Vert Carte', 3)">Ajouter au panier</button>
+      <button onclick="addToCart('Carte Bougies Verte', 3)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="images/bougies_bleu_sticker.jpg" alt="Bougies Bleu Sticker">
-      <p>Sticker Bleu - 1,50€</p>
-      <button onclick="addToCart('Bougies Bleu Sticker', 1.5)">Ajouter au panier</button>
-    </div>
-    <div class="product">
-      <img src="images/bougies_bleu_carte.jpg" alt="Bougies Bleu Carte">
+      <img src="images/carte bougies bleu.png" alt="Carte Bougies Bleu">
       <p>Carte Bleu - 3€</p>
-      <button onclick="addToCart('Bougies Bleu Carte', 3)">Ajouter au panier</button>
+      <button onclick="addToCart('Carte Bougies Bleu', 3)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="images/bougies_rose_sticker.jpg" alt="Bougies Rose Sticker">
-      <p>Sticker Rose - 1,50€</p>
-      <button onclick="addToCart('Bougies Rose Sticker', 1.5)">Ajouter au panier</button>
-    </div>
-    <div class="product">
-      <img src="images/bougies_rose_carte.jpg" alt="Bougies Rose Carte">
+      <img src="images/carte bougies rose.png" alt="Carte Bougies Rose">
       <p>Carte Rose - 3€</p>
-      <button onclick="addToCart('Bougies Rose Carte', 3)">Ajouter au panier</button>
+      <button onclick="addToCart('Carte Bougies Rose', 3)">Ajouter au panier</button>
     </div>
 
     <h3>Panier</h3>
