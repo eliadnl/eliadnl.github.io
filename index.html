@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accueil - L'Atelier d'Elia</title>
+  <title>Boutique - L'Atelier d'Elia</title>
   <link rel="stylesheet" href="style.css">
   <style>
     body {
@@ -20,95 +20,111 @@
       justify-content: space-between;
       align-items: center;
     }
-
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-
-    nav a {
+    header nav a {
       color: white;
-      text-decoration: none;
       margin-left: 20px;
+      text-decoration: none;
       font-weight: bold;
     }
-
-    nav a:hover {
+    header nav a:hover {
       text-decoration: underline;
+    }
+
+    .cart-indicator {
+      background-color: #ff9966;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
     main {
       padding: 20px;
+    }
+
+    h1, h2 {
       text-align: center;
     }
 
-    .collections {
+    .products-grid {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
       gap: 20px;
+      justify-content: center;
       margin-top: 30px;
     }
 
-    .collection {
-      width: 200px;
-      cursor: pointer;
+    .product {
+      width: 180px;
       text-align: center;
       border: 1px solid #ccc;
       border-radius: 10px;
       background-color: #fff5e6;
+      cursor: pointer;
       transition: transform 0.2s;
       padding: 10px;
     }
-
-    .collection img {
-      width: 180px;
+    .product img {
+      width: 160px;
       height: auto;
       border-radius: 5px;
     }
-
-    .collection p {
-      margin-top: 10px;
+    .product p {
+      margin-top: 5px;
       font-weight: bold;
-      font-size: 16px;
     }
-
-    .collection:hover {
+    .product:hover {
       transform: scale(1.05);
     }
-
   </style>
 </head>
 <body>
 
   <header>
-    <h1>L'Atelier d'Elia</h1>
-    <nav>
-      <a href="index.html">Accueil</a>
-      <a href="boutique.html">Boutique</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <div>
+      <a href="index.html" style="font-size:18px;">Accueil</a>
+      <a href="boutique.html" style="font-size:18px;">Boutique</a>
+      <a href="contact.html" style="font-size:18px;">Contact</a>
+    </div>
+    <div class="cart-indicator" id="cartCount">Panier : 0</div>
   </header>
 
   <main>
+    <h1>Boutique - L'Atelier d'Elia</h1>
     <h2>Nos Collections</h2>
-    <p>Cliquez sur l'image ou le nom pour découvrir les produits</p>
 
-    <div class="collections">
-      <!-- Collection Chrétienne N°1 -->
-      <div class="collection" onclick="location.href='colombe.html'">
-        <img src="images/carte%20colombe%20bleu.png" alt="Illustration Chrétienne">
-        <p>Illustration Chrétienne N°1</p>
+    <div class="products-grid">
+
+      <!-- Colombes -->
+      <div class="product" onclick="location.href='colombe.html'">
+        <img src="images/carte colombe bleu.png" alt="Colombes">
+        <p>Colombes</p>
       </div>
 
-      <!-- Tu pourras ajouter d'autres collections ici plus tard -->
-    </div>
+      <!-- Adoration -->
+      <div class="product" onclick="location.href='adoration.html'">
+        <img src="images/carte adoration rose.png" alt="Adoration">
+        <p>Adoration</p>
+      </div>
 
+      <!-- Bougies -->
+      <div class="product" onclick="location.href='bougies.html'">
+        <img src="images/carte bougies verte.png" alt="Bougies">
+        <p>Bougies</p>
+      </div>
+
+    </div>
   </main>
 
-  <footer style="background-color:#446D92;color:white;padding:15px;text-align:center;">
-    <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
-  </footer>
+  <script>
+    let cart = [];
+    const cartCount = document.getElementById('cartCount');
 
+    function addToCart(name, price) {
+      cart.push({name, price});
+      cartCount.textContent = `Panier : ${cart.length}`;
+      console.log(cart);
+    }
+  </script>
 </body>
 </html>
