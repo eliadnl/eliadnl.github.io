@@ -6,23 +6,78 @@
   <title>Boutique - L'Atelier d'Elia</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    body {
+      display: flex;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff8f0;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 180px;
+      background-color: #446D92;
+      color: white;
+      padding: 20px;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    .sidebar h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    /* Cart indicator */
+    .cart-indicator {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #ff9966;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Product grid */
+    .products-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 50px;
+    }
+
     .product {
-      display: inline-block;
+      width: 180px;
       text-align: center;
-      margin: 15px;
-      padding: 10px;
       border: 1px solid #ccc;
       border-radius: 10px;
-      width: 200px;
       background-color: #fff5e6;
       cursor: pointer;
       transition: transform 0.2s;
-    }
-    .product:hover {
-      transform: scale(1.05);
+      padding: 10px;
     }
     .product img {
-      width: 180px;
+      width: 160px;
       height: auto;
       border-radius: 5px;
     }
@@ -30,41 +85,69 @@
       margin-top: 5px;
       font-weight: bold;
     }
+    .product:hover {
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>L'Atelier d'Elia</h1>
-    <nav>
-      <a href="index.html">Accueil</a>
-      <a href="boutique.html">Boutique</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
 
-  <main>
-    <h2>Nos Collections</h2>
-    <p>Cliquez sur une illustration pour choisir la couleur et le format :</p>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Collections</h2>
+    <a href="#colombes" onclick="filterCollection('colombes')">Colombes</a>
+    <a href="#adoration" onclick="filterCollection('adoration')">Adoration</a>
+    <a href="#bougies" onclick="filterCollection('bougies')">Bougies</a>
+  </div>
 
-    <div class="product" onclick="location.href='colombe.html'">
-      <img src="images/carte colombe bleu.png" alt="Colombes">
-      <p>Colombes</p>
+  <!-- Main content -->
+  <div class="main-content">
+    <div class="cart-indicator" id="cartCount">Panier : 0</div>
+
+    <h1>Boutique - L'Atelier d'Elia</h1>
+    <div class="products-grid" id="productsGrid">
+
+      <!-- Colombes -->
+      <div class="product" data-collection="colombes" onclick="location.href='colombe.html'">
+        <img src="images/carte colombe bleu.png" alt="Colombes">
+        <p>Colombes</p>
+      </div>
+
+      <!-- Adoration -->
+      <div class="product" data-collection="adoration" onclick="location.href='adoration.html'">
+        <img src="images/carte adoration rose.png" alt="Adoration">
+        <p>Adoration</p>
+      </div>
+
+      <!-- Bougies -->
+      <div class="product" data-collection="bougies" onclick="location.href='bougies.html'">
+        <img src="images/carte bougies verte.png" alt="Bougies">
+        <p>Bougies</p>
+      </div>
+
     </div>
+  </div>
 
-    <div class="product" onclick="location.href='adoration.html'">
-      <img src="images/carte adoration rose.png" alt="Adoration">
-      <p>Adoration</p>
-    </div>
+  <script>
+    let cart = [];
+    const cartCount = document.getElementById('cartCount');
 
-    <div class="product" onclick="location.href='bougies.html'">
-      <img src="images/carte bougies verte.png" alt="Bougies">
-      <p>Bougies</p>
-    </div>
+    function addToCart(name, price) {
+      cart.push({name, price});
+      cartCount.textContent = `Panier : ${cart.length}`;
+      console.log(cart);
+    }
 
-  </main>
-
-  <footer>
-    <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
-  </footer>
+    function filterCollection(collection) {
+      const products = document.querySelectorAll('.product');
+      products.forEach(prod => {
+        if(prod.dataset.collection === collection) {
+          prod.style.display = 'block';
+        } else {
+          prod.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
