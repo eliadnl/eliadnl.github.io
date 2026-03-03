@@ -5,6 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Boutique - L'Atelier d'Elia</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .product {
+      display: inline-block;
+      text-align: center;
+      margin: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      width: 200px;
+      background-color: #fff5e6;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .product:hover {
+      transform: scale(1.05);
+    }
+    .product img {
+      width: 180px;
+      height: auto;
+      border-radius: 5px;
+    }
+    .product p {
+      margin-top: 5px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -17,87 +43,28 @@
   </header>
 
   <main>
-    <h2>Collection : Illustration Chrétienne N°1</h2>
-    <p>Chaque illustration est disponible en 3 couleurs : Vert, Bleu, Rose.<br>
-       Vous pouvez choisir entre Sticker (1,50€) ou Carte (3€).</p>
+    <h2>Nos Collections</h2>
+    <p>Cliquez sur une illustration pour choisir la couleur et le format :</p>
 
-    <h3>Colombes</h3>
-    <div class="product">
-      <img src="images/carte colombe verte.png" alt="Carte Colombe Verte">
-      <p>Carte Vert - 3€</p>
-      <button onclick="addToCart('Carte Colombe Verte', 3)">Ajouter au panier</button>
-    </div>
-    <div class="product">
-      <img src="images/carte colombe bleu.png" alt="Carte Colombe Bleu">
-      <p>Carte Bleu - 3€</p>
-      <button onclick="addToCart('Carte Colombe Bleu', 3)">Ajouter au panier</button>
-    </div>
-    <div class="product">
-      <img src="images/carte colombe rose.png" alt="Carte Colombe Rose">
-      <p>Carte Rose - 3€</p>
-      <button onclick="addToCart('Carte Colombe Rose', 3)">Ajouter au panier</button>
+    <div class="product" onclick="location.href='colombe.html'">
+      <img src="images/carte colombe bleu.png" alt="Colombes">
+      <p>Colombes</p>
     </div>
 
-    <h3>Adoration</h3>
-    <div class="product">
-      <img src="images/carte adoration verte.png" alt="Carte Adoration Verte">
-      <p>Carte Vert - 3€</p>
-      <button onclick="addToCart('Carte Adoration Verte', 3)">Ajouter au panier</button>
-    </div>
-    <div class="product">
-      <img src="images/carte adoration bleu.png" alt="Carte Adoration Bleu">
-      <p>Carte Bleu - 3€</p>
-      <button onclick="addToCart('Carte Adoration Bleu', 3)">Ajouter au panier</button>
-    </div>
-    <div class="product">
-      <img src="images/carte adoration rose.png" alt="Carte Adoration Rose">
-      <p>Carte Rose - 3€</p>
-      <button onclick="addToCart('Carte Adoration Rose', 3)">Ajouter au panier</button>
+    <div class="product" onclick="location.href='adoration.html'">
+      <img src="images/carte adoration rose.png" alt="Adoration">
+      <p>Adoration</p>
     </div>
 
-    <h3>Bougies</h3>
-    <div class="product">
-      <img src="images/carte bougies verte.png" alt="Carte Bougies Verte">
-      <p>Carte Vert - 3€</p>
-      <button onclick="addToCart('Carte Bougies Verte', 3)">Ajouter au panier</button>
+    <div class="product" onclick="location.href='bougies.html'">
+      <img src="images/carte bougies verte.png" alt="Bougies">
+      <p>Bougies</p>
     </div>
-    <div class="product">
-      <img src="images/carte bougies bleu.png" alt="Carte Bougies Bleu">
-      <p>Carte Bleu - 3€</p>
-      <button onclick="addToCart('Carte Bougies Bleu', 3)">Ajouter au panier</button>
-    </div>
-    <div class="product">
-      <img src="images/carte bougies rose.png" alt="Carte Bougies Rose">
-      <p>Carte Rose - 3€</p>
-      <button onclick="addToCart('Carte Bougies Rose', 3)">Ajouter au panier</button>
-    </div>
-
-    <h3>Panier</h3>
-    <ul id="cartList"></ul>
 
   </main>
 
   <footer>
     <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
   </footer>
-
-  <script>
-    let cart = [];
-
-    function addToCart(name, price) {
-      cart.push({name, price});
-      renderCart();
-    }
-
-    function renderCart() {
-      const cartList = document.getElementById('cartList');
-      cartList.innerHTML = '';
-      cart.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item.name + " - " + item.price + "€";
-        cartList.appendChild(li);
-      });
-    }
-  </script>
 </body>
 </html>
