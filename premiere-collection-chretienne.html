@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Première Collection - L'Atelier d'Elia</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#fff8f0;
+  display:flex;
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:220px;
+  background:#446D92;
+  color:white;
+  padding:20px;
+  min-height:100vh;
+}
+
+.sidebar h3{
+  margin-top:20px;
+  margin-bottom:10px;
+}
+
+.sidebar label{
+  display:block;
+  margin-bottom:5px;
+  cursor:pointer;
+}
+
+/* CONTENU */
+.main{
+  flex:1;
+  padding:20px;
+  position:relative;
+}
+
+.cart{
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:#ff9966;
+  padding:8px 15px;
+  border-radius:20px;
+  color:white;
+  font-weight:bold;
+}
+
+.products{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  margin-top:40px;
+}
+
+.card{
+  width:180px;
+  background:#fff5e6;
+  border-radius:10px;
+  padding:10px;
+  text-align:center;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.card:hover{
+  transform:scale(1.05);
+}
+
+.card img{
+  width:160px;
+  border-radius:8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <h2>Filtres</h2>
+
+  <h3>Illustration</h3>
+  <label><input type="checkbox" onclick="filter()"> Colombe</label>
+  <label><input type="checkbox" onclick="filter()"> Adoration</label>
+  <label><input type="checkbox" onclick="filter()"> Bougies</label>
+
+  <h3>Couleur</h3>
+  <label><input type="checkbox" onclick="filter()"> Vert</label>
+  <label><input type="checkbox" onclick="filter()"> Bleu</label>
+  <label><input type="checkbox" onclick="filter()"> Rose</label>
+
+  <h3>Format</h3>
+  <label><input type="checkbox" onclick="filter()"> Carte</label>
+  <label><input type="checkbox" onclick="filter()"> Sticker</label>
+</div>
+
+<div class="main">
+  <div class="cart" id="cart">Panier : 0</div>
+
+  <h1>Première Collection d'Illustration Chrétienne</h1>
+
+  <div class="products">
+
+    <div class="card" onclick="location.href='colombe-produit.html'">
+      <img src="images/carte colombe bleu.png">
+      <p>Colombe</p>
+    </div>
+
+    <div class="card" onclick="location.href='adoration-produit.html'">
+      <img src="images/carte adoration rose.png">
+      <p>Adoration</p>
+    </div>
+
+    <div class="card" onclick="location.href='bougies-produit.html'">
+      <img src="images/carte bougies verte.png">
+      <p>Bougies</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function filter(){
+  alert("Filtrage à connecter plus tard 🙂");
+}
+</script>
+
+</body>
+</html>
