@@ -32,6 +32,7 @@
       text-decoration: none;
       margin-bottom: 10px;
       font-weight: bold;
+      cursor: pointer;
     }
     .sidebar a:hover {
       text-decoration: underline;
@@ -95,9 +96,9 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <h2>Collections</h2>
-    <a href="#colombes" onclick="filterCollection('colombes')">Colombes</a>
-    <a href="#adoration" onclick="filterCollection('adoration')">Adoration</a>
-    <a href="#bougies" onclick="filterCollection('bougies')">Bougies</a>
+    <a onclick="filterCollection('colombes')">Colombes</a>
+    <a onclick="filterCollection('adoration')">Adoration</a>
+    <a onclick="filterCollection('bougies')">Bougies</a>
   </div>
 
   <!-- Main content -->
@@ -109,19 +110,19 @@
 
       <!-- Colombes -->
       <div class="product" data-collection="colombes" onclick="location.href='colombe.html'">
-        <img src="images/carte colombe bleu.png" alt="Colombes">
+        <img src="images/carte%20colombe%20bleu.png" alt="Colombes">
         <p>Colombes</p>
       </div>
 
       <!-- Adoration -->
       <div class="product" data-collection="adoration" onclick="location.href='adoration.html'">
-        <img src="images/carte adoration rose.png" alt="Adoration">
+        <img src="images/carte%20adoration%20rose.png" alt="Adoration">
         <p>Adoration</p>
       </div>
 
       <!-- Bougies -->
       <div class="product" data-collection="bougies" onclick="location.href='bougies.html'">
-        <img src="images/carte bougies verte.png" alt="Bougies">
+        <img src="images/carte%20bougies%20verte.png" alt="Bougies">
         <p>Bougies</p>
       </div>
 
