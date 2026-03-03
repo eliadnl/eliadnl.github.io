@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique - L'Atelier d'Elia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>L'Atelier d'Elia</h1>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="boutique.html">Boutique</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Collection : Illustration Chrétienne N°1</h2>
+    <p>Chaque illustration est disponible en 3 couleurs : Vert, Bleu, Rose.<br>
+       Vous pouvez choisir entre Sticker (1,50€) ou Carte (3€).</p>
+
+    <h3>Colombes</h3>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Colombes+Vert" alt="Colombes Vert">
+      <p>Sticker Vert - 1,50€</p>
+      <button onclick="addToCart('Colombes Vert Sticker', 1.5)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Colombes+Vert" alt="Colombes Vert">
+      <p>Carte Vert - 3€</p>
+      <button onclick="addToCart('Colombes Vert Carte', 3)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Colombes+Bleu" alt="Colombes Bleu">
+      <p>Sticker Bleu - 1,50€</p>
+      <button onclick="addToCart('Colombes Bleu Sticker', 1.5)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Colombes+Bleu" alt="Colombes Bleu">
+      <p>Carte Bleu - 3€</p>
+      <button onclick="addToCart('Colombes Bleu Carte', 3)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Colombes+Rose" alt="Colombes Rose">
+      <p>Sticker Rose - 1,50€</p>
+      <button onclick="addToCart('Colombes Rose Sticker', 1.5)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Colombes+Rose" alt="Colombes Rose">
+      <p>Carte Rose - 3€</p>
+      <button onclick="addToCart('Colombes Rose Carte', 3)">Ajouter au panier</button>
+    </div>
+
+    <h3>Adoration</h3>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Adoration+Vert" alt="Adoration Vert">
+      <p>Sticker Vert - 1,50€</p>
+      <button onclick="addToCart('Adoration Vert Sticker', 1.5)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Adoration+Vert" alt="Adoration Vert">
+      <p>Carte Vert - 3€</p>
+      <button onclick="addToCart('Adoration Vert Carte', 3)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Adoration+Bleu" alt="Adoration Bleu">
+      <p>Sticker Bleu - 1,50€</p>
+      <button onclick="addToCart('Adoration Bleu Sticker', 1.5)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Adoration+Bleu" alt="Adoration Bleu">
+      <p>Carte Bleu - 3€</p>
+      <button onclick="addToCart('Adoration Bleu Carte', 3)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Adoration+Rose" alt="Adoration Rose">
+      <p>Sticker Rose - 1,50€</p>
+      <button onclick="addToCart('Adoration Rose Sticker', 1.5)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Adoration+Rose" alt="Adoration Rose">
+      <p>Carte Rose - 3€</p>
+      <button onclick="addToCart('Adoration Rose Carte', 3)">Ajouter au panier</button>
+    </div>
+
+    <h3>Bougies</h3>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Bougies+Vert" alt="Bougies Vert">
+      <p>Sticker Vert - 1,50€</p>
+      <button onclick="addToCart('Bougies Vert Sticker', 1.5)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Bougies+Vert" alt="Bougies Vert">
+      <p>Carte Vert - 3€</p>
+      <button onclick="addToCart('Bougies Vert Carte', 3)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Bougies+Bleu" alt="Bougies Bleu">
+      <p>Sticker Bleu - 1,50€</p>
+      <button onclick="addToCart('Bougies Bleu Sticker', 1.5)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Bougies+Bleu" alt="Bougies Bleu">
+      <p>Carte Bleu - 3€</p>
+      <button onclick="addToCart('Bougies Bleu Carte', 3)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Bougies+Rose" alt="Bougies Rose">
+      <p>Sticker Rose - 1,50€</p>
+      <button onclick="addToCart('Bougies Rose Sticker', 1.5)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/200x200?text=Bougies+Rose" alt="Bougies Rose">
+      <p>Carte Rose - 3€</p>
+      <button onclick="addToCart('Bougies Rose Carte', 3)">Ajouter au panier</button>
+    </div>
+
+    <h3>Panier</h3>
+    <ul id="cartList"></ul>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({name, price});
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartList = document.getElementById('cartList');
+      cartList.innerHTML = '';
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item.name + " - " + item.price + "€";
+        cartList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
