@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colombes - L'Atelier d'Elia</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .product-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .color-selector button {
+      background-color: #446D92;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .color-selector button:hover {
+      background-color: #2d4b6c;
+    }
+    #productImage {
+      width: 300px;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    .add-cart-btn {
+      background-color: #ff9966;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .add-cart-btn:hover {
+      background-color: #ff7744;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>L'Atelier d'Elia</h1>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="boutique.html">Boutique</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
+  <main>
+    <div class="product-container">
+      <h2>Colombes</h2>
+      <p>Choisissez la couleur de votre carte :</p>
+
+      <!-- Boutons de couleur -->
+      <div class="color-selector">
+        <button onclick="showColor('verte', 3)">Vert</button>
+        <button onclick="showColor('bleu', 3)">Bleu</button>
+        <button onclick="showColor('rose', 3)">Rose</button>
+      </div>
+
+      <!-- Image du produit -->
+      <img id="productImage" src="images/carte colombe verte.png" alt="Colombe Verte">
+
+      <!-- Prix et panier -->
+      <div>
+        <p id="price">Prix : 3€</p>
+        <button class="add-cart-btn" onclick="addToCart(currentColor, 3)">Ajouter au panier</button>
+      </div>
+
+      <p><a href="boutique.html">← Retour à la boutique</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    let currentColor = 'verte';
+    let cart = [];
+
+    function showColor(color, price) {
+      const image = document.getElementById('productImage');
+      image.src = `images/carte colombe ${color}.png`;
+      image.alt = `Colombe ${color}`;
+      currentColor = color;
+      document.getElementById('price').textContent = "Prix : " + price + "€";
+    }
+
+    function addToCart(color, price) {
+      cart.push({name: `Colombe ${color}`, price});
+      alert(`Vous avez ajouté "Colombe ${color}" au panier !`);
+      console.log(cart);
+    }
+  </script>
+</body>
+</html>
