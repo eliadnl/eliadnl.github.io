@@ -23,96 +23,96 @@
 
     <h3>Colombes</h3>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Colombes+Vert" alt="Colombes Vert">
+      <img src="images/colombes_vert_sticker.jpg" alt="Colombes Vert Sticker">
       <p>Sticker Vert - 1,50€</p>
       <button onclick="addToCart('Colombes Vert Sticker', 1.5)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Colombes+Vert" alt="Colombes Vert">
+      <img src="images/colombes_vert_carte.jpg" alt="Colombes Vert Carte">
       <p>Carte Vert - 3€</p>
       <button onclick="addToCart('Colombes Vert Carte', 3)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Colombes+Bleu" alt="Colombes Bleu">
+      <img src="images/colombes_bleu_sticker.jpg" alt="Colombes Bleu Sticker">
       <p>Sticker Bleu - 1,50€</p>
       <button onclick="addToCart('Colombes Bleu Sticker', 1.5)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Colombes+Bleu" alt="Colombes Bleu">
+      <img src="images/colombes_bleu_carte.jpg" alt="Colombes Bleu Carte">
       <p>Carte Bleu - 3€</p>
       <button onclick="addToCart('Colombes Bleu Carte', 3)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Colombes+Rose" alt="Colombes Rose">
+      <img src="images/colombes_rose_sticker.jpg" alt="Colombes Rose Sticker">
       <p>Sticker Rose - 1,50€</p>
       <button onclick="addToCart('Colombes Rose Sticker', 1.5)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Colombes+Rose" alt="Colombes Rose">
+      <img src="images/colombes_rose_carte.jpg" alt="Colombes Rose Carte">
       <p>Carte Rose - 3€</p>
       <button onclick="addToCart('Colombes Rose Carte', 3)">Ajouter au panier</button>
     </div>
 
     <h3>Adoration</h3>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Adoration+Vert" alt="Adoration Vert">
+      <img src="images/adoration_vert_sticker.jpg" alt="Adoration Vert Sticker">
       <p>Sticker Vert - 1,50€</p>
       <button onclick="addToCart('Adoration Vert Sticker', 1.5)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Adoration+Vert" alt="Adoration Vert">
+      <img src="images/adoration_vert_carte.jpg" alt="Adoration Vert Carte">
       <p>Carte Vert - 3€</p>
       <button onclick="addToCart('Adoration Vert Carte', 3)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Adoration+Bleu" alt="Adoration Bleu">
+      <img src="images/adoration_bleu_sticker.jpg" alt="Adoration Bleu Sticker">
       <p>Sticker Bleu - 1,50€</p>
       <button onclick="addToCart('Adoration Bleu Sticker', 1.5)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Adoration+Bleu" alt="Adoration Bleu">
+      <img src="images/adoration_bleu_carte.jpg" alt="Adoration Bleu Carte">
       <p>Carte Bleu - 3€</p>
       <button onclick="addToCart('Adoration Bleu Carte', 3)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Adoration+Rose" alt="Adoration Rose">
+      <img src="images/adoration_rose_sticker.jpg" alt="Adoration Rose Sticker">
       <p>Sticker Rose - 1,50€</p>
       <button onclick="addToCart('Adoration Rose Sticker', 1.5)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Adoration+Rose" alt="Adoration Rose">
+      <img src="images/adoration_rose_carte.jpg" alt="Adoration Rose Carte">
       <p>Carte Rose - 3€</p>
       <button onclick="addToCart('Adoration Rose Carte', 3)">Ajouter au panier</button>
     </div>
 
     <h3>Bougies</h3>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Bougies+Vert" alt="Bougies Vert">
+      <img src="images/bougies_vert_sticker.jpg" alt="Bougies Vert Sticker">
       <p>Sticker Vert - 1,50€</p>
       <button onclick="addToCart('Bougies Vert Sticker', 1.5)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Bougies+Vert" alt="Bougies Vert">
+      <img src="images/bougies_vert_carte.jpg" alt="Bougies Vert Carte">
       <p>Carte Vert - 3€</p>
       <button onclick="addToCart('Bougies Vert Carte', 3)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Bougies+Bleu" alt="Bougies Bleu">
+      <img src="images/bougies_bleu_sticker.jpg" alt="Bougies Bleu Sticker">
       <p>Sticker Bleu - 1,50€</p>
       <button onclick="addToCart('Bougies Bleu Sticker', 1.5)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Bougies+Bleu" alt="Bougies Bleu">
+      <img src="images/bougies_bleu_carte.jpg" alt="Bougies Bleu Carte">
       <p>Carte Bleu - 3€</p>
       <button onclick="addToCart('Bougies Bleu Carte', 3)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Bougies+Rose" alt="Bougies Rose">
+      <img src="images/bougies_rose_sticker.jpg" alt="Bougies Rose Sticker">
       <p>Sticker Rose - 1,50€</p>
       <button onclick="addToCart('Bougies Rose Sticker', 1.5)">Ajouter au panier</button>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/200x200?text=Bougies+Rose" alt="Bougies Rose">
+      <img src="images/bougies_rose_carte.jpg" alt="Bougies Rose Carte">
       <p>Carte Rose - 3€</p>
       <button onclick="addToCart('Bougies Rose Carte', 3)">Ajouter au panier</button>
     </div>
