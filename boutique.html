@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boutique - L'Atelier d'Elia</title>
+
 <style>
 body {
   margin: 0;
@@ -59,7 +60,6 @@ h1, h2 {
   border-radius: 10px;
   padding: 10px;
   text-align: center;
-  cursor: pointer;
   transition: 0.2s;
 }
 
@@ -68,9 +68,29 @@ h1, h2 {
 }
 
 .card img {
-  width: 160px;   /* ✅ même largeur que l'accueil */
-  height: auto;   /* ✅ conserve le ratio original */
+  width: 160px;
+  height: auto;
   border-radius: 8px;
+}
+
+.card button {
+  margin-top: 8px;
+  background-color: #ff9966;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.card button:hover {
+  background-color: #ff7744;
+}
+
+.card p {
+  margin: 5px 0;
+  font-weight: bold;
 }
 </style>
 </head>
@@ -82,7 +102,7 @@ h1, h2 {
     <a href="boutique.html">Boutique</a>
     <a href="contact.html">Contact</a>
   </nav>
-  <div class="cart">Panier : 0</div>
+  <div class="cart" id="cartCount">Panier : 0</div>
 </header>
 
 <main>
@@ -91,40 +111,84 @@ h1, h2 {
 <div class="products">
 
   <!-- COLOMBES -->
-  <div class="card" onclick="location.href='colombe-produit.html'">
-    <img src="images/carte%20colombe%20bleu.png" alt="Colombe bleue">
+  <div class="card">
+    <img src="images/carte%20colombe%20bleu.png" alt="Colombe bleue" onclick="location.href='colombe-produit.html'">
+    <p>Colombe bleu</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Colombe bleu', 3)">Ajouter au panier</button>
   </div>
-  <div class="card" onclick="location.href='colombe-produit.html'">
-    <img src="images/carte%20colombe%20rose.png" alt="Colombe rose">
+
+  <div class="card">
+    <img src="images/carte%20colombe%20rose.png" alt="Colombe rose" onclick="location.href='colombe-produit.html'">
+    <p>Colombe rose</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Colombe rose', 3)">Ajouter au panier</button>
   </div>
-  <div class="card" onclick="location.href='colombe-produit.html'">
-    <img src="images/carte%20colombe%20verte.png" alt="Colombe verte">
+
+  <div class="card">
+    <img src="images/carte%20colombe%20verte.png" alt="Colombe verte" onclick="location.href='colombe-produit.html'">
+    <p>Colombe verte</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Colombe verte', 3)">Ajouter au panier</button>
   </div>
 
   <!-- ADORATION -->
-  <div class="card" onclick="location.href='adoration-produit.html'">
-    <img src="images/carte%20adoration%20bleu.png" alt="Adoration bleue">
+  <div class="card">
+    <img src="images/carte%20adoration%20bleu.png" alt="Adoration bleue" onclick="location.href='adoration-produit.html'">
+    <p>Adoration bleu</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Adoration bleu', 3)">Ajouter au panier</button>
   </div>
-  <div class="card" onclick="location.href='adoration-produit.html'">
-    <img src="images/carte%20adoration%20rose.png" alt="Adoration rose">
+
+  <div class="card">
+    <img src="images/carte%20adoration%20rose.png" alt="Adoration rose" onclick="location.href='adoration-produit.html'">
+    <p>Adoration rose</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Adoration rose', 3)">Ajouter au panier</button>
   </div>
-  <div class="card" onclick="location.href='adoration-produit.html'">
-    <img src="images/carte%20adoration%20verte.png" alt="Adoration verte">
+
+  <div class="card">
+    <img src="images/carte%20adoration%20verte.png" alt="Adoration verte" onclick="location.href='adoration-produit.html'">
+    <p>Adoration verte</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Adoration verte', 3)">Ajouter au panier</button>
   </div>
 
   <!-- BOUGIES -->
-  <div class="card" onclick="location.href='bougies-produit.html'">
-    <img src="images/carte%20bougies%20bleu.png" alt="Bougies bleues">
+  <div class="card">
+    <img src="images/carte%20bougies%20bleu.png" alt="Bougies bleues" onclick="location.href='bougies-produit.html'">
+    <p>Bougies bleu</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Bougies bleu', 3)">Ajouter au panier</button>
   </div>
-  <div class="card" onclick="location.href='bougies-produit.html'">
-    <img src="images/carte%20bougies%20rose.png" alt="Bougies roses">
+
+  <div class="card">
+    <img src="images/carte%20bougies%20rose.png" alt="Bougies roses" onclick="location.href='bougies-produit.html'">
+    <p>Bougies rose</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Bougies rose', 3)">Ajouter au panier</button>
   </div>
-  <div class="card" onclick="location.href='bougies-produit.html'">
-    <img src="images/carte%20bougies%20verte.png" alt="Bougies vertes">
+
+  <div class="card">
+    <img src="images/cartes%20bougies%20verte.png" alt="Bougies vertes" onclick="location.href='bougies-produit.html'">
+    <p>Bougies verte</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Bougies verte', 3)">Ajouter au panier</button>
   </div>
 
 </div>
 </main>
+
+<script>
+let cart = [];
+const cartCount = document.getElementById('cartCount');
+
+function addToCart(name, price){
+  cart.push({name, price});
+  cartCount.textContent = `Panier : ${cart.length}`;
+  console.log(cart);
+}
+</script>
 
 </body>
 </html>
