@@ -239,57 +239,56 @@ h1 {
 
 <div class="products-grid">
 
-  <!-- Exemple de produit avec data-attributes pour filtre -->
   <div class="product" data-color="bleu" data-type="Colombe">
-    <img src="images/carte colombe bleu.png" alt="Carte colombe fond bleu" onclick="location.href='colombe-produit.html'">
+    <img src="images/carte colombe bleu.png" alt="Carte colombe fond bleu">
     <p>Carte colombe fond bleu<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Carte colombe fond bleu', 3, 'images/carte colombe bleu.png')">Ajouter au panier</button>
   </div>
 
   <div class="product" data-color="rose" data-type="Colombe">
-    <img src="images/carte colombe rose.png" alt="Carte colombe fond rose" onclick="location.href='colombe-produit.html'">
+    <img src="images/carte colombe rose.png" alt="Carte colombe fond rose">
     <p>Carte colombe fond rose<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Carte colombe fond rose', 3, 'images/carte colombe rose.png')">Ajouter au panier</button>
   </div>
 
   <div class="product" data-color="verte" data-type="Colombe">
-    <img src="images/carte colombe verte.png" alt="Carte colombe fond vert" onclick="location.href='colombe-produit.html'">
+    <img src="images/carte colombe verte.png" alt="Carte colombe fond vert">
     <p>Carte colombe fond vert<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Carte colombe fond vert', 3, 'images/carte colombe verte.png')">Ajouter au panier</button>
   </div>
 
   <div class="product" data-color="bleu" data-type="Adoration">
-    <img src="images/carte adoration bleu.png" alt="Carte adoration fond bleu" onclick="location.href='adoration-produit.html'">
+    <img src="images/carte adoration bleu.png" alt="Carte adoration fond bleu">
     <p>Carte adoration fond bleu<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Carte adoration fond bleu', 3, 'images/carte adoration bleu.png')">Ajouter au panier</button>
   </div>
 
   <div class="product" data-color="rose" data-type="Adoration">
-    <img src="images/carte adoration rose.png" alt="Carte adoration fond rose" onclick="location.href='adoration-produit.html'">
+    <img src="images/carte adoration rose.png" alt="Carte adoration fond rose">
     <p>Carte adoration fond rose<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Carte adoration fond rose', 3, 'images/carte adoration rose.png')">Ajouter au panier</button>
   </div>
 
   <div class="product" data-color="verte" data-type="Adoration">
-    <img src="images/carte adoration verte.png" alt="Carte adoration fond vert" onclick="location.href='adoration-produit.html'">
+    <img src="images/carte adoration verte.png" alt="Carte adoration fond vert">
     <p>Carte adoration fond vert<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Carte adoration fond verte', 3, 'images/carte adoration verte.png')">Ajouter au panier</button>
   </div>
 
   <div class="product" data-color="bleu" data-type="Bougies">
-    <img src="images/carte bougies bleu.png" alt="Carte bougies fond bleu" onclick="location.href='bougies-produit.html'">
+    <img src="images/carte bougies bleu.png" alt="Carte bougies fond bleu">
     <p>Carte bougies fond bleu<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Bougies bleu', 3, 'images/carte bougies bleu.png')">Ajouter au panier</button>
   </div>
 
   <div class="product" data-color="rose" data-type="Bougies">
-    <img src="images/carte bougies rose.png" alt="Carte bougies fond rose" onclick="location.href='bougies-produit.html'">
+    <img src="images/carte bougies rose.png" alt="Carte bougies fond rose">
     <p>Carte bougies fond rose<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Carte bougies fond rose', 3, 'images/carte bougies rose.png')">Ajouter au panier</button>
   </div>
 
   <div class="product" data-color="verte" data-type="Bougies">
-    <img src="images/carte bougies verte.png" alt="Carte bougies fond vert" onclick="location.href='bougies-produit.html'">
+    <img src="images/carte bougies verte.png" alt="Carte bougies fond vert">
     <p>Carte bougies fond vert<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Carte bougies fond vert', 3, 'images/carte bougies verte.png')">Ajouter au panier</button>
   </div>
@@ -313,7 +312,6 @@ const cartItems = document.getElementById('cartItems');
 updateCartCount();
 renderCart();
 
-// AJOUT AU PANIER
 function addToCart(name, price, imgSrc){
   const existingItem = cart.find(item => item.name === name);
   if(existingItem){
@@ -325,14 +323,12 @@ function addToCart(name, price, imgSrc){
   renderCart();
 }
 
-// SUPPRIMER DU PANIER
 function removeFromCart(name){
   cart = cart.filter(item => item.name !== name);
   saveCart();
   renderCart();
 }
 
-// CHANGER QUANTITÉ
 function changeQuantity(name, delta){
   const item = cart.find(i => i.name === name);
   if(!item) return;
@@ -345,7 +341,6 @@ function changeQuantity(name, delta){
   renderCart();
 }
 
-// SAUVEGARDE ET MISE À JOUR
 function saveCart(){
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
@@ -356,7 +351,6 @@ function updateCartCount(){
   cartCount.textContent = `Panier : ${total}`;
 }
 
-// RENDER PANIER
 function renderCart(){
   cartItems.innerHTML = '';
   cart.forEach(item => {
@@ -376,12 +370,10 @@ function renderCart(){
   });
 }
 
-// TOGGLE PANIER
 function toggleCart(){
   cartOverlay.style.display = cartOverlay.style.display === 'block' ? 'none' : 'block';
 }
 
-// FILTRAGE PRODUITS
 function applyFilter(){
   const filter = document.getElementById('filterSelect').value;
   const products = document.querySelectorAll('.products-grid .product');
