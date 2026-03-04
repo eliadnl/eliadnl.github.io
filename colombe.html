@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Colombe - L'Atelier d'Elia</title>
+<title>Colombes - L'Atelier d'Elia</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-
 body {
   margin: 0;
   background-color: #f6f1ea;
@@ -16,56 +15,56 @@ body {
   color: #2d2d2d;
 }
 
-/* HEADER */
 header {
   background-color: #ffffff;
-  padding: 20px 40px;
+  padding: 20px 60px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid #eee;
 }
 
-header nav a {
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+}
+
+nav {
+  display: flex;
+  gap: 40px;
+}
+
+nav a {
   text-decoration: none;
   color: #2d2d2d;
-  margin-left: 25px;
   font-size: 14px;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
-header nav a:hover {
-  opacity: 0.6;
-}
-
 .cart-indicator {
   background-color: #c89b5e;
   color: white;
-  padding: 8px 20px;
+  padding: 8px 22px;
   border-radius: 30px;
   font-size: 13px;
   cursor: pointer;
 }
 
-/* TITRES */
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 42px;
-  font-weight: 400;
   text-align: center;
   margin-top: 50px;
 }
 
 h2 {
   font-family: 'Playfair Display', serif;
-  font-weight: 400;
   text-align: center;
   color: #c89b5e;
   margin-bottom: 50px;
 }
 
-/* PRODUITS */
 .products-grid {
   display: flex;
   flex-wrap: wrap;
@@ -86,12 +85,6 @@ h2 {
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-.product p {
-  margin-top: 10px;
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
-}
-
 .product:hover {
   transform: translateY(-6px);
 }
@@ -106,11 +99,6 @@ h2 {
   cursor: pointer;
 }
 
-.product button:hover {
-  background-color: #b58345;
-}
-
-/* PANIER */
 #cartOverlay {
   display: none;
   position: fixed;
@@ -125,76 +113,41 @@ h2 {
   box-shadow: 0 15px 35px rgba(0,0,0,0.12);
   z-index: 100;
 }
-
-#cartOverlay h3 {
-  font-family: 'Playfair Display', serif;
-  text-align: center;
-}
-
-.cart-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.cart-item img {
-  width: 45px;
-  margin-right: 10px;
-  border-radius: 5px;
-}
-
-#payButton {
-  width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  background: #c89b5e;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-}
-
-#payButton:hover {
-  background: #b58345;
-}
-
 </style>
 </head>
 
 <body>
 
 <header>
-  <div>
+  <div class="logo">L'Atelier d'Elia</div>
+  <nav>
     <a href="index.html">Accueil</a>
     <a href="boutique.html">Boutique</a>
     <a href="contact.html">Contact</a>
-  </div>
+  </nav>
   <div class="cart-indicator" id="cartCount" onclick="toggleCart()">Panier : 0</div>
 </header>
 
 <main>
-<h1>Colombes - L'Atelier d'Elia</h1>
+<h1>Colombes</h1>
 <h2>Choisissez votre illustration</h2>
 
 <div class="products-grid">
   <div class="product">
-    <img src="images/carte colombe bleu.png" alt="Colombe bleu">
-    <p>Colombe bleu</p>
-    <p>Prix : 3€</p>
+    <img src="images/carte colombe bleu.png">
+    <p>Colombe bleu - 3€</p>
     <button onclick="addToCart('Colombe bleu', 3, 'images/carte colombe bleu.png')">Ajouter au panier</button>
   </div>
 
   <div class="product">
-    <img src="images/carte colombe rose.png" alt="Colombe rose">
-    <p>Colombe rose</p>
-    <p>Prix : 3€</p>
+    <img src="images/carte colombe rose.png">
+    <p>Colombe rose - 3€</p>
     <button onclick="addToCart('Colombe rose', 3, 'images/carte colombe rose.png')">Ajouter au panier</button>
   </div>
 
   <div class="product">
-    <img src="images/carte colombe verte.png" alt="Colombe verte">
-    <p>Colombe verte</p>
-    <p>Prix : 3€</p>
+    <img src="images/carte colombe verte.png">
+    <p>Colombe verte - 3€</p>
     <button onclick="addToCart('Colombe verte', 3, 'images/carte colombe verte.png')">Ajouter au panier</button>
   </div>
 </div>
@@ -203,40 +156,34 @@ h2 {
 <div id="cartOverlay">
   <h3>Panier</h3>
   <div id="cartItems"></div>
-  <button id="payButton" onclick="location.href='paiement.html'">Payer</button>
+  <button onclick="location.href='paiement.html'">Payer</button>
 </div>
 
 <script>
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const cartCount = document.getElementById('cartCount');
 const cartOverlay = document.getElementById('cartOverlay');
 const cartItems = document.getElementById('cartItems');
 
-if(localStorage.getItem('cart')) {
-  cart = JSON.parse(localStorage.getItem('cart'));
-  cartCount.textContent = `Panier : ${cart.length}`;
-  renderCart();
-}
+cartCount.textContent = `Panier : ${cart.length}`;
+renderCart();
 
 function addToCart(name, price, imgSrc){
   cart.push({name, price, imgSrc});
   cartCount.textContent = `Panier : ${cart.length}`;
-  renderCart();
   localStorage.setItem('cart', JSON.stringify(cart));
+  renderCart();
 }
 
 function renderCart(){
   cartItems.innerHTML = '';
   cart.forEach(item => {
-    const div = document.createElement('div');
-    div.className = 'cart-item';
-    div.innerHTML = `<img src="${item.imgSrc}" alt="${item.name}"><div>${item.name} - ${item.price}€</div>`;
-    cartItems.appendChild(div);
+    cartItems.innerHTML += `<div>${item.name} - ${item.price}€</div>`;
   });
 }
 
 function toggleCart(){
-  cartOverlay.style.display = (cartOverlay.style.display === 'block') ? 'none' : 'block';
+  cartOverlay.style.display = cartOverlay.style.display === 'block' ? 'none' : 'block';
 }
 </script>
 
