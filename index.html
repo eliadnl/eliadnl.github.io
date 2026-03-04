@@ -1,130 +1,208 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Boutique - L'Atelier d'Elia</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fff8f0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boutique - L'Atelier d'Elia</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff8f0;
+  }
 
-    header {
-      background-color: #446D92;
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header nav a {
-      color: white;
-      margin-left: 20px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    header nav a:hover {
-      text-decoration: underline;
-    }
+  header {
+    background-color: #446D92;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  header nav a:hover {
+    text-decoration: underline;
+  }
 
-    .cart-indicator {
-      background-color: #ff9966;
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+  .cart-indicator {
+    background-color: #ff9966;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+  }
 
-    main {
-      padding: 20px;
-    }
+  main {
+    padding: 20px;
+  }
 
-    h1, h2 {
-      text-align: center;
-    }
+  h1, h2 {
+    text-align: center;
+  }
 
-    .products-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      margin-top: 30px;
-    }
+  .products-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+  }
 
-    .product {
-      width: 180px;
-      text-align: center;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      background-color: #fff5e6;
-      cursor: pointer;
-      transition: transform 0.2s;
-      padding: 10px;
-    }
-    .product img {
-      width: 160px;
-      height: auto;
-      border-radius: 5px;
-    }
-    .product p {
-      margin-top: 5px;
-      font-weight: bold;
-    }
-    .product:hover {
-      transform: scale(1.05);
-    }
-  </style>
+  .product {
+    width: 180px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff5e6;
+    cursor: pointer;
+    transition: transform 0.2s;
+    padding: 10px;
+  }
+  .product img {
+    width: 160px;
+    height: auto;
+    border-radius: 5px;
+  }
+  .product p {
+    margin-top: 5px;
+    font-weight: bold;
+  }
+  .product:hover {
+    transform: scale(1.05);
+  }
+
+  /* Cart overlay */
+  #cartOverlay {
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    width: 250px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: white;
+    border: 2px solid #446D92;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 100;
+  }
+
+  #cartOverlay h3 {
+    text-align: center;
+    margin-top: 0;
+  }
+
+  .cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .cart-item img {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+    border-radius: 4px;
+  }
+
+  #payButton {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #446D92;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  #payButton:hover {
+    background: #2d4b6c;
+  }
+</style>
 </head>
 <body>
 
-  <header>
-    <div>
-      <a href="index.html" style="font-size:18px;">Accueil</a>
-      <a href="boutique.html" style="font-size:18px;">Boutique</a>
-      <a href="contact.html" style="font-size:18px;">Contact</a>
-    </div>
-    <div class="cart-indicator" id="cartCount">Panier : 0</div>
-  </header>
+<header>
+  <div>
+    <a href="index.html" style="font-size:18px;">Accueil</a>
+    <a href="boutique.html" style="font-size:18px;">Boutique</a>
+    <a href="contact.html" style="font-size:18px;">Contact</a>
+  </div>
+  <div class="cart-indicator" id="cartCount" onclick="toggleCart()">Panier : 0</div>
+</header>
 
-  <main>
-    <h1>Boutique - L'Atelier d'Elia</h1>
-    <h2>Nos Collections</h2>
+<main>
+<h1>Boutique - L'Atelier d'Elia</h1>
+<h2>Nos Collections</h2>
 
-    <div class="products-grid">
+<div class="products-grid">
+  <!-- Colombes -->
+  <div class="product" onclick="location.href='colombe.html'">
+    <img src="images/carte colombe bleu.png" alt="Colombes">
+    <p>Colombes</p>
+  </div>
+  <!-- Adoration -->
+  <div class="product" onclick="location.href='adoration.html'">
+    <img src="images/carte adoration rose.png" alt="Adoration">
+    <p>Adoration</p>
+  </div>
+  <!-- Bougies -->
+  <div class="product" onclick="location.href='bougies.html'">
+    <img src="images/carte bougies verte.png" alt="Bougies">
+    <p>Bougies</p>
+  </div>
+</div>
+</main>
 
-      <!-- Colombes -->
-      <div class="product" onclick="location.href='colombe.html'">
-        <img src="images/carte colombe bleu.png" alt="Colombes">
-        <p>Colombes</p>
-      </div>
+<!-- Cart overlay -->
+<div id="cartOverlay">
+  <h3>Panier</h3>
+  <div id="cartItems"></div>
+  <button id="payButton" onclick="location.href='paiement.html'">Payer</button>
+</div>
 
-      <!-- Adoration -->
-      <div class="product" onclick="location.href='adoration.html'">
-        <img src="images/carte adoration rose.png" alt="Adoration">
-        <p>Adoration</p>
-      </div>
+<script>
+let cart = [];
+const cartCount = document.getElementById('cartCount');
+const cartOverlay = document.getElementById('cartOverlay');
+const cartItems = document.getElementById('cartItems');
 
-      <!-- Bougies -->
-      <div class="product" onclick="location.href='bougies.html'">
-        <img src="images/carte bougies verte.png" alt="Bougies">
-        <p>Bougies</p>
-      </div>
+// Charger le panier depuis localStorage si existant
+if(localStorage.getItem('cart')) {
+  cart = JSON.parse(localStorage.getItem('cart'));
+  cartCount.textContent = `Panier : ${cart.length}`;
+  renderCart();
+}
 
-    </div>
-  </main>
+function addToCart(name, price, imgSrc){
+  cart.push({name, price, imgSrc});
+  cartCount.textContent = `Panier : ${cart.length}`;
+  renderCart();
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
 
-  <script>
-    let cart = [];
-    const cartCount = document.getElementById('cartCount');
+function renderCart(){
+  cartItems.innerHTML = '';
+  cart.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `<img src="${item.imgSrc}" alt="${item.name}"><div>${item.name} - ${item.price}€</div>`;
+    cartItems.appendChild(div);
+  });
+}
 
-    function addToCart(name, price) {
-      cart.push({name, price});
-      cartCount.textContent = `Panier : ${cart.length}`;
-      console.log(cart);
-    }
-  </script>
+function toggleCart(){
+  cartOverlay.style.display = (cartOverlay.style.display === 'block') ? 'none' : 'block';
+}
+</script>
 </body>
 </html>
