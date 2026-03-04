@@ -6,37 +6,99 @@
 <title>Contact - L'Atelier d'Elia</title>
 <link rel="stylesheet" href="style.css">
 <style>
-  .cart-indicator {
-    background-color: #ff9966;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    position: relative;
-  }
-  #cartOverlay {
-    display: none;
-    position: fixed;
-    top: 60px;
-    right: 20px;
-    width: 250px;
-    max-height: 400px;
-    overflow-y: auto;
-    background: white;
-    border: 2px solid #446D92;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    z-index: 100;
-  }
-  #cartOverlay h3 { text-align:center; margin-top:0; }
-  .cart-item { display:flex; align-items:center; margin-bottom:10px; }
-  .cart-item img { width:40px; height:auto; margin-right:10px; border-radius:4px; }
-  #payButton {
-    width:100%; padding:10px; margin-top:10px; background:#446D92; color:white; border:none;
-    border-radius:5px; font-weight:bold; cursor:pointer;
-  }
-  #payButton:hover { background:#2d4b6c; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff8f0;
+}
+
+header {
+  background-color: #446D92;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+.cart-indicator {
+  background-color: #ff9966;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+}
+
+main {
+  padding: 20px;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+/* Cart overlay identique à boutique */
+#cartOverlay {
+  display: none;
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 250px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: white;
+  border: 2px solid #446D92;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 100;
+}
+
+#cartOverlay h3 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cart-item img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+#payButton {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #446D92;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#payButton:hover {
+  background: #2d4b6c;
+}
 </style>
 </head>
 <body>
@@ -62,7 +124,7 @@
 <p>Je serais ravis de répondre à vos questions ou commandes !</p>
 </main>
 
-<!-- Cart overlay -->
+<!-- Cart overlay identique à boutique -->
 <div id="cartOverlay">
   <h3>Panier</h3>
   <div id="cartItems"></div>
@@ -75,7 +137,7 @@ const cartCount = document.getElementById('cartCount');
 const cartOverlay = document.getElementById('cartOverlay');
 const cartItems = document.getElementById('cartItems');
 
-// Charger le panier depuis localStorage si existant
+// Charger le panier depuis localStorage
 if(localStorage.getItem('cart')) {
   cart = JSON.parse(localStorage.getItem('cart'));
   cartCount.textContent = `Panier : ${cart.length}`;
