@@ -15,6 +15,7 @@ body {
   color: #2d2d2d;
 }
 
+/* HEADER */
 header {
   background-color: #ffffff;
   padding: 20px 60px;
@@ -55,6 +56,42 @@ nav a:hover {
   cursor: pointer;
 }
 
+/* FILTRE */
+.filter-container {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.filter-container label {
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  margin-right: 10px;
+  color: #2d2d2d;
+}
+
+.filter-container select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* BOUTON REINITIALISER */
+#resetFilters {
+  margin-top: 15px;
+  padding: 8px 16px;
+  border-radius: 25px;
+  border: 1px solid #c89b5e;
+  background: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#resetFilters:hover {
+  background-color: #f0e6d8;
+}
+
+/* TITRES */
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 42px;
@@ -62,59 +99,7 @@ h1 {
   margin-top: 50px;
 }
 
-.filter-container {
-  text-align: center;
-  margin: 40px 0;
-}
-
-.filters-group {
-  margin-bottom: 25px;
-}
-
-.filters-group h4 {
-  margin-bottom: 10px;
-  font-weight: 400;
-}
-
-.filter-btn {
-  padding: 8px 16px;
-  margin: 6px;
-  border-radius: 25px;
-  border: 1px solid #c89b5e;
-  background: white;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.filter-btn:hover {
-  background-color: #f0e6d8;
-}
-
-.filter-btn.active {
-  background-color: #c89b5e;
-  color: white;
-}
-
-.filter-btn.active::after {
-  content: " ✓";
-  font-weight: bold;
-}
-
-.reset-btn {
-  margin-bottom: 20px;
-  padding: 10px 20px;
-  border-radius: 25px;
-  border: 1px solid #c89b5e;
-  background: white;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.reset-btn:hover {
-  background-color: #f0e6d8;
-}
-
+/* PRODUITS */
 .products-grid {
   display: flex;
   flex-wrap: wrap;
@@ -133,6 +118,7 @@ h1 {
   width: 100%;
   border-radius: 8px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  cursor: pointer;
 }
 
 .product:hover {
@@ -147,6 +133,11 @@ h1 {
   padding: 10px 25px;
   border-radius: 30px;
   cursor: pointer;
+  font-size: 14px;
+}
+
+.product button:hover {
+  opacity: 0.8;
 }
 
 .product-price {
@@ -154,6 +145,77 @@ h1 {
   color: #c89b5e;
   font-weight: bold;
   margin-top: 5px;
+}
+
+/* PANIER */
+#cartOverlay {
+  display: none;
+  position: fixed;
+  top: 90px;
+  right: 30px;
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  z-index: 100;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.cart-item img {
+  width: 50px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cart-item-controls button {
+  padding: 3px 8px;
+  cursor: pointer;
+  border: 1px solid #c89b5e;
+  background: white;
+  color: #c89b5e;
+  border-radius: 5px;
+}
+
+.cart-item-remove {
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+/* BOUTON FINALISER LA COMMANDE */
+.cart-button {
+  margin-top: 12px;
+  background-color: #c89b5e;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cart-button:hover {
+  opacity: 0.8;
 }
 </style>
 </head>
@@ -166,121 +228,149 @@ h1 {
     <a href="boutique.html">Boutique</a>
     <a href="contact.html">Contact</a>
   </nav>
-  <div class="cart-indicator" id="cartCount">Panier : 0</div>
+  <div class="cart-indicator" id="cartCount" onclick="toggleCart()">Panier : 0</div>
 </header>
 
 <main>
 <h1>Boutique</h1>
 
+<!-- FILTRE -->
 <div class="filter-container">
-
-  <button class="reset-btn" id="resetFilters">Réinitialiser les filtres</button>
-
-  <div class="filters-group">
-    <h4>Couleur</h4>
-    <button class="filter-btn" data-filter="bleu">Bleu</button>
-    <button class="filter-btn" data-filter="rose">Rose</button>
-    <button class="filter-btn" data-filter="verte">Verte</button>
-  </div>
-
-  <div class="filters-group">
-    <h4>Illustration</h4>
-    <button class="filter-btn" data-filter="Colombe">Colombe</button>
-    <button class="filter-btn" data-filter="Adoration">Adoration</button>
-    <button class="filter-btn" data-filter="Bougies">Bougies</button>
-  </div>
-
-  <div class="filters-group">
-    <h4>Format</h4>
-    <button class="filter-btn" data-filter="carte">Carte</button>
-    <button class="filter-btn" data-filter="stickers">Stickers</button>
-  </div>
-
+  <label for="filterSelect">Filtrer par :</label>
+  <select id="filterSelect" onchange="applyFilter()">
+    <option value="all">Tous les produits</option>
+    <optgroup label="Couleur">
+      <option value="bleu">Bleu</option>
+      <option value="rose">Rose</option>
+      <option value="verte">Verte</option>
+    </optgroup>
+    <optgroup label="Illustration">
+      <option value="Colombe">Colombe</option>
+      <option value="Adoration">Adoration</option>
+      <option value="Bougies">Bougies</option>
+    </optgroup>
+    <optgroup label="Format">
+      <option value="carte">Carte</option>
+      <option value="stickers">Stickers</option>
+    </optgroup>
+  </select>
+  <br>
+  <button id="resetFilters">Réinitialiser les filtres</button>
 </div>
 
 <div class="products-grid">
 
+<!-- Place ici tous tes produits avec data-color, data-type et data-format -->
+<!-- Exemple d’un produit : -->
 <div class="product" data-color="bleu" data-type="Colombe" data-format="carte">
-<img src="images/carte colombe bleu.png">
-<p>Carte colombe fond bleu<br><span class="product-price">3€</span></p>
-<button onclick="addToCart('Carte colombe fond bleu',3)">Ajouter</button>
+  <img src="images/carte colombe bleu.png" alt="Carte colombe fond bleu">
+  <p>Carte colombe fond bleu<br><span class="product-price">3€</span></p>
+  <button onclick="addToCart('Carte colombe fond bleu', 3, 'images/carte colombe bleu.png')">Ajouter au panier</button>
 </div>
 
-<div class="product" data-color="rose" data-type="Colombe" data-format="carte">
-<img src="images/carte colombe rose.png">
-<p>Carte colombe fond rose<br><span class="product-price">3€</span></p>
-<button onclick="addToCart('Carte colombe fond rose',3)">Ajouter</button>
-</div>
-
-<div class="product" data-color="verte" data-type="Colombe" data-format="stickers">
-<img src="images/stickers colombe vert.png">
-<p>Stickers colombe fond vert<br><span class="product-price">3€</span></p>
-<button onclick="addToCart('Stickers colombe fond vert',3)">Ajouter</button>
-</div>
+<!-- Répète pour tous les autres produits exactement comme dans ton fichier actuel -->
 
 </div>
 </main>
 
+<!-- Cart overlay -->
+<div id="cartOverlay">
+  <h3>Panier</h3>
+  <div id="cartItems"></div>
+  <button class="cart-button" onclick="location.href='paiement.html'">Finaliser la commande</button>
+</div>
+
 <script>
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const cartCount = document.getElementById('cartCount');
-updateCartCount();
+const cartOverlay = document.getElementById('cartOverlay');
+const cartItems = document.getElementById('cartItems');
 
-function addToCart(name, price){
-  const existing = cart.find(item => item.name === name);
-  if(existing){ existing.quantity += 1; }
-  else{ cart.push({name, price, quantity:1}); }
+updateCartCount();
+renderCart();
+
+function addToCart(name, price, imgSrc){
+  const existingItem = cart.find(item => item.name === name);
+  if(existingItem){
+    existingItem.quantity += 1;
+  } else {
+    cart.push({name, price, imgSrc, quantity:1});
+  }
+  saveCart();
+  renderCart();
+}
+
+function removeFromCart(name){
+  cart = cart.filter(item => item.name !== name);
+  saveCart();
+  renderCart();
+}
+
+function changeQuantity(name, delta){
+  const item = cart.find(i => i.name === name);
+  if(!item) return;
+  item.quantity += delta;
+  if(item.quantity < 1){
+    removeFromCart(name);
+  } else {
+    saveCart();
+  }
+  renderCart();
+}
+
+function saveCart(){
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
 }
 
 function updateCartCount(){
   const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-  cartCount.textContent = "Panier : " + total;
+  cartCount.textContent = `Panier : ${total}`;
 }
 
-const selectedFilters = [];
-const filterButtons = document.querySelectorAll('.filter-btn');
+function renderCart(){
+  cartItems.innerHTML = '';
+  cart.forEach(item => {
+    const div = document.createElement('div');
+    div.classList.add('cart-item');
+    div.innerHTML = `
+      <img src="${item.imgSrc}" alt="${item.name}">
+      <div class="cart-item-details">${item.name} - ${item.price}€</div>
+      <div class="cart-item-controls">
+        <button onclick="changeQuantity('${item.name}', -1)">-</button>
+        <span>${item.quantity}</span>
+        <button onclick="changeQuantity('${item.name}', 1)">+</button>
+        <span class="cart-item-remove" onclick="removeFromCart('${item.name}')">×</span>
+      </div>
+    `;
+    cartItems.appendChild(div);
+  });
+}
+
+function toggleCart(){
+  cartOverlay.style.display = cartOverlay.style.display === 'block' ? 'none' : 'block';
+}
+
+// FILTRE AVEC REINITIALISATION
+const filterSelect = document.getElementById('filterSelect');
 const resetBtn = document.getElementById('resetFilters');
 
-filterButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const value = button.dataset.filter;
-    if(selectedFilters.includes(value)){
-      selectedFilters.splice(selectedFilters.indexOf(value), 1);
-      button.classList.remove('active');
-    } else {
-      selectedFilters.push(value);
-      button.classList.add('active');
-    }
-    applyFilters();
-  });
-});
-
+filterSelect.addEventListener('change', applyFilter);
 resetBtn.addEventListener('click', () => {
-  selectedFilters.length = 0;
-  filterButtons.forEach(btn => btn.classList.remove('active'));
-  applyFilters();
+  filterSelect.value = "all";
+  applyFilter();
 });
 
-function applyFilters(){
-  const products = document.querySelectorAll('.product');
+function applyFilter(){
+  const filter = filterSelect.value.toLowerCase();
+  const products = document.querySelectorAll('.products-grid .product');
 
   products.forEach(prod => {
-    const color = prod.dataset.color;
-    const type = prod.dataset.type;
-    const format = prod.dataset.format;
+    const color = prod.getAttribute('data-color').toLowerCase();
+    const type = prod.getAttribute('data-type').toLowerCase();
+    const format = prod.getAttribute('data-format').toLowerCase();
 
-    if(selectedFilters.length === 0){
-      prod.style.display = "block";
-      return;
-    }
-
-    if(
-      selectedFilters.includes(color) ||
-      selectedFilters.includes(type) ||
-      selectedFilters.includes(format)
-    ){
+    if(filter === "all" || filter === color || filter === type || filter === format){
       prod.style.display = "block";
     } else {
       prod.style.display = "none";
@@ -288,6 +378,17 @@ function applyFilters(){
   });
 }
 </script>
+
+<!-- BANNIÈRE INSTAGRAM -->
+<footer style="background-color:#f6f1ea; padding:20px; text-align:center; border-top:1px solid #eee;">
+  <a href="https://www.instagram.com/latelier_delia" target="_blank" style="text-decoration:none; color:#2d2d2d; display:inline-flex; align-items:center; gap:15px;">
+    <img src="images/logo instagram.png" alt="Instagram" style="width:70px; height:70px;">
+    <span style="font-size:20px; font-weight:bold;">@latelier_delia</span>
+  </a>
+  
+<footer>
+  <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
+</footer>
 
 </body>
 </html>
