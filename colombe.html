@@ -1,201 +1,244 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Colombes - L'Atelier d'Elia</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colombe - L'Atelier d'Elia</title>
 
-  <!-- Google Fonts élégantes -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
-  <style>
+<style>
 
-    body {
-      margin: 0;
-      background-color: #f6f1ea;
-      font-family: 'Montserrat', sans-serif;
-      color: #2d2d2d;
-    }
+body {
+  margin: 0;
+  background-color: #f6f1ea;
+  font-family: 'Montserrat', sans-serif;
+  color: #2d2d2d;
+}
 
-    /* HEADER */
-    header {
-      background-color: #ffffff;
-      padding: 20px 40px;
-      border-bottom: 1px solid #eee;
-      text-align: center;
-    }
+/* HEADER */
+header {
+  background-color: #ffffff;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
 
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      margin: 0 0 10px 0;
-    }
+header nav a {
+  text-decoration: none;
+  color: #2d2d2d;
+  margin-left: 25px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
 
-    nav a {
-      text-decoration: none;
-      color: #2d2d2d;
-      margin: 0 20px;
-      font-size: 14px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: opacity 0.3s ease;
-    }
+header nav a:hover {
+  opacity: 0.6;
+}
 
-    nav a:hover {
-      opacity: 0.6;
-    }
+.cart-indicator {
+  background-color: #c89b5e;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 13px;
+  cursor: pointer;
+}
 
-    /* PANIER FIXE */
-    #cartCount {
-      background-color: #c89b5e;
-      color: white;
-      padding: 8px 20px;
-      border-radius: 30px;
-      font-size: 13px;
-      letter-spacing: 1px;
-      cursor: pointer;
-      position: fixed;
-      top: 20px;
-      right: 30px;
-      z-index: 200;
-      transition: background 0.3s ease;
-    }
+/* TITRES */
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 50px;
+}
 
-    #cartCount:hover {
-      background-color: #b58345;
-    }
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  text-align: center;
+  color: #c89b5e;
+  margin-bottom: 50px;
+}
 
-    /* CONTENU PRODUIT */
-    .product-container {
-      text-align: center;
-      margin-top: 60px;
-    }
+/* PRODUITS */
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  justify-content: center;
+  padding-bottom: 80px;
+}
 
-    .product-container h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 36px;
-      font-weight: 400;
-      margin-bottom: 10px;
-    }
+.product {
+  width: 240px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
 
-    .color-selector button {
-      background-color: #c89b5e;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      margin: 8px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-family: 'Montserrat', sans-serif;
-      letter-spacing: 1px;
-      transition: background 0.3s ease;
-    }
+.product img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
 
-    .color-selector button:hover {
-      background-color: #b58345;
-    }
+.product p {
+  margin-top: 10px;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+}
 
-    #productImage {
-      width: 300px;
-      height: auto;
-      margin-top: 30px;
-      border-radius: 8px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    }
+.product:hover {
+  transform: translateY(-6px);
+}
 
-    #price {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      margin-top: 20px;
-    }
+.product button {
+  margin-top: 12px;
+  background-color: #c89b5e;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+}
 
-    .add-cart-btn {
-      background-color: #c89b5e;
-      color: white;
-      border: none;
-      padding: 12px 30px;
-      margin-top: 15px;
-      border-radius: 30px;
-      cursor: pointer;
-      letter-spacing: 1px;
-      transition: background 0.3s ease;
-    }
+.product button:hover {
+  background-color: #b58345;
+}
 
-    .add-cart-btn:hover {
-      background-color: #b58345;
-    }
+/* PANIER */
+#cartOverlay {
+  display: none;
+  position: fixed;
+  top: 90px;
+  right: 30px;
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  z-index: 100;
+}
 
-    a {
-      color: #c89b5e;
-      text-decoration: none;
-    }
+#cartOverlay h3 {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+}
 
-    a:hover {
-      opacity: 0.7;
-    }
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
 
-    /* PANIER OVERLAY */
-    #cartOverlay {
-      display: none;
-      position: fixed;
-      top: 90px;
-      right: 30px;
-      width: 300px;
-      max-height: 400px;
-      overflow-y: auto;
-      background: white;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-      z-index: 100;
-    }
+.cart-item img {
+  width: 45px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
 
-    #cartOverlay h3 {
-      font-family: 'Playfair Display', serif;
-      text-align: center;
-      font-weight: 400;
-      margin-top: 0;
-    }
+#payButton {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: #c89b5e;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
 
-    .cart-item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-      font-size: 14px;
-    }
+#payButton:hover {
+  background: #b58345;
+}
 
-    .cart-item img {
-      width: 45px;
-      margin-right: 10px;
-      border-radius: 5px;
-    }
-
-    #payButton {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      background: #c89b5e;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      font-size: 13px;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    #payButton:hover {
-      background: #b58345;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 80px;
-      padding: 20px;
-      background-color: #ffffff;
-      border-top: 1px solid #eee;
-      font-size: 14px;
-    }
-
-  </style>
+</style>
 </head>
+
+<body>
+
+<header>
+  <div>
+    <a href="index.html">Accueil</a>
+    <a href="boutique.html">Boutique</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="cart-indicator" id="cartCount" onclick="toggleCart()">Panier : 0</div>
+</header>
+
+<main>
+<h1>Colombes - L'Atelier d'Elia</h1>
+<h2>Choisissez votre illustration</h2>
+
+<div class="products-grid">
+  <div class="product">
+    <img src="images/carte colombe bleu.png" alt="Colombe bleu">
+    <p>Colombe bleu</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Colombe bleu', 3, 'images/carte colombe bleu.png')">Ajouter au panier</button>
+  </div>
+
+  <div class="product">
+    <img src="images/carte colombe rose.png" alt="Colombe rose">
+    <p>Colombe rose</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Colombe rose', 3, 'images/carte colombe rose.png')">Ajouter au panier</button>
+  </div>
+
+  <div class="product">
+    <img src="images/carte colombe verte.png" alt="Colombe verte">
+    <p>Colombe verte</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Colombe verte', 3, 'images/carte colombe verte.png')">Ajouter au panier</button>
+  </div>
+</div>
+</main>
+
+<div id="cartOverlay">
+  <h3>Panier</h3>
+  <div id="cartItems"></div>
+  <button id="payButton" onclick="location.href='paiement.html'">Payer</button>
+</div>
+
+<script>
+let cart = [];
+const cartCount = document.getElementById('cartCount');
+const cartOverlay = document.getElementById('cartOverlay');
+const cartItems = document.getElementById('cartItems');
+
+if(localStorage.getItem('cart')) {
+  cart = JSON.parse(localStorage.getItem('cart'));
+  cartCount.textContent = `Panier : ${cart.length}`;
+  renderCart();
+}
+
+function addToCart(name, price, imgSrc){
+  cart.push({name, price, imgSrc});
+  cartCount.textContent = `Panier : ${cart.length}`;
+  renderCart();
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function renderCart(){
+  cartItems.innerHTML = '';
+  cart.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `<img src="${item.imgSrc}" alt="${item.name}"><div>${item.name} - ${item.price}€</div>`;
+    cartItems.appendChild(div);
+  });
+}
+
+function toggleCart(){
+  cartOverlay.style.display = (cartOverlay.style.display === 'block') ? 'none' : 'block';
+}
+</script>
+
+</body>
+</html>
