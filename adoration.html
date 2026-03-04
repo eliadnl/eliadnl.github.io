@@ -211,7 +211,7 @@ function addToCart(name, price, imgSrc){
   cart.push({name, price, imgSrc});
   cartCount.textContent = `Panier : ${cart.length}`;
   renderCart();
-  localStorage.setItem('cart', JSON.stringify(cart)); // panier persistant sur toutes les pages
+  localStorage.setItem('cart', JSON.stringify(cart));
 }
 
 function renderCart(){
