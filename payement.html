@@ -40,6 +40,11 @@ button{
 button:hover{
   opacity:0.9;
 }
+
+.message{
+  margin-top:20px;
+  font-size:16px;
+}
 </style>
 </head>
 <body>
@@ -62,21 +67,42 @@ button:hover{
   🟡 Payer avec PayPal
 </button>
 
+<div class="message" id="message"></div>
+
 <script>
+
+// 🔹 Récupération du total depuis commande.html
 const total = localStorage.getItem('totalCommande') || "0.00";
 document.getElementById("total").textContent = total;
 
-// 🔵 Stripe (pour l'instant redirection simple)
+// 🔵 Paiement carte (Stripe plus tard)
 function payerCarte(){
-  alert("Ici tu connecteras Stripe plus tard.");
-  // Tu pourras mettre ton lien Stripe ici
-  // window.location.href = "https://checkout.stripe.com/...";
+  alert("Le paiement par carte sera bientôt disponible.");
 }
 
-// 🟡 PayPal
+// 🟡 Paiement PayPal
 function payerPaypal(){
-  window.location.href = `https://www.paypal.com/paypalme/latelierdelia/${total}`;
+
+  if(total === "0.00"){
+    alert("Erreur : montant invalide.");
+    return;
+  }
+
+  // Message avant redirection
+  document.getElementById("message").textContent = 
+  "Redirection vers PayPal...";
+
+  // Vider le panier
+  localStorage.removeItem("cart");
+  localStorage.removeItem("totalCommande");
+
+  // Redirection vers TON PayPal.me
+  setTimeout(function(){
+    window.location.href = 
+    "https://www.paypal.com/paypalme/EliaDNL/" + total;
+  }, 1000);
 }
+
 </script>
 
 </body>
