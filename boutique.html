@@ -219,41 +219,72 @@ h1 {
 <main>
 <h1>Boutique</h1>
 
-<!-- FILTRE MULTI-SÉLECTION -->
+<!-- FILTRE -->
 <div class="filter-container">
-  <label>Filtrer par :</label>
-  
-  <!-- Couleur -->
-  <select id="colorFilter" multiple style="margin-bottom:10px;">
-    <option value="bleu">Bleu</option>
-    <option value="rose">Rose</option>
-    <option value="verte">Verte</option>
-  </select>
+  <label style="display:block; font-weight:bold; margin-bottom:10px;">Filtrer par :</label>
 
-  <!-- Illustration -->
-  <select id="typeFilter" multiple style="margin-bottom:10px;">
-    <option value="colombe">Colombe</option>
-    <option value="adoration">Adoration</option>
-    <option value="bougies">Bougies</option>
-  </select>
+  <div style="margin-bottom:10px;">
+    <span style="font-weight:bold;">Couleur :</span><br>
+    <label><input type="checkbox" class="filter-checkbox" value="bleu"> Bleu</label>
+    <label><input type="checkbox" class="filter-checkbox" value="rose"> Rose</label>
+    <label><input type="checkbox" class="filter-checkbox" value="verte"> Verte</label>
+  </div>
 
-  <!-- Format -->
-  <select id="formatFilter" multiple style="margin-bottom:10px;">
-    <option value="carte">Carte</option>
-    <option value="stickers">Stickers</option>
-  </select>
+  <div style="margin-bottom:10px;">
+    <span style="font-weight:bold;">Illustration :</span><br>
+    <label><input type="checkbox" class="filter-checkbox" value="colombe"> Colombe</label>
+    <label><input type="checkbox" class="filter-checkbox" value="adoration"> Adoration</label>
+    <label><input type="checkbox" class="filter-checkbox" value="bougies"> Bougies</label>
+  </div>
 
-  <br>
+  <div style="margin-bottom:10px;">
+    <span style="font-weight:bold;">Format :</span><br>
+    <label><input type="checkbox" class="filter-checkbox" value="carte"> Carte</label>
+    <label><input type="checkbox" class="filter-checkbox" value="stickers"> Stickers</label>
+  </div>
+
   <button id="resetFilters" style="
-      margin-top: 10px;
-      padding: 8px 16px;
-      border-radius: 25px;
-      border: 1px solid #c89b5e;
-      background: white;
-      cursor: pointer;
-      font-weight: bold;
+    margin-top: 10px;
+    padding: 8px 16px;
+    border-radius: 25px;
+    border: 1px solid #c89b5e;
+    background: white;
+    cursor: pointer;
+    font-weight: bold;
   ">Réinitialiser les filtres</button>
 </div>
+
+<script>
+const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
+const resetBtn = document.getElementById('resetFilters');
+
+filterCheckboxes.forEach(cb => cb.addEventListener('change', applyFilter));
+resetBtn.addEventListener('click', () => {
+  filterCheckboxes.forEach(cb => cb.checked = false);
+  applyFilter();
+});
+
+function applyFilter() {
+  const selected = Array.from(filterCheckboxes)
+    .filter(cb => cb.checked)
+    .map(cb => cb.value.toLowerCase());
+
+  const products = document.querySelectorAll('.products-grid .product');
+
+  products.forEach(prod => {
+    const color = prod.getAttribute('data-color')?.toLowerCase();
+    const type = prod.getAttribute('data-type')?.toLowerCase();
+    const format = prod.getAttribute('data-format')?.toLowerCase();
+
+    const show = selected.length === 0 || 
+      selected.includes(color) || 
+      selected.includes(type) || 
+      selected.includes(format);
+
+    prod.style.display = show ? 'block' : 'none';
+  });
+}
+</script>
 
 <div class="products-grid">
 
