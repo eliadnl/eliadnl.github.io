@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bougies - L'Atelier d'Elia</title>
+  <title>Colombes - L'Atelier d'Elia</title>
   <link rel="stylesheet" href="style.css">
   <style>
     .product-container {
@@ -57,7 +57,7 @@
 
   <main>
     <div class="product-container">
-      <h2>Bougies</h2>
+      <h2>Colombes</h2>
       <p>Choisissez la couleur de votre carte :</p>
 
       <!-- Boutons de couleur -->
@@ -68,7 +68,7 @@
       </div>
 
       <!-- Image du produit -->
-      <img id="productImage" src="images/carte bougies verte.png" alt="Bougies Verte">
+      <img id="productImage" src="images/carte colombe verte.png" alt="Colombe Verte">
 
       <!-- Prix et panier -->
       <div>
@@ -90,17 +90,17 @@
 
     function showColor(color, price) {
       const image = document.getElementById('productImage');
-      image.src = `images/carte bougies ${color}.png`;
-      image.alt = `Bougies ${color}`;
+      image.src = `images/carte colombe ${color}.png`;
+      image.alt = `Colombe ${color}`;
       currentColor = color;
       document.getElementById('price').textContent = "Prix : " + price + "€";
     }
 
     function addToCart(color, price) {
-      cart.push({name: `Bougies ${color}`, price});
-      alert(`Vous avez ajouté "Bougies ${color}" au panier !`);
+      cart.push({name: `Colombe ${color}`, price});
+      alert(`Vous avez ajouté "Colombe ${color}" au panier !`);
       console.log(cart);
     }
   </script>
 </body>
-</html>
+</html> meme chose pour celui ci qui est adoration.html
