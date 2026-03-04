@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L'Atelier d'Elia - Accueil</title>
+<title>Boutique - L'Atelier d'Elia</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
@@ -19,41 +18,43 @@ body {
 /* HEADER */
 header {
   background-color: #ffffff;
-  padding: 20px 40px;
+  padding: 20px 60px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid #eee;
 }
 
-header a {
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+}
+
+nav a {
   text-decoration: none;
   color: #2d2d2d;
-  margin-right: 30px;
   font-size: 14px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  transition: opacity 0.3s ease;
 }
 
-header a:hover {
+nav a:hover {
   opacity: 0.6;
 }
 
-/* Panier */
 .cart-indicator {
   background-color: #c89b5e;
   color: white;
-  padding: 8px 20px;
+  padding: 8px 22px;
   border-radius: 30px;
   font-size: 13px;
-  letter-spacing: 1px;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
-
-.cart-indicator:hover {
-  background-color: #b58345;
 }
 
 /* MAIN */
