@@ -43,6 +43,63 @@
     .add-cart-btn:hover {
       background-color: #ff7744;
     }
+
+    /* Cart overlay */
+    #cartOverlay {
+      display: none;
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      width: 250px;
+      max-height: 400px;
+      overflow-y: auto;
+      background: white;
+      border: 2px solid #446D92;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      z-index: 100;
+    }
+    #cartOverlay h3 {
+      text-align: center;
+      margin-top: 0;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .cart-item img {
+      width: 40px;
+      height: auto;
+      margin-right: 10px;
+      border-radius: 4px;
+    }
+    #cartCount {
+      background-color: #ff9966;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      z-index: 200;
+    }
+    #payButton {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background: #446D92;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #payButton:hover {
+      background: #2d4b6c;
+    }
   </style>
 </head>
 <body>
@@ -53,6 +110,7 @@
       <a href="boutique.html">Boutique</a>
       <a href="contact.html">Contact</a>
     </nav>
+    <div id="cartCount" onclick="toggleCart()">Panier : 0</div>
   </header>
 
   <main>
@@ -60,17 +118,14 @@
       <h2>Colombes</h2>
       <p>Choisissez la couleur de votre carte :</p>
 
-      <!-- Boutons de couleur -->
       <div class="color-selector">
         <button onclick="showColor('verte', 3)">Vert</button>
         <button onclick="showColor('bleu', 3)">Bleu</button>
         <button onclick="showColor('rose', 3)">Rose</button>
       </div>
 
-      <!-- Image du produit -->
       <img id="productImage" src="images/carte colombe verte.png" alt="Colombe Verte">
 
-      <!-- Prix et panier -->
       <div>
         <p id="price">Prix : 3€</p>
         <button class="add-cart-btn" onclick="addToCart(currentColor, 3)">Ajouter au panier</button>
@@ -80,6 +135,13 @@
     </div>
   </main>
 
+  <!-- Cart overlay -->
+  <div id="cartOverlay">
+    <h3>Panier</h3>
+    <div id="cartItems"></div>
+    <button id="payButton" onclick="location.href='paiement.html'">Payer</button>
+  </div>
+
   <footer>
     <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
   </footer>
@@ -87,6 +149,16 @@
   <script>
     let currentColor = 'verte';
     let cart = [];
+    const cartCount = document.getElementById('cartCount');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const cartItems = document.getElementById('cartItems');
+
+    // Charger le panier depuis localStorage si existant
+    if(localStorage.getItem('cart')) {
+      cart = JSON.parse(localStorage.getItem('cart'));
+      cartCount.textContent = `Panier : ${cart.length}`;
+      renderCart();
+    }
 
     function showColor(color, price) {
       const image = document.getElementById('productImage');
@@ -97,9 +169,26 @@
     }
 
     function addToCart(color, price) {
-      cart.push({name: `Colombe ${color}`, price});
+      const imgSrc = `images/carte colombe ${color}.png`;
+      cart.push({name: `Colombe ${color}`, price, imgSrc});
+      cartCount.textContent = `Panier : ${cart.length}`;
+      renderCart();
+      localStorage.setItem('cart', JSON.stringify(cart));
       alert(`Vous avez ajouté "Colombe ${color}" au panier !`);
-      console.log(cart);
+    }
+
+    function renderCart() {
+      cartItems.innerHTML = '';
+      cart.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `<img src="${item.imgSrc}" alt="${item.name}"><div>${item.name} - ${item.price}€</div>`;
+        cartItems.appendChild(div);
+      });
+    }
+
+    function toggleCart() {
+      cartOverlay.style.display = (cartOverlay.style.display === 'block') ? 'none' : 'block';
     }
   </script>
 </body>
