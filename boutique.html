@@ -56,65 +56,25 @@ nav a:hover {
   cursor: pointer;
 }
 
-<!-- FILTRE -->
-<div class="filter-container">
-  <label for="filterSelect">Filtrer par :</label>
-  <select id="filterSelect" multiple style="padding:8px 12px; border-radius:8px; border:1px solid #ccc; font-family:'Montserrat', sans-serif; width:200px;">
-    <optgroup label="Couleur">
-      <option value="bleu">Bleu</option>
-      <option value="rose">Rose</option>
-      <option value="verte">Verte</option>
-    </optgroup>
-    <optgroup label="Illustration">
-      <option value="colombe">Colombe</option>
-      <option value="adoration">Adoration</option>
-      <option value="bougies">Bougies</option>
-    </optgroup>
-    <optgroup label="Format">
-      <option value="carte">Carte</option>
-      <option value="stickers">Stickers</option>
-    </optgroup>
-  </select>
-  <button id="resetFilters" style="
-    margin-left: 10px;
-    padding: 8px 16px;
-    border-radius: 30px;
-    border: 1px solid #c89b5e;
-    background: white;
-    cursor: pointer;
-    font-weight: bold;
-  ">Réinitialiser</button>
-</div>
-
-<script>
-const filterSelect = document.getElementById('filterSelect');
-const resetBtn = document.getElementById('resetFilters');
-
-filterSelect.addEventListener('change', applyFilter);
-resetBtn.addEventListener('click', () => {
-  // Déselectionner toutes les options
-  Array.from(filterSelect.options).forEach(option => option.selected = false);
-  applyFilter();
-});
-
-function applyFilter() {
-  const selected = Array.from(filterSelect.selectedOptions).map(opt => opt.value.toLowerCase());
-  const products = document.querySelectorAll('.products-grid .product');
-
-  products.forEach(prod => {
-    const color = prod.getAttribute('data-color')?.toLowerCase();
-    const type = prod.getAttribute('data-type')?.toLowerCase();
-    const format = prod.getAttribute('data-format')?.toLowerCase();
-
-    const show = selected.length === 0 || 
-                 selected.includes(color) || 
-                 selected.includes(type) || 
-                 selected.includes(format);
-
-    prod.style.display = show ? 'block' : 'none';
-  });
+/* FILTRE */
+.filter-container {
+  text-align: center;
+  margin: 30px 0;
 }
-</script>
+
+.filter-container label {
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  margin-right: 10px;
+  color: #2d2d2d;
+}
+
+.filter-container select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: 'Montserrat', sans-serif;
+}
 
 /* TITRES */
 h1 {
@@ -259,72 +219,41 @@ h1 {
 <main>
 <h1>Boutique</h1>
 
-<!-- FILTRE -->
+<!-- FILTRE MULTI-SÉLECTION -->
 <div class="filter-container">
-  <label style="display:block; font-weight:bold; margin-bottom:10px;">Filtrer par :</label>
+  <label>Filtrer par :</label>
+  
+  <!-- Couleur -->
+  <select id="colorFilter" multiple style="margin-bottom:10px;">
+    <option value="bleu">Bleu</option>
+    <option value="rose">Rose</option>
+    <option value="verte">Verte</option>
+  </select>
 
-  <div style="margin-bottom:10px;">
-    <span style="font-weight:bold;">Couleur :</span><br>
-    <label><input type="checkbox" class="filter-checkbox" value="bleu"> Bleu</label>
-    <label><input type="checkbox" class="filter-checkbox" value="rose"> Rose</label>
-    <label><input type="checkbox" class="filter-checkbox" value="verte"> Verte</label>
-  </div>
+  <!-- Illustration -->
+  <select id="typeFilter" multiple style="margin-bottom:10px;">
+    <option value="colombe">Colombe</option>
+    <option value="adoration">Adoration</option>
+    <option value="bougies">Bougies</option>
+  </select>
 
-  <div style="margin-bottom:10px;">
-    <span style="font-weight:bold;">Illustration :</span><br>
-    <label><input type="checkbox" class="filter-checkbox" value="colombe"> Colombe</label>
-    <label><input type="checkbox" class="filter-checkbox" value="adoration"> Adoration</label>
-    <label><input type="checkbox" class="filter-checkbox" value="bougies"> Bougies</label>
-  </div>
+  <!-- Format -->
+  <select id="formatFilter" multiple style="margin-bottom:10px;">
+    <option value="carte">Carte</option>
+    <option value="stickers">Stickers</option>
+  </select>
 
-  <div style="margin-bottom:10px;">
-    <span style="font-weight:bold;">Format :</span><br>
-    <label><input type="checkbox" class="filter-checkbox" value="carte"> Carte</label>
-    <label><input type="checkbox" class="filter-checkbox" value="stickers"> Stickers</label>
-  </div>
-
+  <br>
   <button id="resetFilters" style="
-    margin-top: 10px;
-    padding: 8px 16px;
-    border-radius: 25px;
-    border: 1px solid #c89b5e;
-    background: white;
-    cursor: pointer;
-    font-weight: bold;
+      margin-top: 10px;
+      padding: 8px 16px;
+      border-radius: 25px;
+      border: 1px solid #c89b5e;
+      background: white;
+      cursor: pointer;
+      font-weight: bold;
   ">Réinitialiser les filtres</button>
 </div>
-
-<script>
-const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
-const resetBtn = document.getElementById('resetFilters');
-
-filterCheckboxes.forEach(cb => cb.addEventListener('change', applyFilter));
-resetBtn.addEventListener('click', () => {
-  filterCheckboxes.forEach(cb => cb.checked = false);
-  applyFilter();
-});
-
-function applyFilter() {
-  const selected = Array.from(filterCheckboxes)
-    .filter(cb => cb.checked)
-    .map(cb => cb.value.toLowerCase());
-
-  const products = document.querySelectorAll('.products-grid .product');
-
-  products.forEach(prod => {
-    const color = prod.getAttribute('data-color')?.toLowerCase();
-    const type = prod.getAttribute('data-type')?.toLowerCase();
-    const format = prod.getAttribute('data-format')?.toLowerCase();
-
-    const show = selected.length === 0 || 
-      selected.includes(color) || 
-      selected.includes(type) || 
-      selected.includes(format);
-
-    prod.style.display = show ? 'block' : 'none';
-  });
-}
-</script>
 
 <div class="products-grid">
 
