@@ -106,6 +106,14 @@ h2 {
   cursor: pointer;
 }
 
+/* PRIX EN DORÉ SUR LIGNE SÉPARÉE */
+.product-price {
+  display: block;
+  margin-top: 5px;
+  color: #c89b5e; /* couleur dorée */
+  font-weight: bold;
+}
+
 /* PANIER */
 #cartOverlay {
   display: none;
@@ -161,7 +169,6 @@ h2 {
   margin-left: 5px;
 }
 
-/* BOUTON FINALISER LA COMMANDE */
 .cart-button {
   margin-top: 12px;
   background-color: #c89b5e;
@@ -198,19 +205,19 @@ h2 {
 <div class="products-grid">
   <div class="product">
     <img src="images/carte colombe bleu.png" alt="Colombe fond bleu">
-    <p>Colombe fond bleu - 3€</p>
+    <p>Colombe fond bleu<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Colombe fond bleu', 3, 'images/carte colombe bleu.png')">Ajouter au panier</button>
   </div>
 
   <div class="product">
     <img src="images/carte colombe rose.png" alt="Colombe fond rose">
-    <p>Colombe fond rose - 3€</p>
+    <p>Colombe fond rose<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Colombe fond rose', 3, 'images/carte colombe rose.png')">Ajouter au panier</button>
   </div>
 
   <div class="product">
     <img src="images/carte colombe verte.png" alt="Colombe fond vert">
-    <p>Colombe fond vert - 3€</p>
+    <p>Colombe fond vert<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Colombe fond vert', 3, 'images/carte colombe verte.png')">Ajouter au panier</button>
   </div>
 </div>
@@ -294,10 +301,8 @@ function toggleCart() {
 }
 
 function finaliserCommande() {
-  // Calculer total
   let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   localStorage.setItem('totalCommande', total.toFixed(2));
-  // Redirection vers page paiement
   window.location.href = 'payement.html';
 }
 </script>
