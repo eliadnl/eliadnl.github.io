@@ -3,163 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Illustrations Adoration - L'Atelier d'Elia</title>
-
+<title>Commande - L'Atelier d'Elia</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
-  background-color: #f6f1ea;
   font-family: 'Montserrat', sans-serif;
+  background-color: #f6f1ea;
   color: #2d2d2d;
 }
-
-/* HEADER */
 header {
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 20px 60px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid #eee;
 }
-
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-}
-
-nav {
-  display: flex;
-  gap: 40px;
-}
-
-nav a {
-  text-decoration: none;
-  color: #2d2d2d;
-  font-size: 14px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-nav a:hover {
-  opacity: 0.6;
-}
-
-.cart-indicator {
-  background-color: #c89b5e;
-  color: white;
-  padding: 8px 22px;
-  border-radius: 30px;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-/* TITRES */
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 42px;
-  text-align: center;
-  margin-top: 50px;
-}
-
-h2 {
-  font-family: 'Playfair Display', serif;
-  text-align: center;
-  color: #c89b5e;
-  margin-bottom: 50px;
-}
-
-/* PRODUITS */
-.products-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 60px;
-  justify-content: center;
-  padding-bottom: 80px;
-}
-
-.product {
-  width: 240px;
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.product img {
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
-
-.product:hover {
-  transform: translateY(-6px);
-}
-
-.product button {
-  margin-top: 12px;
-  background-color: #c89b5e;
-  color: white;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 30px;
-  cursor: pointer;
-}
-
-/* PANIER */
-#cartOverlay {
-  display: none;
-  position: fixed;
-  top: 90px;
-  right: 30px;
-  width: 300px;
-  max-height: 400px;
-  overflow-y: auto;
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-  z-index: 100;
-}
-
-.cart-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 15px;
-}
-
-.cart-item img {
-  width: 50px;
-  border-radius: 5px;
-  margin-right: 10px;
-}
-
-.cart-item-details {
-  flex: 1;
-}
-
-.cart-item-controls {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.cart-item-controls button {
-  padding: 3px 8px;
-  cursor: pointer;
-  border: 1px solid #c89b5e;
-  background: white;
-  color: #c89b5e;
-  border-radius: 5px;
-}
-
-.cart-item-remove {
-  cursor: pointer;
-  color: red;
-  font-weight: bold;
-  margin-left: 5px;
-}
+.logo { font-family: 'Playfair Display', serif; font-size:24px; }
+nav a { text-decoration:none; margin-left:20px; color:#2d2d2d; font-size:14px; text-transform:uppercase; }
+nav a:hover { opacity:0.6; }
+h1 { text-align:center; font-family:'Playfair Display', serif; margin-top:50px; }
+h2 { font-family:'Playfair Display', serif; color:#c89b5e; text-align:center; margin:30px 0; }
+.order-container { max-width:900px; margin: 0 auto; padding:20px; background:white; border-radius:10px; box-shadow:0 10px 25px rgba(0,0,0,0.1); }
+.order-items { margin-bottom:40px; }
+.order-item { display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee; padding:10px 0; }
+.order-item img { width:60px; border-radius:5px; margin-right:10px; }
+.order-item-details { flex:1; }
+.total { text-align:right; font-weight:bold; font-size:18px; margin-top:10px; }
+form { display:flex; flex-direction:column; gap:15px; }
+input, textarea { padding:10px; border-radius:5px; border:1px solid #ccc; width:100%; font-size:14px; }
+button { background-color:#c89b5e; color:white; border:none; padding:12px; border-radius:30px; cursor:pointer; font-size:16px; }
+button:hover { opacity:0.9; }
 </style>
 </head>
 
@@ -170,180 +46,70 @@ h2 {
   <nav>
     <a href="index.html">Accueil</a>
     <a href="boutique.html">Boutique</a>
-    <a href="contact.html">Contact</a>
   </nav>
-  <div class="cart-indicator" id="cartCount" onclick="toggleCart()">Panier : 0</div>
 </header>
 
-<main>
-<h1>Adoration</h1>
-<h2>Choisissez votre illustration</h2>
+<h1>Votre commande</h1>
 
-<div class="products-grid">
-  <div class="product">
-    <img src="images/carte adoration bleu.png">
-    <p>Adoration fond bleu - 3€</p>
-    <button onclick="addToCart('Adoration fond bleu', 3, 'images/carte adoration bleu.png')">Ajouter au panier</button>
+<div class="order-container">
+  <h2>Articles dans le panier</h2>
+  <div class="order-items" id="orderItems">
+    <!-- Les articles du panier seront injectés ici -->
   </div>
+  <div class="total" id="totalPrice">Total : 0€</div>
 
-  <div class="product">
-    <img src="images/carte adoration rose.png">
-    <p>Adoration fond rose - 3€</p>
-    <button onclick="addToCart('Adoration fond rose', 3, 'images/carte adoration rose.png')">Ajouter au panier</button>
-  </div>
-
-  <div class="product">
-    <img src="images/carte adoration verte.png">
-    <p>Adoration fond verte - 3€</p>
-    <button onclick="addToCart('Adoration fond verte', 3, 'images/carte adoration verte.png')">Ajouter au panier</button>
-  </div>
-</div>
-</main>
-
-<div id="cartOverlay">
-  <h3>Panier</h3>
-  <div id="cartItems"></div>
-  <button onclick="location.href='paiement.html'">Payer</button>
+  <h2>Vos informations</h2>
+  <form id="orderForm">
+    <input type="text" id="name" placeholder="Nom complet" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <textarea id="address" placeholder="Adresse" rows="3" required></textarea>
+    <button type="submit">Valider la commande</button>
+  </form>
 </div>
 
 <script>
+// Récupérer le panier depuis localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-const cartCount = document.getElementById('cartCount');
-const cartOverlay = document.getElementById('cartOverlay');
-const cartItems = document.getElementById('cartItems');
+const orderItems = document.getElementById('orderItems');
+const totalPrice = document.getElementById('totalPrice');
 
-updateCartCount();
-renderCart();
-
-function addToCart(name, price, imgSrc) {
-  const existingItem = cart.find(item => item.name === name);
-  if (existingItem) {
-    existingItem.quantity += 1;
-  } else {
-    cart.push({name, price, imgSrc, quantity: 1});
-  }
-  saveCart();
-  renderCart();
-}
-
-function removeFromCart(name) {
-  cart = cart.filter(item => item.name !== name);
-  saveCart();
-  renderCart();
-}
-
-function changeQuantity(name, delta) {
-  const item = cart.find(i => i.name === name);
-  if (!item) return;
-  item.quantity += delta;
-  if (item.quantity < 1) {
-    removeFromCart(name);
-  } else {
-    saveCart();
-  }
-  renderCart();
-}
-
-function saveCart() {
-  localStorage.setItem('cart', JSON.stringify(cart));
-  updateCartCount();
-}
-
-function updateCartCount() {
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  cartCount.textContent = `Panier : ${totalItems}`;
-}
-
-function renderCart() {
-  cartItems.innerHTML = '';
+// Affichage des articles
+function renderOrder() {
+  orderItems.innerHTML = '';
+  let total = 0;
   cart.forEach(item => {
     const div = document.createElement('div');
-    div.classList.add('cart-item');
+    div.classList.add('order-item');
     div.innerHTML = `
       <img src="${item.imgSrc}" alt="${item.name}">
-      <div class="cart-item-details">
-        ${item.name} - ${item.price}€
-      </div>
-      <div class="cart-item-controls">
-        <button onclick="changeQuantity('${item.name}', -1)">-</button>
-        <span>${item.quantity}</span>
-        <button onclick="changeQuantity('${item.name}', 1)">+</button>
-        <span class="cart-item-remove" onclick="removeFromCart('${item.name}')">×</span>
-      </div>
+      <div class="order-item-details">${item.name} - ${item.price}€ x ${item.quantity}</div>
+      <div>${item.price * item.quantity}€</div>
     `;
-    cartItems.appendChild(div);
+    orderItems.appendChild(div);
+    total += item.price * item.quantity;
   });
+  totalPrice.textContent = `Total : ${total}€`;
 }
+renderOrder();
 
-function toggleCart() {
-  cartOverlay.style.display = cartOverlay.style.display === 'block' ? 'none' : 'block';
-}
-</script>
-<!-- Fin du contenu principal -->
-
-<!-- BANNIÈRE COLLECTION -->
-<section style="background-color:#fff8f0; padding:40px 20px; border-top:1px solid #eee;">
-  <h2 style="text-align:center; color:#c89b5e; margin-bottom:30px;">Autres illustrations de la collection</h2>
-  <div style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap;">
-    
-    <div style="text-align:center; width:120px;">
-      <a href="bougies.html">
-        <img src="images/carte bougies bleu.png" alt="Bougies fond bleu" style="width:100%; border-radius:5px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-      </a>
-      <p style="margin:5px 0; font-size:14px;">Bougies fond bleu</p>
-      <p style="color:#c89b5e; font-weight:bold; margin:0;">3€</p>
-    </div>
-    
-    <div style="text-align:center; width:120px;">
-      <a href="bougies.html">
-        <img src="images/carte bougies rose.png" alt="Bougies fond rose" style="width:100%; border-radius:5px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-      </a>
-      <p style="margin:5px 0; font-size:14px;">Bougies fond rose</p>
-      <p style="color:#c89b5e; font-weight:bold; margin:0;">3€</p>
-    </div>
-    
-    <div style="text-align:center; width:120px;">
-      <a href="bougies.html">
-        <img src="images/carte bougies verte.png" alt="Bougies fond vert" style="width:100%; border-radius:5px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-      </a>
-      <p style="margin:5px 0; font-size:14px;">Bougies fond vert</p>
-      <p style="color:#c89b5e; font-weight:bold; margin:0;">3€</p>
-    </div>
-
-    <div style="text-align:center; width:120px;">
-      <a href="colombe.html">
-        <img src="images/carte colombe bleu.png" alt="COLOMBE fond bleu" style="width:100%; border-radius:5px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-      </a>
-      <p style="margin:5px 0; font-size:14px;">COLOMBE fond bleu</p>
-      <p style="color:#c89b5e; font-weight:bold; margin:0;">3€</p>
-    </div>
-    
-    <div style="text-align:center; width:120px;">
-      <a href="colombe.html">
-        <img src="images/carte colombe rose.png" alt="COLOMBE fond rose" style="width:100%; border-radius:5px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-      </a>
-      <p style="margin:5px 0; font-size:14px;">COLOMBE fond rose</p>
-      <p style="color:#c89b5e; font-weight:bold; margin:0;">3€</p>
-    </div>
-
-   <div style="text-align:center; width:120px;">
-      <a href="colombe.html">
-        <img src="images/carte colombe verte.png" alt="COLOMBE fond vert" style="width:100%; border-radius:5px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-      </a>
-      <p style="margin:5px 0; font-size:14px;">COLOMBE fond vert</p>
-      <p style="color:#c89b5e; font-weight:bold; margin:0;">3€</p>
-   </div> 
-
-  </div>
-</section>
+// Gestion formulaire
+document.getElementById('orderForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const address = document.getElementById('address').value.trim();
+  if(!name || !email || !address) return alert("Merci de remplir tous les champs !");
   
-<!-- BANNIÈRE INSTAGRAM -->
-<footer style="background-color:#f6f1ea; padding:20px; text-align:center; border-top:1px solid #eee;">
-  <a href="https://www.instagram.com/latelier_delia" target="_blank" style="text-decoration:none; color:#2d2d2d; display:inline-flex; align-items:center; gap:15px;">
-    <img src="images/logo instagram noir.png" alt="Instagram" style="width:70px; height:70px;">
-    <span style="font-size:20px; font-weight:bold;">@latelier_delia</span>
-  </a>
-</footer>
+  // Ici tu peux envoyer les infos à ton serveur ou API
+  alert(`Merci ${name} ! Votre commande a été enregistrée.\nTotal : ${totalPrice.textContent}`);
+  
+  // Vider le panier
+  cart = [];
+  localStorage.setItem('cart', JSON.stringify(cart));
+  renderOrder();
+  this.reset();
+});
+</script>
 
 </body>
 </html>
