@@ -3,17 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boutique - L'Atelier d'Elia</title>
+<title>L'Atelier d'Elia - Accueil</title>
 
-<!-- Google Fonts élégantes -->
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-
 body {
   margin: 0;
-  background-color: #f6f1ea;
   font-family: 'Montserrat', sans-serif;
+  background-color: #f6f1ea;
   color: #2d2d2d;
 }
 
@@ -171,6 +170,28 @@ h2 {
   background: #b58345;
 }
 
+/* FOOTER */
+footer {
+  background-color: #f6f1ea;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+footer a {
+  text-decoration: none;
+  color: #2d2d2d;
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+}
+footer a img {
+  width: 70px;
+  height: 70px;
+}
+footer a span {
+  font-size: 20px;
+  font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -185,13 +206,12 @@ h2 {
 </header>
 
 <main>
-<h1>Boutique - L'Atelier d'Elia</h1>
-<h2>La dernière Collection</h2>
+<h1>Bienvenue à L'Atelier d'Elia</h1>
+<h2>Découvrez notre collection</h2>
 
 <div class="products-grid">
-
   <div class="product" onclick="location.href='colombe.html'">
-    <img src="images/carte colombe bleu.png" alt="Colombes">
+    <img src="images/carte colombe bleu.png" alt="Colombe">
     <p>Colombe</p>
   </div>
 
@@ -204,7 +224,6 @@ h2 {
     <img src="images/carte bougies verte.png" alt="Bougies">
     <p>Bougies</p>
   </div>
-
 </div>
 </main>
 
@@ -240,28 +259,24 @@ function renderCart(){
     const div = document.createElement('div');
     div.className = 'cart-item';
     div.innerHTML = `<img src="${item.imgSrc}" alt="${item.name}">
-                     <div>${item.name} - ${item.price}€</div>`;
+                     <div>${item.name} - ${item.price || '3'}€</div>`;
     cartItems.appendChild(div);
   });
 }
 
 function toggleCart(){
-  cartOverlay.style.display = 
-    (cartOverlay.style.display === 'block') ? 'none' : 'block';
+  cartOverlay.style.display = (cartOverlay.style.display === 'block') ? 'none' : 'block';
 }
 </script>
 
 <!-- BANNIÈRE INSTAGRAM -->
-<footer style="background-color:#f6f1ea; padding:20px; text-align:center; border-top:1px solid #eee;">
-  <a href="https://www.instagram.com/latelier_delia" target="_blank" style="text-decoration:none; color:#2d2d2d; display:inline-flex; align-items:center; gap:15px;">
-    <img src="images/logo instagram.png" alt="Instagram" style="width:70px; height:70px;">
-    <span style="font-size:20px; font-weight:bold;">@latelier_delia</span>
+<footer>
+  <a href="https://www.instagram.com/latelier_delia" target="_blank">
+    <img src="images/logo instagram.png" alt="Instagram">
+    <span>@latelier_delia</span>
   </a>
-
-<footer>
   <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
-<footer>
+</footer>
 
-  
 </body>
 </html>
