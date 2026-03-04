@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commande - L'Atelier d'Elia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<style>
+body {
+  margin:0;
+  background-color:#f6f1ea;
+  font-family:'Montserrat',sans-serif;
+  color:#2d2d2d;
+}
+header, footer {background:#fff; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee;}
+.logo {font-family:'Playfair Display',serif;font-size:24px;}
+h1,h2 {text-align:center;}
+h1 {font-size:36px;margin-top:40px;}
+h2 {color:#c89b5e;margin-bottom:40px;}
+.cart-table {width:90%; max-width:800px; margin:0 auto 40px; border-collapse:collapse;}
+.cart-table th, .cart-table td {border-bottom:1px solid #ddd; padding:10px; text-align:center;}
+.cart-table img {width:50px; border-radius:5px;}
+input[type="text"], input[type="email"], textarea {width:90%; padding:10px; margin-bottom:15px; border-radius:5px; border:1px solid #ccc;}
+textarea {resize:vertical;}
+button {background:#c89b5e; color:white; border:none; padding:12px 25px; border-radius:30px; cursor:pointer; font-size:16px;}
+#promoRow {display:flex; gap:10px; justify-content:center; margin-bottom:20px;}
+#total {font-weight:bold; font-size:18px; text-align:right; margin-right:5%;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">L'Atelier d'Elia</div>
+</header>
+
+<main>
+<h1>Votre commande</h1>
+<h2>Vérifiez vos articles et remplissez vos informations</h2>
+
+<table class="cart-table" id="cartTable">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Article</th>
+      <th>Prix</th>
+      <th>Quantité</th>
+      <th>Sous-total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Les articles du panier seront insérés ici via JS -->
+  </tbody>
+</table>
+
+<div id="promoRow">
+  <input type="text" id="promoCode" placeholder="Code promo">
+  <button onclick="applyPromo()">Appliquer</button>
+</div>
+
+<div id="total">Total : 0€</div>
+
+<h2>Informations de livraison</h2>
+<form id="orderForm">
+  <input type="text" id="firstName" placeholder="Prénom" required><br>
+  <input type="text" id="lastName" placeholder="Nom" required><br>
+  <input type="email" id="email" placeholder="Email" required><br>
+  <input type="text" id="address" placeholder="Adresse" required><br>
+  <textarea id="comment" rows="4" placeholder="Commentaire / Instructions"></textarea><br>
+  <button type="button" onclick="submitOrder()">Payer</button>
+</form>
+
+</main>
+
+<footer style="text-align:center; padding:20px; border-top:1px solid #eee;">
+  <p>&copy; 2026 L'Atelier d'Elia</p>
+</footer>
+
+<script>
+// Récupérer panier
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let total = 0;
+let discount = 0;
+
+function renderCart() {
+  const tbody = document.querySelector('#cartTable tbody');
+  tbody.innerHTML = '';
+  total = 0;
+  cart.forEach(item => {
+    const subtotal = item.price * item.quantity;
+    total += subtotal;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><img src="${item.imgSrc}" alt="${item.name}"></td>
+      <td>${item.name}</td>
+      <td>${item.price}€</td>
+      <td>${item.quantity}</td>
+      <td>${subtotal.toFixed(2)}€</td>
+    `;
+    tbody.appendChild(tr);
+  });
+  updateTotal();
+}
+
+function updateTotal() {
+  const displayTotal = total - discount;
+  document.getElementById('total').textContent = `Total : ${displayTotal.toFixed(2)}€`;
+}
+
+function applyPromo() {
+  const code = document.getElementById('promoCode').value.trim();
+  if(code === 'PROMO10') { // Exemple de code promo
+    discount = total * 0.10;
+    alert('Code promo appliqué : 10% de réduction !');
+  } else {
+    discount = 0;
+    if(code) alert('Code promo invalide');
+  }
+  updateTotal();
+}
+
+function submitOrder() {
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const address = document.getElementById('address').value.trim();
+  const comment = document.getElementById('comment').value.trim();
+
+  if(!firstName || !lastName || !email || !address) {
+    alert('Veuillez remplir tous les champs obligatoires.');
+    return;
+  }
+
+  // Ici tu pourrais envoyer les données au serveur
+  // Pour l’exemple, on redirige vers PayPal (sandbox / config à adapter)
+  const amount = (total - discount).toFixed(2);
+  
+  // Vider le panier
+  localStorage.removeItem('cart');
+
+  // Redirection exemple PayPal
+  // Remplacer "YOUR_PAYPAL_LINK" par ton lien PayPal réel
+  window.location.href = `https://www.paypal.com/paypalme/latelierdelia/${amount}`;
+}
+
+renderCart();
+</script>
+
+</body>
+</html>
