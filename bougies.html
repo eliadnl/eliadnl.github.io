@@ -15,7 +15,7 @@ body {
   color: #2d2d2d;
 }
 
-/* HEADER IDENTIQUE ACCUEIL */
+/* HEADER IDENTIQUE */
 header {
   background-color: #ffffff;
   padding: 20px 60px;
@@ -56,6 +56,7 @@ nav a:hover {
   cursor: pointer;
 }
 
+/* TITRES */
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 42px;
@@ -70,6 +71,7 @@ h2 {
   margin-bottom: 50px;
 }
 
+/* PRODUITS */
 .products-grid {
   display: flex;
   flex-wrap: wrap;
@@ -104,6 +106,7 @@ h2 {
   cursor: pointer;
 }
 
+/* PANIER */
 #cartOverlay {
   display: none;
   position: fixed;
@@ -134,26 +137,26 @@ h2 {
 </header>
 
 <main>
-<h1>Bougies</h1>
-<h2>Choisissez votre bougie</h2>
+<h1>bougies</h1>
+<h2>Choisissez votre illustration</h2>
 
 <div class="products-grid">
   <div class="product">
-    <img src="images/bougie1.png">
-    <p>Bougies bleu 3€</p>
-    <button onclick="addToCart('carte bougies bleu', 5, 'images/carte bougies bleu.png')">Ajouter au panier</button>
+    <img src="images/carte bougies bleu.png">
+    <p>bougies bleues - 3€</p>
+    <button onclick="addToCart('Bougies bleues', 3, 'images/carte bougies bleu.png')">Ajouter au panier</button>
   </div>
 
   <div class="product">
-    <img src="images/bougie2.png">
-    <p>Bougies roses 3€</p>
-    <button onclick="addToCart('cartes bougies rose', 5, 'images/carte bougies rose.png')">Ajouter au panier</button>
+    <img src="images/carte bougies rose.png">
+    <p>Bougies roses - 3€</p>
+    <button onclick="addToCart('bougies roses', 3, 'images/carte bougies rose.png')">Ajouter au panier</button>
   </div>
 
   <div class="product">
-    <img src="images/bougie3.png">
-    <p>Bougies vertes€</p>
-    <button onclick="addToCart('cartes bougies verte', 5, 'images/carte bougies verte.png')">Ajouter au panier</button>
+    <img src="images/carte bougies verte.png">
+    <p>Bougies vertes - 3€</p>
+    <button onclick="addToCart('bougies vertes', 3, 'images/carte bougies verte.png')">Ajouter au panier</button>
   </div>
 </div>
 </main>
