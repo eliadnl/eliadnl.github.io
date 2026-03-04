@@ -5,230 +5,232 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boutique - L'Atelier d'Elia</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #fff8f0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f6f1ea;
+  color: #2d2d2d;
 }
 
+/* HEADER */
 header {
-  background: #446D92;
-  color: white;
-  padding: 15px 20px;
+  background-color: #ffffff;
+  padding: 20px 60px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
 }
 
 nav a {
-  color: white;
   text-decoration: none;
-  margin-right: 20px;
-  font-weight: bold;
+  color: #2d2d2d;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 nav a:hover {
-  text-decoration: underline;
+  opacity: 0.6;
 }
 
-.cart {
-  background: #ff9966;
-  padding: 8px 15px;
-  border-radius: 20px;
-  font-weight: bold;
+.cart-indicator {
+  background-color: #c89b5e;
+  color: white;
+  padding: 8px 22px;
+  border-radius: 30px;
+  font-size: 13px;
   cursor: pointer;
-  position: relative;
 }
 
-main {
-  padding: 30px;
-}
-
-h1, h2 {
+/* TITRES */
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
   text-align: center;
+  margin-top: 50px;
 }
 
-.products {
+h2 {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  color: #c89b5e;
+  margin-bottom: 50px;
+}
+
+/* PRODUITS */
+.products-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 25px;
+  gap: 40px;
   justify-content: center;
+  padding-bottom: 80px;
 }
 
-.card {
-  width: 180px;
-  background: #fff5e6;
-  border-radius: 10px;
-  padding: 10px;
+.product {
+  width: 220px;
   text-align: center;
-  transition: 0.2s;
+  transition: transform 0.3s ease;
 }
 
-.card:hover{
-  transform: scale(1.05);
-}
-
-.card img{
-  width: 160px;
-  height:auto;
+.product img {
+  width: 100%;
   border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  cursor: pointer;
 }
 
-.card button{
-  margin-top: 8px;
-  background-color: #ff9966;
+.product:hover {
+  transform: translateY(-5px);
+}
+
+.product button {
+  margin-top: 12px;
+  background-color: #c89b5e;
   color: white;
   border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 10px 25px;
+  border-radius: 30px;
   cursor: pointer;
+  font-size: 14px;
+}
+
+.product button:hover {
+  opacity: 0.8;
+}
+
+/* PRIX DORÉ */
+.product-price {
+  display: block;
+  color: #c89b5e;
   font-weight: bold;
+  margin-top: 5px;
 }
 
-.card button:hover{
-  background-color: #ff7744;
-}
-
-.card p{
-  margin: 5px 0;
-  font-weight: bold;
-}
-
-/* Cart overlay */
+/* PANIER */
 #cartOverlay {
   display: none;
   position: fixed;
-  top: 60px;
-  right: 20px;
-  width: 250px;
+  top: 90px;
+  right: 30px;
+  width: 300px;
   max-height: 400px;
   overflow-y: auto;
   background: white;
-  border: 2px solid #446D92;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
   z-index: 100;
-}
-
-#cartOverlay h3 {
-  text-align: center;
-  margin-top: 0;
 }
 
 .cart-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 .cart-item img {
-  width: 40px;
-  height: auto;
+  width: 50px;
+  border-radius: 5px;
   margin-right: 10px;
-  border-radius: 4px;
 }
 
-#payButton {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  background: #446D92;
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cart-item-controls button {
+  padding: 3px 8px;
+  cursor: pointer;
+  border: 1px solid #c89b5e;
+  background: white;
+  color: #c89b5e;
+  border-radius: 5px;
+}
+
+.cart-item-remove {
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+/* BOUTON FINALISER LA COMMANDE */
+.cart-button {
+  margin-top: 12px;
+  background-color: #c89b5e;
   color: white;
   border: none;
-  border-radius: 5px;
-  font-weight: bold;
+  padding: 10px 25px;
+  border-radius: 30px;
   cursor: pointer;
+  font-size: 14px;
 }
 
-#payButton:hover {
-  background: #2d4b6c;
+.cart-button:hover {
+  opacity: 0.8;
 }
 </style>
 </head>
 <body>
 
 <header>
+  <div class="logo">L'Atelier d'Elia</div>
   <nav>
     <a href="index.html">Accueil</a>
     <a href="boutique.html">Boutique</a>
     <a href="contact.html">Contact</a>
   </nav>
-  <div class="cart" id="cartCount" onclick="toggleCart()">Panier : 0</div>
+  <div class="cart-indicator" id="cartCount" onclick="toggleCart()">Panier : 0</div>
 </header>
 
 <main>
-<h1>Première Collection d'Illustration Chrétienne</h1>
+<h1>Boutique</h1>
+<h2>Découvrez notre collection d'illustrations chrétiennes</h2>
 
-<div class="products">
+<div class="products-grid">
 
-  <!-- COLOMBES -->
-  <div class="card">
-    <img src="images/carte%20colombe%20bleu.png" alt="Colombe bleue" onclick="location.href='colombe-produit.html'">
-    <p>Colombe bleu</p>
-    <p>Prix : 3€</p>
-    <button onclick="addToCart('Colombe bleu', 3, 'images/carte%20colombe%20bleu.png')">Ajouter au panier</button>
+  <!-- Exemple de produit -->
+  <div class="product">
+    <img src="images/carte colombe bleu.png" alt="Colombe bleu" onclick="location.href='colombe-produit.html'">
+    <p>Colombe bleu<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Colombe bleu', 3, 'images/carte colombe bleu.png')">Ajouter au panier</button>
   </div>
 
-  <div class="card">
-    <img src="images/carte%20colombe%20rose.png" alt="Colombe rose" onclick="location.href='colombe-produit.html'">
-    <p>Colombe rose</p>
-    <p>Prix : 3€</p>
-    <button onclick="addToCart('Colombe rose', 3, 'images/carte%20colombe%20rose.png')">Ajouter au panier</button>
+  <div class="product">
+    <img src="images/carte colombe rose.png" alt="Colombe rose" onclick="location.href='colombe-produit.html'">
+    <p>Colombe rose<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Colombe rose', 3, 'images/carte colombe rose.png')">Ajouter au panier</button>
   </div>
 
-  <div class="card">
-    <img src="images/carte%20colombe%20verte.png" alt="Colombe verte" onclick="location.href='colombe-produit.html'">
-    <p>Colombe verte</p>
-    <p>Prix : 3€</p>
-    <button onclick="addToCart('Colombe verte', 3, 'images/carte%20colombe%20verte.png')">Ajouter au panier</button>
+  <div class="product">
+    <img src="images/carte colombe verte.png" alt="Colombe verte" onclick="location.href='colombe-produit.html'">
+    <p>Colombe verte<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Colombe verte', 3, 'images/carte colombe verte.png')">Ajouter au panier</button>
   </div>
 
-  <!-- ADORATION -->
-  <div class="card">
-    <img src="images/carte%20adoration%20bleu.png" alt="Adoration bleue" onclick="location.href='adoration-produit.html'">
-    <p>Adoration bleu</p>
-    <p>Prix : 3€</p>
-    <button onclick="addToCart('Adoration bleu', 3, 'images/carte%20adoration%20bleu.png')">Ajouter au panier</button>
-  </div>
-
-  <div class="card">
-    <img src="images/carte%20adoration%20rose.png" alt="Adoration rose" onclick="location.href='adoration-produit.html'">
-    <p>Adoration rose</p>
-    <p>Prix : 3€</p>
-    <button onclick="addToCart('Adoration rose', 3, 'images/carte%20adoration%20rose.png')">Ajouter au panier</button>
-  </div>
-
-  <div class="card">
-    <img src="images/carte%20adoration%20verte.png" alt="Adoration verte" onclick="location.href='adoration-produit.html'">
-    <p>Adoration verte</p>
-    <p>Prix : 3€</p>
-    <button onclick="addToCart('Adoration verte', 3, 'images/carte%20adoration%20verte.png')">Ajouter au panier</button>
-  </div>
-
-  <!-- BOUGIES -->
-  <div class="card">
-    <img src="images/carte%20bougies%20bleu.png" alt="Bougies bleues" onclick="location.href='bougies-produit.html'">
-    <p>Bougies bleu</p>
-    <p>Prix : 3€</p>
-    <button onclick="addToCart('Bougies bleu', 3, 'images/carte%20bougies%20bleu.png')">Ajouter au panier</button>
-  </div>
-
-  <div class="card">
-    <img src="images/carte%20bougies%20rose.png" alt="Bougies roses" onclick="location.href='bougies-produit.html'">
-    <p>Bougies rose</p>
-    <p>Prix : 3€</p>
-    <button onclick="addToCart('Bougies rose', 3, 'images/carte%20bougies%20rose.png')">Ajouter au panier</button>
-  </div>
-
-  <div class="card">
-    <img src="images/carte bougies verte.png" alt="Bougies vertes" onclick="location.href='bougies-produit.html'">
-    <p>Bougies verte</p>
-    <p>Prix : 3€</p>
-    <button onclick="addToCart('Bougies verte', 3, 'images/carte bougies verte.png')">Ajouter au panier</button>
-  </div>
-
+  <!-- Ajoute ici tous tes autres produits (Adoration, Bougies...) de la même manière -->
+  
 </div>
 </main>
 
@@ -236,48 +238,78 @@ h1, h2 {
 <div id="cartOverlay">
   <h3>Panier</h3>
   <div id="cartItems"></div>
-  <!-- Bouton Payer -->
-  <button id="payButton" onclick="location.href='paiement.html'">Payer</button>
+  <button class="cart-button" onclick="location.href='paiement.html'">Finaliser la commande</button>
 </div>
 
 <script>
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const cartCount = document.getElementById('cartCount');
 const cartOverlay = document.getElementById('cartOverlay');
 const cartItems = document.getElementById('cartItems');
 
-// Charger le panier depuis le localStorage si existant
-if (localStorage.getItem('cart')) {
-  cart = JSON.parse(localStorage.getItem('cart'));
-  cartCount.textContent = `Panier : ${cart.length}`;
+updateCartCount();
+renderCart();
+
+function addToCart(name, price, imgSrc){
+  const existingItem = cart.find(item => item.name === name);
+  if(existingItem){
+    existingItem.quantity += 1;
+  } else {
+    cart.push({name, price, imgSrc, quantity:1});
+  }
+  saveCart();
   renderCart();
 }
 
-function addToCart(name, price, imgSrc) {
-  cart.push({name, price, imgSrc});
-  cartCount.textContent = `Panier : ${cart.length}`;
+function removeFromCart(name){
+  cart = cart.filter(item => item.name !== name);
+  saveCart();
   renderCart();
+}
 
-  // Sauvegarde le panier dans le localStorage
+function changeQuantity(name, delta){
+  const item = cart.find(i => i.name === name);
+  if(!item) return;
+  item.quantity += delta;
+  if(item.quantity < 1){
+    removeFromCart(name);
+  } else {
+    saveCart();
+  }
+  renderCart();
+}
+
+function saveCart(){
   localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartCount();
+}
+
+function updateCartCount(){
+  const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+  cartCount.textContent = `Panier : ${total}`;
 }
 
 function renderCart(){
   cartItems.innerHTML = '';
   cart.forEach(item => {
     const div = document.createElement('div');
-    div.className = 'cart-item';
-    div.innerHTML = `<img src="${item.imgSrc}" alt="${item.name}"><div>${item.name} - ${item.price}€</div>`;
+    div.classList.add('cart-item');
+    div.innerHTML = `
+      <img src="${item.imgSrc}" alt="${item.name}">
+      <div class="cart-item-details">${item.name} - ${item.price}€</div>
+      <div class="cart-item-controls">
+        <button onclick="changeQuantity('${item.name}', -1)">-</button>
+        <span>${item.quantity}</span>
+        <button onclick="changeQuantity('${item.name}', 1)">+</button>
+        <span class="cart-item-remove" onclick="removeFromCart('${item.name}')">×</span>
+      </div>
+    `;
     cartItems.appendChild(div);
   });
 }
 
-function toggleCart() {
-  if(cartOverlay.style.display === 'none' || cartOverlay.style.display === ''){
-    cartOverlay.style.display = 'block';
-  } else {
-    cartOverlay.style.display = 'none';
-  }
+function toggleCart(){
+  cartOverlay.style.display = cartOverlay.style.display === 'block' ? 'none' : 'block';
 }
 </script>
 
