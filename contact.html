@@ -1,34 +1,111 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact - L'Atelier d'Elia</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact - L'Atelier d'Elia</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .cart-indicator {
+    background-color: #ff9966;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+  }
+  #cartOverlay {
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    width: 250px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: white;
+    border: 2px solid #446D92;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 100;
+  }
+  #cartOverlay h3 { text-align:center; margin-top:0; }
+  .cart-item { display:flex; align-items:center; margin-bottom:10px; }
+  .cart-item img { width:40px; height:auto; margin-right:10px; border-radius:4px; }
+  #payButton {
+    width:100%; padding:10px; margin-top:10px; background:#446D92; color:white; border:none;
+    border-radius:5px; font-weight:bold; cursor:pointer;
+  }
+  #payButton:hover { background:#2d4b6c; }
+</style>
 </head>
 <body>
-  <header>
-    <h1>L'Atelier d'Elia</h1>
-    <nav>
-      <a href="index.html">Accueil</a>
-      <a href="boutique.html">Boutique</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
 
-  <main>
-    <h2>Contactez-moi</h2>
-    <p>Vous pouvez me contacter par :</p>
-    <ul>
-      <li>Email : <a href="mailto:eliadnlpro@outlook.com">eliadnlpro@outlook.com</a></li>
-      <li>Instagram : <a href="https://www.instagram.com/latelier_delia" target="_blank">@latelier_delia</a></li>
-      <li>TikTok : <a href="https://www.tiktok.com/@latelier_delia" target="_blank">@latelier_delia</a></li>
-    </ul>
-    <p>Je serais ravis de répondre à vos questions ou commandes !</p>
-  </main>
+<header>
+  <h1>L'Atelier d'Elia</h1>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="boutique.html">Boutique</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="cart-indicator" id="cartCount" onclick="toggleCart()">Panier : 0</div>
+</header>
 
-  <footer>
-    <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
-  </footer>
+<main>
+<h2>Contactez-moi</h2>
+<p>Vous pouvez me contacter par :</p>
+<ul>
+  <li>Email : <a href="mailto:eliadnlpro@outlook.com">eliadnlpro@outlook.com</a></li>
+  <li>Instagram : <a href="https://www.instagram.com/latelier_delia" target="_blank">@latelier_delia</a></li>
+  <li>TikTok : <a href="https://www.tiktok.com/@latelier_delia" target="_blank">@latelier_delia</a></li>
+</ul>
+<p>Je serais ravis de répondre à vos questions ou commandes !</p>
+</main>
+
+<!-- Cart overlay -->
+<div id="cartOverlay">
+  <h3>Panier</h3>
+  <div id="cartItems"></div>
+  <button id="payButton" onclick="location.href='paiement.html'">Payer</button>
+</div>
+
+<script>
+let cart = [];
+const cartCount = document.getElementById('cartCount');
+const cartOverlay = document.getElementById('cartOverlay');
+const cartItems = document.getElementById('cartItems');
+
+// Charger le panier depuis localStorage si existant
+if(localStorage.getItem('cart')) {
+  cart = JSON.parse(localStorage.getItem('cart'));
+  cartCount.textContent = `Panier : ${cart.length}`;
+  renderCart();
+}
+
+function addToCart(name, price, imgSrc){
+  cart.push({name, price, imgSrc});
+  cartCount.textContent = `Panier : ${cart.length}`;
+  renderCart();
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function renderCart(){
+  cartItems.innerHTML = '';
+  cart.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `<img src="${item.imgSrc}" alt="${item.name}"><div>${item.name} - ${item.price}€</div>`;
+    cartItems.appendChild(div);
+  });
+}
+
+function toggleCart(){
+  cartOverlay.style.display = (cartOverlay.style.display === 'block') ? 'none' : 'block';
+}
+</script>
+
+<footer>
+  <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
+</footer>
 </body>
 </html>
