@@ -66,7 +66,7 @@ button {background:#c89b5e; color:white; border:none; padding:12px 25px; border-
   <input type="email" id="email" placeholder="Email" required><br>
   <input type="text" id="address" placeholder="Adresse" required><br>
   <textarea id="comment" rows="4" placeholder="Commentaire / Instructions"></textarea><br>
-  <button type="button" onclick="submitOrder()">Payer</button>
+  <button type="button" onclick="submitOrder()">Finaliser la commande</button>
 </form>
 
 </main>
@@ -75,7 +75,11 @@ button {background:#c89b5e; color:white; border:none; padding:12px 25px; border-
   <p>&copy; 2026 L'Atelier d'Elia</p>
 </footer>
 
+<!-- Inclure EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
+emailjs.init("YOUR_PUBLIC_KEY"); // Remplace par ta clé publique EmailJS
+
 // Récupérer panier
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let total = 0;
@@ -108,7 +112,7 @@ function updateTotal() {
 
 function applyPromo() {
   const code = document.getElementById('promoCode').value.trim();
-  if(code === 'PROMO10') { // Exemple de code promo
+  if(code === 'PROMO10') {
     discount = total * 0.10;
     alert('Code promo appliqué : 10% de réduction !');
   } else {
@@ -130,16 +134,40 @@ function submitOrder() {
     return;
   }
 
-  // Ici tu pourrais envoyer les données au serveur
-  // Pour l’exemple, on redirige vers PayPal (sandbox / config à adapter)
-  const amount = (total - discount).toFixed(2);
-  
-  // Vider le panier
-  localStorage.removeItem('cart');
+  if(cart.length === 0) {
+    alert('Votre panier est vide.');
+    return;
+  }
 
-  // Redirection exemple PayPal
-  // Remplacer "YOUR_PAYPAL_LINK" par ton lien PayPal réel
-  window.location.href = `https://www.paypal.com/paypalme/latelierdelia/${amount}`;
+  // Préparer le contenu du panier
+  let panierTexte = '';
+  cart.forEach(item => {
+    panierTexte += `${item.name} x${item.quantity} - ${(item.price*item.quantity).toFixed(2)}€\n`;
+  });
+
+  // Envoyer email via EmailJS (ton mail reste caché côté client)
+  const templateParams = {
+    prenom: firstName,
+    nom: lastName,
+    email_client: email,
+    adresse: address,
+    commentaire: comment,
+    panier: panierTexte,
+    total: (total - discount).toFixed(2) + '€'
+  };
+
+  emailjs.send('YOUR_SERVICE_ID','YOUR_TEMPLATE_ID', templateParams)
+    .then(function(response) {
+      alert('Commande envoyée avec succès ! Vous allez être redirigé vers le paiement.');
+      // vider le panier
+      localStorage.removeItem('cart');
+      // Redirection vers PayPal
+      const amount = (total - discount).toFixed(2);
+      window.location.href = `https://www.paypal.com/paypalme/latelierdelia/${amount}`;
+    }, function(error) {
+      alert('Erreur lors de l’envoi de la commande, veuillez réessayer.');
+      console.log(error);
+    });
 }
 
 renderCart();
