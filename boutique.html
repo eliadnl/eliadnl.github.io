@@ -15,7 +15,6 @@ body {
   color: #2d2d2d;
 }
 
-/* HEADER */
 header {
   background-color: #ffffff;
   padding: 20px 60px;
@@ -56,27 +55,17 @@ nav a:hover {
   cursor: pointer;
 }
 
-/* FILTRE */
 .filter-container {
   text-align: center;
   margin: 30px 0;
-}
-
-.filter-container label {
-  font-family: 'Playfair Display', serif;
-  font-weight: bold;
-  margin-right: 10px;
-  color: #2d2d2d;
 }
 
 .filter-container select {
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  font-family: 'Montserrat', sans-serif;
 }
 
-/* TITRES */
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 42px;
@@ -84,7 +73,6 @@ h1 {
   margin-top: 50px;
 }
 
-/* PRODUITS */
 .products-grid {
   display: flex;
   flex-wrap: wrap;
@@ -103,7 +91,6 @@ h1 {
   width: 100%;
   border-radius: 8px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  cursor: pointer;
 }
 
 .product:hover {
@@ -118,11 +105,6 @@ h1 {
   padding: 10px 25px;
   border-radius: 30px;
   cursor: pointer;
-  font-size: 14px;
-}
-
-.product button:hover {
-  opacity: 0.8;
 }
 
 .product-price {
@@ -132,7 +114,6 @@ h1 {
   margin-top: 5px;
 }
 
-/* PANIER */
 #cartOverlay {
   display: none;
   position: fixed;
@@ -146,61 +127,6 @@ h1 {
   padding: 20px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.12);
   z-index: 100;
-}
-
-.cart-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 15px;
-}
-
-.cart-item img {
-  width: 50px;
-  border-radius: 5px;
-  margin-right: 10px;
-}
-
-.cart-item-details {
-  flex: 1;
-}
-
-.cart-item-controls {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.cart-item-controls button {
-  padding: 3px 8px;
-  cursor: pointer;
-  border: 1px solid #c89b5e;
-  background: white;
-  color: #c89b5e;
-  border-radius: 5px;
-}
-
-.cart-item-remove {
-  cursor: pointer;
-  color: red;
-  font-weight: bold;
-  margin-left: 5px;
-}
-
-/* BOUTON FINALISER LA COMMANDE */
-.cart-button {
-  margin-top: 12px;
-  background-color: #c89b5e;
-  color: white;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.cart-button:hover {
-  opacity: 0.8;
 }
 </style>
 </head>
@@ -219,9 +145,7 @@ h1 {
 <main>
 <h1>Boutique</h1>
 
-<!-- FILTRE -->
 <div class="filter-container">
-  <label for="filterSelect">Filtrer par :</label>
   <select id="filterSelect" onchange="applyFilter()">
     <option value="all">Tous les produits</option>
 
@@ -241,227 +165,87 @@ h1 {
       <option value="carte">Carte</option>
       <option value="stickers">Stickers</option>
     </optgroup>
-
   </select>
 </div>
 
 <div class="products-grid">
 
-  <div class="product" data-color="bleu" data-type="Colombe" data-format="carte">
-    <img src="images/carte colombe bleu.png" alt="Carte colombe fond bleu">
-    <p>Carte colombe fond bleu<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte colombe fond bleu', 3, 'images/carte colombe bleu.png')">Ajouter au panier</button>
-  </div>
+<div class="product" data-color="bleu" data-type="Colombe" data-format="carte">
+<img src="images/carte colombe bleu.png">
+<p>Carte colombe fond bleu<br><span class="product-price">3€</span></p>
+<button onclick="addToCart('Carte colombe fond bleu',3,'images/carte colombe bleu.png')">Ajouter</button>
+</div>
 
 <div class="product" data-color="rose" data-type="Colombe" data-format="carte">
-    <img src="images/carte colombe rose.png" alt="Carte colombe fond rose">
-    <p>Carte colombe fond rose<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte colombe fond rose', 3, 'images/carte colombe rose.png')">Ajouter au panier</button>
-  </div>
-<div class="product" data-color="vert" data-type="Colombe" data-format="carte">
-    <img src="images/carte colombe verte.png" alt="Carte colombe fond vert">
-    <p>Carte colombe fond vert<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte colombe fond vert', 3, 'images/carte colombe verte.png')">Ajouter au panier</button>
-  </div>
+<img src="images/carte colombe rose.png">
+<p>Carte colombe fond rose<br><span class="product-price">3€</span></p>
+<button onclick="addToCart('Carte colombe fond rose',3,'images/carte colombe rose.png')">Ajouter</button>
+</div>
 
- <div class="product" data-color="bleu" data-type="Adoration" data-format="carte">
-    <img src="images/carte adoration bleu.png" alt="Carte adoration fond bleu">
-    <p>Carte adoration fond bleu<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte adoration fond bleu', 3, 'images/carte adoration bleu.png')">Ajouter au panier</button>
-  </div>
-  
- <div class="product" data-color="rose" data-type="Adoration" data-format="carte">
-    <img src="images/carte adoration rose.png" alt="Carte adoration fond rose">
-    <p>Carte adoration fond rose<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte adoration fond rose', 3, 'images/carte adoration rose.png')">Ajouter au panier</button>
-  </div>
+<div class="product" data-color="verte" data-type="Colombe" data-format="carte">
+<img src="images/carte colombe verte.png">
+<p>Carte colombe fond vert<br><span class="product-price">3€</span></p>
+<button onclick="addToCart('Carte colombe fond vert',3,'images/carte colombe verte.png')">Ajouter</button>
+</div>
 
-  <div class="product" data-color="vert" data-type="Adoration" data-format="carte">
-    <img src="images/carte adoration verte.png" alt="Carte adoration fond vert">
-    <p>Carte adoration fond vert<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte adoration fond verte', 3, 'images/carte adoration verte.png')">Ajouter au panier</button>
-  </div>
+<div class="product" data-color="bleu" data-type="Colombe" data-format="stickers">
+<img src="images/stickers colombe bleu.png">
+<p>Stickers colombe fond bleu<br><span class="product-price">3€</span></p>
+<button onclick="addToCart('Stickers colombe fond bleu',3,'images/stickers colombe bleu.png')">Ajouter</button>
+</div>
 
-  <div class="product" data-color="bleu" data-type="bougies" data-format="carte">
-    <img src="images/carte bougies bleu.png" alt="Carte bougies fond bleu">
-    <p>Carte bougies fond bleu<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Bougies bleu', 3, 'images/carte bougies bleu.png')">Ajouter au panier</button>
-  </div>
+<div class="product" data-color="rose" data-type="Colombe" data-format="stickers">
+<img src="images/stickers colombe rose.png">
+<p>Stickers colombe fond rose<br><span class="product-price">3€</span></p>
+<button onclick="addToCart('Stickers colombe fond rose',3,'images/stickers colombe rose.png')">Ajouter</button>
+</div>
 
-    <div class="product" data-color="rose" data-type="bougies" data-format="carte">
-    <img src="images/carte bougies rose.png" alt="Carte bougies fond rose">
-    <p>Carte bougies fond rose<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte bougies fond rose', 3, 'images/carte bougies rose.png')">Ajouter au panier</button>
-  </div>
-
-  <div class="product" data-color="vert" data-type="bougies" data-format="carte">
-    <img src="images/carte bougies verte.png" alt="Carte bougies fond vert">
-    <p>Carte bougies fond vert<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte bougies fond vert', 3, 'images/carte bougies verte.png')">Ajouter au panier</button>
-  </div>
-
-  <div class="product" data-color="bleu" data-type="Colombe" data-format="stickers">
-    <img src="images/stickers colombe bleu.png" alt="Stickers colombe fond bleu">
-    <p>Stickers colombe fond bleu<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers colombe fond bleu', 3, 'images/stickers colombe bleu.png')">Ajouter au panier</button>
-  </div>
-
-  <div class="product" data-color="rose" data-type="Colombe" data-format="stickers">
-    <img src="images/stickers colombe rose.png" alt="Stickers colombe fond rose">
-    <p>Stickers colombe fond rose<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers colombe fond rose', 3, 'images/stickers colombe rose.png')">Ajouter au panier</button>
-  </div>
-
-    <div class="product" data-color="vert" data-type="Colombe" data-format="stickers">
-    <img src="images/stickers colombe vert.png" alt="Stickers colombe fond vert">
-    <p>Stickers colombe fond vert<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers colombe fond vert', 3, 'images/stickers colombe vert.png')">Ajouter au panier</button>
-  </div>
-
-   <div class="product" data-color="bleu" data-type="Adoration" data-format="stickers">
-    <img src="images/stickers adoration bleu.png" alt="Stickers adoration fond bleu">
-    <p>Stickers adoration fond bleu<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers adoration fond bleu', 3, 'images/stickers adoration bleu.png')">Ajouter au panier</button>
-  </div>
-
-<div class="product" data-color="rose" data-type="Adoration" data-format="stickers">
-    <img src="images/stickers adoration rose.png" alt="Stickers adoration fond rose">
-    <p>Stickers adoration fond rose<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers adoration fond rose', 3, 'images/stickers adoration rose.png')">Ajouter au panier</button>
-  </div>
-
-  <div class="product" data-color="vert" data-type="Adoration" data-format="stickers">
-    <img src="images/stickers adoration vert.png" alt="Stickers adoration fond vert">
-    <p>Stickers adoration fond vert<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers adoration fond verte', 3, 'images/stickers adoration vert.png')">Ajouter au panier</button>
-  </div>
-
-  <div class="product" data-color="bleu" data-type="Bougies" data-format="stickers">
-    <img src="images/stickers bougies bleu.png" alt="Stickers bougies fond bleu">
-    <p>Stickers bougies fond bleu<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Sitckers bougies fond bleu', 3, 'images/stickers bougies bleu.png')">Ajouter au panier</button>
-  </div>
-
-<div class="product" data-color="rose" data-type="Bougies" data-format="stickers">
-    <img src="images/stickers bougies rose.png" alt="Stickers bougies fond rose">
-    <p>Stickers bougies fond rose<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers bougies fond rose', 3, 'images/stickers bougies rose.png')">Ajouter au panier</button>
-  </div>
-
-  <div class="product" data-color="vert" data-type="Bougies" data-format="stickers">
-    <img src="images/stickers bougies vert.png" alt="Stickers bougies fond vert">
-    <p>Stickers bougies fond vert<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers bougies fond vert', 3, 'images/stickers bougies vert.png')">Ajouter au panier</button>
-  </div>
+<div class="product" data-color="verte" data-type="Colombe" data-format="stickers">
+<img src="images/stickers colombe vert.png">
+<p>Stickers colombe fond vert<br><span class="product-price">3€</span></p>
+<button onclick="addToCart('Stickers colombe fond vert',3,'images/stickers colombe vert.png')">Ajouter</button>
+</div>
 
 </div>
 </main>
 
-<!-- Cart overlay -->
-<div id="cartOverlay">
-  <h3>Panier</h3>
-  <div id="cartItems"></div>
-  <button class="cart-button" onclick="location.href='paiement.html'">Finaliser la commande</button>
-</div>
-
 <script>
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const cartCount = document.getElementById('cartCount');
-const cartOverlay = document.getElementById('cartOverlay');
-const cartItems = document.getElementById('cartItems');
-
 updateCartCount();
-renderCart();
 
 function addToCart(name, price, imgSrc){
-  const existingItem = cart.find(item => item.name === name);
-  if(existingItem){
-    existingItem.quantity += 1;
-  } else {
-    cart.push({name, price, imgSrc, quantity:1});
-  }
-  saveCart();
-  renderCart();
-}
-
-function removeFromCart(name){
-  cart = cart.filter(item => item.name !== name);
-  saveCart();
-  renderCart();
-}
-
-function changeQuantity(name, delta){
-  const item = cart.find(i => i.name === name);
-  if(!item) return;
-  item.quantity += delta;
-  if(item.quantity < 1){
-    removeFromCart(name);
-  } else {
-    saveCart();
-  }
-  renderCart();
-}
-
-function saveCart(){
+  const existing = cart.find(item => item.name === name);
+  if(existing){ existing.quantity += 1; }
+  else{ cart.push({name, price, imgSrc, quantity:1}); }
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
 }
 
 function updateCartCount(){
   const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-  cartCount.textContent = `Panier : ${total}`;
+  cartCount.textContent = "Panier : " + total;
 }
 
-function renderCart(){
-  cartItems.innerHTML = '';
-  cart.forEach(item => {
-    const div = document.createElement('div');
-    div.classList.add('cart-item');
-    div.innerHTML = `
-      <img src="${item.imgSrc}" alt="${item.name}">
-      <div class="cart-item-details">${item.name} - ${item.price}€</div>
-      <div class="cart-item-controls">
-        <button onclick="changeQuantity('${item.name}', -1)">-</button>
-        <span>${item.quantity}</span>
-        <button onclick="changeQuantity('${item.name}', 1)">+</button>
-        <span class="cart-item-remove" onclick="removeFromCart('${item.name}')">×</span>
-      </div>
-    `;
-    cartItems.appendChild(div);
-  });
-}
-
-function toggleCart(){
-  cartOverlay.style.display = cartOverlay.style.display === 'block' ? 'none' : 'block';
-}
+function toggleCart(){}
 
 function applyFilter(){
   const filter = document.getElementById('filterSelect').value;
-  const products = document.querySelectorAll('.products-grid .product');
+  const products = document.querySelectorAll('.product');
 
   products.forEach(prod => {
-    const color = prod.getAttribute('data-color');
-    const type = prod.getAttribute('data-type');
+    const color = prod.dataset.color;
+    const type = prod.dataset.type;
+    const format = prod.dataset.format;
 
-    if(filter === 'all' || filter === color || filter === type){
-      prod.style.display = 'block';
+    if(filter === "all" || filter === color || filter === type || filter === format){
+      prod.style.display = "block";
     } else {
-      prod.style.display = 'none';
+      prod.style.display = "none";
     }
   });
 }
 </script>
-
-<!-- BANNIÈRE INSTAGRAM -->
-<footer style="background-color:#f6f1ea; padding:20px; text-align:center; border-top:1px solid #eee;">
-  <a href="https://www.instagram.com/latelier_delia" target="_blank" style="text-decoration:none; color:#2d2d2d; display:inline-flex; align-items:center; gap:15px;">
-    <img src="images/logo instagram.png" alt="Instagram" style="width:70px; height:70px;">
-    <span style="font-size:20px; font-weight:bold;">@latelier_delia</span>
-  </a>
-  
-<footer>
-  <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
-</footer>
 
 </body>
 </html>
