@@ -37,6 +37,8 @@ nav a:hover {
   padding: 8px 15px;
   border-radius: 20px;
   font-weight: bold;
+  cursor: pointer;
+  position: relative;
 }
 
 main {
@@ -92,6 +94,41 @@ h1, h2 {
   margin: 5px 0;
   font-weight: bold;
 }
+
+/* Cart overlay */
+#cartOverlay {
+  display: none;
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 250px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: white;
+  border: 2px solid #446D92;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 100;
+}
+
+#cartOverlay h3 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cart-item img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+  border-radius: 4px;
+}
 </style>
 </head>
 <body>
@@ -102,91 +139,117 @@ h1, h2 {
     <a href="boutique.html">Boutique</a>
     <a href="contact.html">Contact</a>
   </nav>
-  <div class="cart" id="cartCount">Panier : 0</div>
+  <div class="cart" id="cartCount" onclick="toggleCart()">Panier : 0</div>
 </header>
 
 <main>
-<h1>Première Collection d'Illustrations Chrétiennes</h1>
+<h1>Première Collection d'Illustration Chrétienne</h1>
 
 <div class="products">
 
   <!-- COLOMBES -->
   <div class="card">
     <img src="images/carte%20colombe%20bleu.png" alt="Colombe bleue" onclick="location.href='colombe-produit.html'">
-    <p>Colombe fond bleu</p>
+    <p>Colombe bleu</p>
     <p>Prix : 3€</p>
-    <button onclick="addToCart('Colombe fond bleu', 3)">Ajouter au panier</button>
+    <button onclick="addToCart('Colombe bleu', 3, 'images/carte%20colombe%20bleu.png')">Ajouter au panier</button>
   </div>
 
   <div class="card">
     <img src="images/carte%20colombe%20rose.png" alt="Colombe rose" onclick="location.href='colombe-produit.html'">
-    <p>Colombe fond rose</p>
+    <p>Colombe rose</p>
     <p>Prix : 3€</p>
-    <button onclick="addToCart('Colombe fond rose', 3)">Ajouter au panier</button>
+    <button onclick="addToCart('Colombe rose', 3, 'images/carte%20colombe%20rose.png')">Ajouter au panier</button>
   </div>
 
   <div class="card">
     <img src="images/carte%20colombe%20verte.png" alt="Colombe verte" onclick="location.href='colombe-produit.html'">
-    <p>Colombe fond vert</p>
+    <p>Colombe verte</p>
     <p>Prix : 3€</p>
-    <button onclick="addToCart('Colombe fond vert', 3)">Ajouter au panier</button>
+    <button onclick="addToCart('Colombe verte', 3, 'images/carte%20colombe%20verte.png')">Ajouter au panier</button>
   </div>
 
   <!-- ADORATION -->
   <div class="card">
     <img src="images/carte%20adoration%20bleu.png" alt="Adoration bleue" onclick="location.href='adoration-produit.html'">
-    <p>Adoration fond bleu</p>
+    <p>Adoration bleu</p>
     <p>Prix : 3€</p>
-    <button onclick="addToCart('Adoration fond bleu', 3)">Ajouter au panier</button>
+    <button onclick="addToCart('Adoration bleu', 3, 'images/carte%20adoration%20bleu.png')">Ajouter au panier</button>
   </div>
 
   <div class="card">
     <img src="images/carte%20adoration%20rose.png" alt="Adoration rose" onclick="location.href='adoration-produit.html'">
-    <p>Adoration fond rose</p>
+    <p>Adoration rose</p>
     <p>Prix : 3€</p>
-    <button onclick="addToCart('Adoration fond rose', 3)">Ajouter au panier</button>
+    <button onclick="addToCart('Adoration rose', 3, 'images/carte%20adoration%20rose.png')">Ajouter au panier</button>
   </div>
 
   <div class="card">
     <img src="images/carte%20adoration%20verte.png" alt="Adoration verte" onclick="location.href='adoration-produit.html'">
-    <p>Adoration fond vert</p>
+    <p>Adoration verte</p>
     <p>Prix : 3€</p>
-    <button onclick="addToCart('Adoration fond vert', 3)">Ajouter au panier</button>
+    <button onclick="addToCart('Adoration verte', 3, 'images/carte%20adoration%20verte.png')">Ajouter au panier</button>
   </div>
 
   <!-- BOUGIES -->
   <div class="card">
     <img src="images/carte%20bougies%20bleu.png" alt="Bougies bleues" onclick="location.href='bougies-produit.html'">
-    <p>Bougies fond bleu</p>
+    <p>Bougies bleu</p>
     <p>Prix : 3€</p>
-    <button onclick="addToCart('Bougies fond bleu', 3)">Ajouter au panier</button>
+    <button onclick="addToCart('Bougies bleu', 3, 'images/carte%20bougies%20bleu.png')">Ajouter au panier</button>
   </div>
 
   <div class="card">
     <img src="images/carte%20bougies%20rose.png" alt="Bougies roses" onclick="location.href='bougies-produit.html'">
-    <p>Bougies fond rose</p>
+    <p>Bougies rose</p>
     <p>Prix : 3€</p>
-    <button onclick="addToCart('Bougies fond rose', 3)">Ajouter au panier</button>
+    <button onclick="addToCart('Bougies rose', 3, 'images/carte%20bougies%20rose.png')">Ajouter au panier</button>
   </div>
 
   <div class="card">
-    <img src="images/carte%20bougies%20verte.png" alt="Bougies vertes" onclick="location.href='bougies-produit.html'">
-    <p>Bougies fond verte</p>
+    <img src="images/cartes%20bougies%20verte.png" alt="Bougies vertes" onclick="location.href='bougies-produit.html'">
+    <p>Bougies verte</p>
     <p>Prix : 3€</p>
-    <button onclick="addToCart('Bougies fond vert', 3)">Ajouter au panier</button>
+    <button onclick="addToCart('Bougies verte', 3, 'images/cartes%20bougies%20verte.png')">Ajouter au panier</button>
   </div>
 
 </div>
 </main>
 
+<!-- Cart overlay -->
+<div id="cartOverlay">
+  <h3>Panier</h3>
+  <div id="cartItems"></div>
+</div>
+
 <script>
 let cart = [];
 const cartCount = document.getElementById('cartCount');
+const cartOverlay = document.getElementById('cartOverlay');
+const cartItems = document.getElementById('cartItems');
 
-function addToCart(name, price){
-  cart.push({name, price});
+function addToCart(name, price, imgSrc) {
+  cart.push({name, price, imgSrc});
   cartCount.textContent = `Panier : ${cart.length}`;
-  console.log(cart);
+  renderCart();
+}
+
+function renderCart(){
+  cartItems.innerHTML = '';
+  cart.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `<img src="${item.imgSrc}" alt="${item.name}"><div>${item.name} - ${item.price}€</div>`;
+    cartItems.appendChild(div);
+  });
+}
+
+function toggleCart() {
+  if(cartOverlay.style.display === 'none' || cartOverlay.style.display === ''){
+    cartOverlay.style.display = 'block';
+  } else {
+    cartOverlay.style.display = 'none';
+  }
 }
 </script>
 
