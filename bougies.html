@@ -106,6 +106,14 @@ h2 {
   cursor: pointer;
 }
 
+/* PRIX EN DORÉ SUR LIGNE SÉPARÉE */
+.product-price {
+  display: block;
+  margin-top: 5px;
+  color: #c89b5e;
+  font-weight: bold;
+}
+
 /* PANIER */
 #cartOverlay {
   display: none;
@@ -161,7 +169,6 @@ h2 {
   margin-left: 5px;
 }
 
-/* BOUTON FINALISER LA COMMANDE */
 .cart-button {
   margin-top: 12px;
   background-color: #c89b5e;
@@ -198,19 +205,19 @@ h2 {
 <div class="products-grid">
   <div class="product">
     <img src="images/carte bougies bleu.png" alt="Bougies fond bleu">
-    <p>Bougies fond bleu - 3€</p>
+    <p>Bougies fond bleu<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Bougies fond bleu', 3, 'images/carte bougies bleu.png')">Ajouter au panier</button>
   </div>
 
   <div class="product">
     <img src="images/carte bougies rose.png" alt="Bougies fond rose">
-    <p>Bougies fond rose - 3€</p>
+    <p>Bougies fond rose<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Bougies fond rose', 3, 'images/carte bougies rose.png')">Ajouter au panier</button>
   </div>
 
   <div class="product">
     <img src="images/carte bougies verte.png" alt="Bougies fond vert">
-    <p>Bougies fond vert - 3€</p>
+    <p>Bougies fond verte<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Bougies fond vert', 3, 'images/carte bougies verte.png')">Ajouter au panier</button>
   </div>
 </div>
@@ -294,10 +301,8 @@ function toggleCart() {
 }
 
 function finaliserCommande() {
-  // Calculer total
   let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   localStorage.setItem('totalCommande', total.toFixed(2));
-  // Redirection vers page paiement
   window.location.href = 'payement.html';
 }
 </script>
