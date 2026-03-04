@@ -187,7 +187,7 @@ function addToCart(name, price, imgSrc){
   cart.push({name, price, imgSrc});
   cartCount.textContent = `Panier : ${cart.length}`;
   renderCart();
-  localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem('cart', JSON.stringify(cart)); // garde le panier sur toutes les pages
 }
 
 function renderCart(){
@@ -204,5 +204,6 @@ function toggleCart(){
   cartOverlay.style.display = (cartOverlay.style.display === 'block') ? 'none' : 'block';
 }
 </script>
+
 </body>
 </html>
