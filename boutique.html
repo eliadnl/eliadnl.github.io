@@ -56,25 +56,65 @@ nav a:hover {
   cursor: pointer;
 }
 
-/* FILTRE */
-.filter-container {
-  text-align: center;
-  margin: 30px 0;
-}
+<!-- FILTRE -->
+<div class="filter-container">
+  <label for="filterSelect">Filtrer par :</label>
+  <select id="filterSelect" multiple style="padding:8px 12px; border-radius:8px; border:1px solid #ccc; font-family:'Montserrat', sans-serif; width:200px;">
+    <optgroup label="Couleur">
+      <option value="bleu">Bleu</option>
+      <option value="rose">Rose</option>
+      <option value="verte">Verte</option>
+    </optgroup>
+    <optgroup label="Illustration">
+      <option value="colombe">Colombe</option>
+      <option value="adoration">Adoration</option>
+      <option value="bougies">Bougies</option>
+    </optgroup>
+    <optgroup label="Format">
+      <option value="carte">Carte</option>
+      <option value="stickers">Stickers</option>
+    </optgroup>
+  </select>
+  <button id="resetFilters" style="
+    margin-left: 10px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: 1px solid #c89b5e;
+    background: white;
+    cursor: pointer;
+    font-weight: bold;
+  ">Réinitialiser</button>
+</div>
 
-.filter-container label {
-  font-family: 'Playfair Display', serif;
-  font-weight: bold;
-  margin-right: 10px;
-  color: #2d2d2d;
-}
+<script>
+const filterSelect = document.getElementById('filterSelect');
+const resetBtn = document.getElementById('resetFilters');
 
-.filter-container select {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-family: 'Montserrat', sans-serif;
+filterSelect.addEventListener('change', applyFilter);
+resetBtn.addEventListener('click', () => {
+  // Déselectionner toutes les options
+  Array.from(filterSelect.options).forEach(option => option.selected = false);
+  applyFilter();
+});
+
+function applyFilter() {
+  const selected = Array.from(filterSelect.selectedOptions).map(opt => opt.value.toLowerCase());
+  const products = document.querySelectorAll('.products-grid .product');
+
+  products.forEach(prod => {
+    const color = prod.getAttribute('data-color')?.toLowerCase();
+    const type = prod.getAttribute('data-type')?.toLowerCase();
+    const format = prod.getAttribute('data-format')?.toLowerCase();
+
+    const show = selected.length === 0 || 
+                 selected.includes(color) || 
+                 selected.includes(type) || 
+                 selected.includes(format);
+
+    prod.style.display = show ? 'block' : 'none';
+  });
 }
+</script>
 
 /* TITRES */
 h1 {
