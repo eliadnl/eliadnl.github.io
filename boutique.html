@@ -55,22 +55,64 @@ nav a:hover {
   cursor: pointer;
 }
 
-.filter-container {
-  text-align: center;
-  margin: 30px 0;
-}
-
-.filter-container select {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 42px;
   text-align: center;
   margin-top: 50px;
+}
+
+.filter-container {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.filters-group {
+  margin-bottom: 25px;
+}
+
+.filters-group h4 {
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  margin: 6px;
+  border-radius: 25px;
+  border: 1px solid #c89b5e;
+  background: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter-btn:hover {
+  background-color: #f0e6d8;
+}
+
+.filter-btn.active {
+  background-color: #c89b5e;
+  color: white;
+}
+
+.filter-btn.active::after {
+  content: " ✓";
+  font-weight: bold;
+}
+
+.reset-btn {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 1px solid #c89b5e;
+  background: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.reset-btn:hover {
+  background-color: #f0e6d8;
 }
 
 .products-grid {
@@ -113,21 +155,6 @@ h1 {
   font-weight: bold;
   margin-top: 5px;
 }
-
-#cartOverlay {
-  display: none;
-  position: fixed;
-  top: 90px;
-  right: 30px;
-  width: 300px;
-  max-height: 400px;
-  overflow-y: auto;
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-  z-index: 100;
-}
 </style>
 </head>
 <body>
@@ -139,33 +166,36 @@ h1 {
     <a href="boutique.html">Boutique</a>
     <a href="contact.html">Contact</a>
   </nav>
-  <div class="cart-indicator" id="cartCount" onclick="toggleCart()">Panier : 0</div>
+  <div class="cart-indicator" id="cartCount">Panier : 0</div>
 </header>
 
 <main>
 <h1>Boutique</h1>
 
 <div class="filter-container">
-  <select id="filterSelect" onchange="applyFilter()">
-    <option value="all">Tous les produits</option>
 
-    <optgroup label="Couleur">
-      <option value="bleu">Bleu</option>
-      <option value="rose">Rose</option>
-      <option value="verte">Verte</option>
-    </optgroup>
+  <button class="reset-btn" id="resetFilters">Réinitialiser les filtres</button>
 
-    <optgroup label="Illustration">
-      <option value="Colombe">Colombe</option>
-      <option value="Adoration">Adoration</option>
-      <option value="Bougies">Bougies</option>
-    </optgroup>
+  <div class="filters-group">
+    <h4>Couleur</h4>
+    <button class="filter-btn" data-filter="bleu">Bleu</button>
+    <button class="filter-btn" data-filter="rose">Rose</button>
+    <button class="filter-btn" data-filter="verte">Verte</button>
+  </div>
 
-    <optgroup label="Format">
-      <option value="carte">Carte</option>
-      <option value="stickers">Stickers</option>
-    </optgroup>
-  </select>
+  <div class="filters-group">
+    <h4>Illustration</h4>
+    <button class="filter-btn" data-filter="Colombe">Colombe</button>
+    <button class="filter-btn" data-filter="Adoration">Adoration</button>
+    <button class="filter-btn" data-filter="Bougies">Bougies</button>
+  </div>
+
+  <div class="filters-group">
+    <h4>Format</h4>
+    <button class="filter-btn" data-filter="carte">Carte</button>
+    <button class="filter-btn" data-filter="stickers">Stickers</button>
+  </div>
+
 </div>
 
 <div class="products-grid">
@@ -173,37 +203,19 @@ h1 {
 <div class="product" data-color="bleu" data-type="Colombe" data-format="carte">
 <img src="images/carte colombe bleu.png">
 <p>Carte colombe fond bleu<br><span class="product-price">3€</span></p>
-<button onclick="addToCart('Carte colombe fond bleu',3,'images/carte colombe bleu.png')">Ajouter</button>
+<button onclick="addToCart('Carte colombe fond bleu',3)">Ajouter</button>
 </div>
 
 <div class="product" data-color="rose" data-type="Colombe" data-format="carte">
 <img src="images/carte colombe rose.png">
 <p>Carte colombe fond rose<br><span class="product-price">3€</span></p>
-<button onclick="addToCart('Carte colombe fond rose',3,'images/carte colombe rose.png')">Ajouter</button>
-</div>
-
-<div class="product" data-color="verte" data-type="Colombe" data-format="carte">
-<img src="images/carte colombe verte.png">
-<p>Carte colombe fond vert<br><span class="product-price">3€</span></p>
-<button onclick="addToCart('Carte colombe fond vert',3,'images/carte colombe verte.png')">Ajouter</button>
-</div>
-
-<div class="product" data-color="bleu" data-type="Colombe" data-format="stickers">
-<img src="images/stickers colombe bleu.png">
-<p>Stickers colombe fond bleu<br><span class="product-price">3€</span></p>
-<button onclick="addToCart('Stickers colombe fond bleu',3,'images/stickers colombe bleu.png')">Ajouter</button>
-</div>
-
-<div class="product" data-color="rose" data-type="Colombe" data-format="stickers">
-<img src="images/stickers colombe rose.png">
-<p>Stickers colombe fond rose<br><span class="product-price">3€</span></p>
-<button onclick="addToCart('Stickers colombe fond rose',3,'images/stickers colombe rose.png')">Ajouter</button>
+<button onclick="addToCart('Carte colombe fond rose',3)">Ajouter</button>
 </div>
 
 <div class="product" data-color="verte" data-type="Colombe" data-format="stickers">
 <img src="images/stickers colombe vert.png">
 <p>Stickers colombe fond vert<br><span class="product-price">3€</span></p>
-<button onclick="addToCart('Stickers colombe fond vert',3,'images/stickers colombe vert.png')">Ajouter</button>
+<button onclick="addToCart('Stickers colombe fond vert',3)">Ajouter</button>
 </div>
 
 </div>
@@ -214,10 +226,10 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const cartCount = document.getElementById('cartCount');
 updateCartCount();
 
-function addToCart(name, price, imgSrc){
+function addToCart(name, price){
   const existing = cart.find(item => item.name === name);
   if(existing){ existing.quantity += 1; }
-  else{ cart.push({name, price, imgSrc, quantity:1}); }
+  else{ cart.push({name, price, quantity:1}); }
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
 }
@@ -227,10 +239,31 @@ function updateCartCount(){
   cartCount.textContent = "Panier : " + total;
 }
 
-function toggleCart(){}
+const selectedFilters = [];
+const filterButtons = document.querySelectorAll('.filter-btn');
+const resetBtn = document.getElementById('resetFilters');
 
-function applyFilter(){
-  const filter = document.getElementById('filterSelect').value;
+filterButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const value = button.dataset.filter;
+    if(selectedFilters.includes(value)){
+      selectedFilters.splice(selectedFilters.indexOf(value), 1);
+      button.classList.remove('active');
+    } else {
+      selectedFilters.push(value);
+      button.classList.add('active');
+    }
+    applyFilters();
+  });
+});
+
+resetBtn.addEventListener('click', () => {
+  selectedFilters.length = 0;
+  filterButtons.forEach(btn => btn.classList.remove('active'));
+  applyFilters();
+});
+
+function applyFilters(){
   const products = document.querySelectorAll('.product');
 
   products.forEach(prod => {
@@ -238,7 +271,16 @@ function applyFilter(){
     const type = prod.dataset.type;
     const format = prod.dataset.format;
 
-    if(filter === "all" || filter === color || filter === type || filter === format){
+    if(selectedFilters.length === 0){
+      prod.style.display = "block";
+      return;
+    }
+
+    if(
+      selectedFilters.includes(color) ||
+      selectedFilters.includes(type) ||
+      selectedFilters.includes(format)
+    ){
       prod.style.display = "block";
     } else {
       prod.style.display = "none";
