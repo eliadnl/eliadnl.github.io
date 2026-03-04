@@ -160,6 +160,22 @@ h2 {
   font-weight: bold;
   margin-left: 5px;
 }
+
+/* BOUTON FINALISER LA COMMANDE */
+.cart-button {
+  margin-top: 12px;
+  background-color: #c89b5e;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cart-button:hover {
+  opacity: 0.8;
+}
 </style>
 </head>
 
@@ -203,7 +219,7 @@ h2 {
 <div id="cartOverlay">
   <h3>Panier</h3>
   <div id="cartItems"></div>
-  <button onclick="location.href='paiement.html'">Payer</button>
+  <button class="cart-button" onclick="finaliserCommande()">Finaliser la commande</button>
 </div>
 
 <script>
@@ -278,7 +294,13 @@ function renderCart() {
 function toggleCart() {
   cartOverlay.style.display = cartOverlay.style.display === 'block' ? 'none' : 'block';
 }
+
+// Nouvelle fonction pour rediriger vers la page commande.html
+function finaliserCommande() {
+  window.location.href = 'commande.html';
+}
 </script>
+
 <!-- Fin du contenu principal -->
 
 <!-- BANNIÈRE COLLECTION -->
@@ -336,7 +358,7 @@ function toggleCart() {
 
   </div>
 </section>
-  
+
 <!-- BANNIÈRE INSTAGRAM -->
 <footer style="background-color:#f6f1ea; padding:20px; text-align:center; border-top:1px solid #eee;">
   <a href="https://www.instagram.com/latelier_delia" target="_blank" style="text-decoration:none; color:#2d2d2d; display:inline-flex; align-items:center; gap:15px;">
@@ -344,7 +366,7 @@ function toggleCart() {
     <span style="font-size:20px; font-weight:bold;">@latelier_delia</span>
   </a>
 </footer>
-  
+
 </body>
 </html>
 
