@@ -55,7 +55,6 @@ nav a:hover {
   font-size: 13px;
   cursor: pointer;
 }
-}
 
 /* MAIN */
 main {
@@ -120,7 +119,7 @@ h2 {
 #cartOverlay {
   display: none;
   position: fixed;
-  top: 80px;
+  top: 90px;
   right: 30px;
   width: 300px;
   max-height: 400px;
@@ -198,11 +197,12 @@ footer a span {
 <body>
 
 <header>
-  <div>
+  <div class="logo">L'Atelier d'Elia</div>
+  <nav>
     <a href="index.html">Accueil</a>
     <a href="boutique.html">Boutique</a>
     <a href="contact.html">Contact</a>
-  </div>
+  </nav>
   <div class="cart-indicator" id="cartCount" onclick="toggleCart()">Panier : 0</div>
 </header>
 
@@ -243,13 +243,13 @@ const cartItems = document.getElementById('cartItems');
 
 if(localStorage.getItem('cart')) {
   cart = JSON.parse(localStorage.getItem('cart'));
-  cartCount.textContent = `Panier : ${cart.length}`;
+  updateCartCount();
   renderCart();
 }
 
 function addToCart(name, price, imgSrc){
-  cart.push({name, price, imgSrc});
-  cartCount.textContent = `Panier : ${cart.length}`;
+  cart.push({name, price, imgSrc, quantity: 1});
+  updateCartCount();
   renderCart();
   localStorage.setItem('cart', JSON.stringify(cart));
 }
@@ -263,6 +263,11 @@ function renderCart(){
                      <div>${item.name} - ${item.price || '3'}€</div>`;
     cartItems.appendChild(div);
   });
+}
+
+function updateCartCount(){
+  const total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  cartCount.textContent = `Panier : ${total}`;
 }
 
 function toggleCart(){
