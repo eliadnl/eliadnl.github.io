@@ -169,7 +169,11 @@ function submitOrder() {
       localStorage.removeItem('cart');
       // Redirection vers PayPal
       const amount = (total - discount).toFixed(2);
-      window.location.href = `https://www.paypal.com/paypalme/latelierdelia/${amount}`;
+  // Sauvegarder le total pour la page paiement
+localStorage.setItem('totalCommande', (total - discount).toFixed(2));
+
+// Redirection vers la page paiement
+window.location.href = "payement.html";
     }, function(error) {
       alert('Erreur lors de l’envoi de la commande, veuillez réessayer.');
       console.log(error);
