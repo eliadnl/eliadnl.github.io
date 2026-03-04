@@ -15,7 +15,7 @@ body {
   color: #2d2d2d;
 }
 
-/* HEADER IDENTIQUE */
+/* HEADER */
 header {
   background-color: #ffffff;
   padding: 20px 60px;
@@ -121,6 +121,45 @@ h2 {
   box-shadow: 0 15px 35px rgba(0,0,0,0.12);
   z-index: 100;
 }
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.cart-item img {
+  width: 50px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cart-item-controls button {
+  padding: 3px 8px;
+  cursor: pointer;
+  border: 1px solid #c89b5e;
+  background: white;
+  color: #c89b5e;
+  border-radius: 5px;
+}
+
+.cart-item-remove {
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+  margin-left: 5px;
+}
 </style>
 </head>
 
@@ -173,24 +212,70 @@ const cartCount = document.getElementById('cartCount');
 const cartOverlay = document.getElementById('cartOverlay');
 const cartItems = document.getElementById('cartItems');
 
-cartCount.textContent = `Panier : ${cart.length}`;
+updateCartCount();
 renderCart();
 
-function addToCart(name, price, imgSrc){
-  cart.push({name, price, imgSrc});
-  cartCount.textContent = `Panier : ${cart.length}`;
-  localStorage.setItem('cart', JSON.stringify(cart));
+function addToCart(name, price, imgSrc) {
+  const existingItem = cart.find(item => item.name === name);
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({name, price, imgSrc, quantity: 1});
+  }
+  saveCart();
   renderCart();
 }
 
-function renderCart(){
+function removeFromCart(name) {
+  cart = cart.filter(item => item.name !== name);
+  saveCart();
+  renderCart();
+}
+
+function changeQuantity(name, delta) {
+  const item = cart.find(i => i.name === name);
+  if (!item) return;
+  item.quantity += delta;
+  if (item.quantity < 1) {
+    removeFromCart(name);
+  } else {
+    saveCart();
+  }
+  renderCart();
+}
+
+function saveCart() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartCount();
+}
+
+function updateCartCount() {
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  cartCount.textContent = `Panier : ${totalItems}`;
+}
+
+function renderCart() {
   cartItems.innerHTML = '';
   cart.forEach(item => {
-    cartItems.innerHTML += `<div>${item.name} - ${item.price}€</div>`;
+    const div = document.createElement('div');
+    div.classList.add('cart-item');
+    div.innerHTML = `
+      <img src="${item.imgSrc}" alt="${item.name}">
+      <div class="cart-item-details">
+        ${item.name} - ${item.price}€
+      </div>
+      <div class="cart-item-controls">
+        <button onclick="changeQuantity('${item.name}', -1)">-</button>
+        <span>${item.quantity}</span>
+        <button onclick="changeQuantity('${item.name}', 1)">+</button>
+        <span class="cart-item-remove" onclick="removeFromCart('${item.name}')">×</span>
+      </div>
+    `;
+    cartItems.appendChild(div);
   });
 }
 
-function toggleCart(){
+function toggleCart() {
   cartOverlay.style.display = cartOverlay.style.display === 'block' ? 'none' : 'block';
 }
 </script>
