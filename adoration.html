@@ -1,106 +1,233 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Colombes - L'Atelier d'Elia</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .product-container {
-      text-align: center;
-      margin-top: 30px;
-    }
-    .color-selector button {
-      background-color: #446D92;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      margin: 5px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .color-selector button:hover {
-      background-color: #2d4b6c;
-    }
-    #productImage {
-      width: 300px;
-      height: auto;
-      margin-top: 20px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-    }
-    .add-cart-btn {
-      background-color: #ff9966;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      margin-top: 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .add-cart-btn:hover {
-      background-color: #ff7744;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colombe - L'Atelier d'Elia</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff8f0;
+}
+
+header {
+  background-color: #446D92;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+header nav a:hover {
+  text-decoration: underline;
+}
+
+.cart-indicator {
+  background-color: #ff9966;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+}
+
+main {
+  padding: 20px;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.product {
+  width: 180px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff5e6;
+  cursor: pointer;
+  transition: transform 0.2s;
+  padding: 10px;
+}
+
+.product img {
+  width: 160px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.product p {
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.product:hover {
+  transform: scale(1.05);
+}
+
+.product button{
+  margin-top: 8px;
+  background-color: #ff9966;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.product button:hover{
+  background-color: #ff7744;
+}
+
+/* Cart overlay */
+#cartOverlay {
+  display: none;
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 250px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: white;
+  border: 2px solid #446D92;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 100;
+}
+
+#cartOverlay h3 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cart-item img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+#payButton {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #446D92;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#payButton:hover {
+  background: #2d4b6c;
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>L'Atelier d'Elia</h1>
-    <nav>
-      <a href="index.html">Accueil</a>
-      <a href="boutique.html">Boutique</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
 
-  <main>
-    <div class="product-container">
-      <h2>Colombes</h2>
-      <p>Choisissez la couleur de votre carte :</p>
+<header>
+  <div>
+    <a href="index.html" style="font-size:18px;">Accueil</a>
+    <a href="boutique.html" style="font-size:18px;">Boutique</a>
+    <a href="contact.html" style="font-size:18px;">Contact</a>
+  </div>
+  <div class="cart-indicator" id="cartCount" onclick="toggleCart()">Panier : 0</div>
+</header>
 
-      <!-- Boutons de couleur -->
-      <div class="color-selector">
-        <button onclick="showColor('verte', 3)">Vert</button>
-        <button onclick="showColor('bleu', 3)">Bleu</button>
-        <button onclick="showColor('rose', 3)">Rose</button>
-      </div>
+<main>
+<h1>Colombes - L'Atelier d'Elia</h1>
+<h2>Choisissez votre illustration</h2>
 
-      <!-- Image du produit -->
-      <img id="productImage" src="images/carte colombe verte.png" alt="Colombe Verte">
+<div class="products-grid">
+  <div class="product">
+    <img src="images/carte colombe bleu.png" alt="Colombe bleu">
+    <p>Colombe bleu</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Colombe bleu', 3, 'images/carte colombe bleu.png')">Ajouter au panier</button>
+  </div>
 
-      <!-- Prix et panier -->
-      <div>
-        <p id="price">Prix : 3€</p>
-        <button class="add-cart-btn" onclick="addToCart(currentColor, 3)">Ajouter au panier</button>
-      </div>
+  <div class="product">
+    <img src="images/carte colombe rose.png" alt="Colombe rose">
+    <p>Colombe rose</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Colombe rose', 3, 'images/carte colombe rose.png')">Ajouter au panier</button>
+  </div>
 
-      <p><a href="boutique.html">← Retour à la boutique</a></p>
-    </div>
-  </main>
+  <div class="product">
+    <img src="images/carte colombe verte.png" alt="Colombe verte">
+    <p>Colombe verte</p>
+    <p>Prix : 3€</p>
+    <button onclick="addToCart('Colombe verte', 3, 'images/carte colombe verte.png')">Ajouter au panier</button>
+  </div>
+</div>
+</main>
 
-  <footer>
-    <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
-  </footer>
+<!-- Cart overlay -->
+<div id="cartOverlay">
+  <h3>Panier</h3>
+  <div id="cartItems"></div>
+  <button id="payButton" onclick="location.href='paiement.html'">Payer</button>
+</div>
 
-  <script>
-    let currentColor = 'verte';
-    let cart = [];
+<script>
+let cart = [];
+const cartCount = document.getElementById('cartCount');
+const cartOverlay = document.getElementById('cartOverlay');
+const cartItems = document.getElementById('cartItems');
 
-    function showColor(color, price) {
-      const image = document.getElementById('productImage');
-      image.src = `images/carte colombe ${color}.png`;
-      image.alt = `Colombe ${color}`;
-      currentColor = color;
-      document.getElementById('price').textContent = "Prix : " + price + "€";
-    }
+// Charger le panier depuis localStorage
+if(localStorage.getItem('cart')) {
+  cart = JSON.parse(localStorage.getItem('cart'));
+  cartCount.textContent = `Panier : ${cart.length}`;
+  renderCart();
+}
 
-    function addToCart(color, price) {
-      cart.push({name: `Colombe ${color}`, price});
-      alert(`Vous avez ajouté "Colombe ${color}" au panier !`);
-      console.log(cart);
-    }
-  </script>
+function addToCart(name, price, imgSrc){
+  cart.push({name, price, imgSrc});
+  cartCount.textContent = `Panier : ${cart.length}`;
+  renderCart();
+  localStorage.setItem('cart', JSON.stringify(cart)); // panier persistant sur toutes les pages
+}
+
+function renderCart(){
+  cartItems.innerHTML = '';
+  cart.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `<img src="${item.imgSrc}" alt="${item.name}"><div>${item.name} - ${item.price}€</div>`;
+    cartItems.appendChild(div);
+  });
+}
+
+function toggleCart(){
+  cartOverlay.style.display = (cartOverlay.style.display === 'block') ? 'none' : 'block';
+}
+</script>
+
 </body>
-</html> meme chose pour celui ci qui est adoration.html
+</html>
