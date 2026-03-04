@@ -4,230 +4,183 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Colombe - L'Atelier d'Elia</title>
-<link rel="stylesheet" href="style.css">
+
+<!-- Google Fonts élégantes -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
 <style>
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #fff8f0;
+  background-color: #f6f1ea;
+  font-family: 'Montserrat', sans-serif;
+  color: #2d2d2d;
 }
 
+/* HEADER */
 header {
-  background-color: #446D92;
-  color: white;
-  padding: 15px 20px;
+  background-color: #ffffff;
+  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #eee;
 }
-header nav a {
-  color: white;
-  margin-left: 20px;
+
+header a {
   text-decoration: none;
-  font-weight: bold;
-}
-header nav a:hover {
-  text-decoration: underline;
+  color: #2d2d2d;
+  margin-right: 30px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease;
 }
 
+header a:hover {
+  opacity: 0.6;
+}
+
+/* PANIER */
 .cart-indicator {
-  background-color: #ff9966;
-  padding: 8px 15px;
-  border-radius: 20px;
-  font-weight: bold;
+  background-color: #c89b5e;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 13px;
+  letter-spacing: 1px;
   cursor: pointer;
-  position: relative;
+  transition: background 0.3s ease;
 }
 
-main {
-  padding: 20px;
+.cart-indicator:hover {
+  background-color: #b58345;
 }
 
-h1, h2 {
+/* TITRES */
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 400;
   text-align: center;
+  margin-top: 50px;
+  margin-bottom: 10px;
 }
 
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  text-align: center;
+  color: #c89b5e;
+  margin-bottom: 50px;
+}
+
+/* PRODUITS */
 .products-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 60px;
   justify-content: center;
-  margin-top: 30px;
+  padding-bottom: 80px;
 }
 
 .product {
-  width: 180px;
+  width: 240px;
   text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff5e6;
   cursor: pointer;
-  transition: transform 0.2s;
-  padding: 10px;
+  transition: transform 0.3s ease;
 }
 
 .product img {
-  width: 160px;
-  height: auto;
-  border-radius: 5px;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: opacity 0.3s ease;
 }
 
 .product p {
-  margin-top: 5px;
-  font-weight: bold;
+  margin-top: 12px;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
 }
 
 .product:hover {
-  transform: scale(1.05);
+  transform: translateY(-6px);
+}
+
+.product:hover img {
+  opacity: 0.9;
 }
 
 .product button{
-  margin-top: 8px;
-  background-color: #ff9966;
+  margin-top: 12px;
+  background-color: #c89b5e;
   color: white;
   border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 10px 25px;
+  border-radius: 30px;
   cursor: pointer;
-  font-weight: bold;
+  letter-spacing: 1px;
+  transition: background 0.3s ease;
 }
 
 .product button:hover{
-  background-color: #ff7744;
+  background-color: #b58345;
 }
 
-/* Cart overlay */
+/* PANIER OVERLAY */
 #cartOverlay {
   display: none;
   position: fixed;
-  top: 60px;
-  right: 20px;
-  width: 250px;
+  top: 90px;
+  right: 30px;
+  width: 300px;
   max-height: 400px;
   overflow-y: auto;
   background: white;
-  border: 2px solid #446D92;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
   z-index: 100;
 }
 
 #cartOverlay h3 {
+  font-family: 'Playfair Display', serif;
   text-align: center;
+  font-weight: 400;
   margin-top: 0;
 }
 
 .cart-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
 }
 
 .cart-item img {
-  width: 40px;
-  height: auto;
+  width: 45px;
   margin-right: 10px;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 #payButton {
   width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  background: #446D92;
+  padding: 12px;
+  margin-top: 15px;
+  background: #c89b5e;
   color: white;
   border: none;
-  border-radius: 5px;
-  font-weight: bold;
+  border-radius: 30px;
+  font-size: 13px;
+  letter-spacing: 1px;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 #payButton:hover {
-  background: #2d4b6c;
+  background: #b58345;
 }
+
 </style>
 </head>
-<body>
-
-<header>
-  <div>
-    <a href="index.html" style="font-size:18px;">Accueil</a>
-    <a href="boutique.html" style="font-size:18px;">Boutique</a>
-    <a href="contact.html" style="font-size:18px;">Contact</a>
-  </div>
-  <div class="cart-indicator" id="cartCount" onclick="toggleCart()">Panier : 0</div>
-</header>
-
-<main>
-<h1>Colombes - L'Atelier d'Elia</h1>
-<h2>Choisissez votre illustration</h2>
-
-<div class="products-grid">
-  <div class="product">
-    <img src="images/carte colombe bleu.png" alt="Colombe bleu">
-    <p>Colombe bleu</p>
-    <p>Prix : 3€</p>
-    <button onclick="addToCart('Colombe bleu', 3, 'images/carte colombe bleu.png')">Ajouter au panier</button>
-  </div>
-
-  <div class="product">
-    <img src="images/carte colombe rose.png" alt="Colombe rose">
-    <p>Colombe rose</p>
-    <p>Prix : 3€</p>
-    <button onclick="addToCart('Colombe rose', 3, 'images/carte colombe rose.png')">Ajouter au panier</button>
-  </div>
-
-  <div class="product">
-    <img src="images/carte colombe verte.png" alt="Colombe verte">
-    <p>Colombe verte</p>
-    <p>Prix : 3€</p>
-    <button onclick="addToCart('Colombe verte', 3, 'images/carte colombe verte.png')">Ajouter au panier</button>
-  </div>
-</div>
-</main>
-
-<!-- Cart overlay -->
-<div id="cartOverlay">
-  <h3>Panier</h3>
-  <div id="cartItems"></div>
-  <button id="payButton" onclick="location.href='paiement.html'">Payer</button>
-</div>
-
-<script>
-let cart = [];
-const cartCount = document.getElementById('cartCount');
-const cartOverlay = document.getElementById('cartOverlay');
-const cartItems = document.getElementById('cartItems');
-
-// Charger le panier depuis localStorage
-if(localStorage.getItem('cart')) {
-  cart = JSON.parse(localStorage.getItem('cart'));
-  cartCount.textContent = `Panier : ${cart.length}`;
-  renderCart();
-}
-
-function addToCart(name, price, imgSrc){
-  cart.push({name, price, imgSrc});
-  cartCount.textContent = `Panier : ${cart.length}`;
-  renderCart();
-  localStorage.setItem('cart', JSON.stringify(cart)); // panier persistant sur toutes les pages
-}
-
-function renderCart(){
-  cartItems.innerHTML = '';
-  cart.forEach(item => {
-    const div = document.createElement('div');
-    div.className = 'cart-item';
-    div.innerHTML = `<img src="${item.imgSrc}" alt="${item.name}"><div>${item.name} - ${item.price}€</div>`;
-    cartItems.appendChild(div);
-  });
-}
-
-function toggleCart(){
-  cartOverlay.style.display = (cartOverlay.style.display === 'block') ? 'none' : 'block';
-}
-</script>
-
-</body>
-</html>
