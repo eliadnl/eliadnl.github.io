@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>illustration : Bougies - L'Atelier d'Elia</title>
+<title>Bougies - L'Atelier d'Elia</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
@@ -15,7 +15,7 @@ body {
   color: #2d2d2d;
 }
 
-/* HEADER IDENTIQUE */
+/* HEADER */
 header {
   background-color: #ffffff;
   padding: 20px 60px;
@@ -121,6 +121,61 @@ h2 {
   box-shadow: 0 15px 35px rgba(0,0,0,0.12);
   z-index: 100;
 }
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.cart-item img {
+  width: 50px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cart-item-controls button {
+  padding: 3px 8px;
+  cursor: pointer;
+  border: 1px solid #c89b5e;
+  background: white;
+  color: #c89b5e;
+  border-radius: 5px;
+}
+
+.cart-item-remove {
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+/* BOUTON FINALISER LA COMMANDE */
+.cart-button {
+  margin-top: 12px;
+  background-color: #c89b5e;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cart-button:hover {
+  opacity: 0.8;
+}
 </style>
 </head>
 
@@ -137,26 +192,26 @@ h2 {
 </header>
 
 <main>
-<h1>bougies</h1>
+<h1>Bougies</h1>
 <h2>Choisissez votre illustration</h2>
 
 <div class="products-grid">
   <div class="product">
-    <img src="images/carte bougies bleu.png">
+    <img src="images/carte bougies bleu.png" alt="Bougies fond bleu">
     <p>Bougies fond bleu - 3€</p>
     <button onclick="addToCart('Bougies fond bleu', 3, 'images/carte bougies bleu.png')">Ajouter au panier</button>
   </div>
 
   <div class="product">
-    <img src="images/carte bougies rose.png">
+    <img src="images/carte bougies rose.png" alt="Bougies fond rose">
     <p>Bougies fond rose - 3€</p>
-    <button onclick="addToCart('bougies fond rose', 3, 'images/carte bougies rose.png')">Ajouter au panier</button>
+    <button onclick="addToCart('Bougies fond rose', 3, 'images/carte bougies rose.png')">Ajouter au panier</button>
   </div>
 
   <div class="product">
-    <img src="images/carte bougies verte.png">
+    <img src="images/carte bougies verte.png" alt="Bougies fond vert">
     <p>Bougies fond vert - 3€</p>
-    <button onclick="addToCart('bougies fond vert', 3, 'images/carte bougies verte.png')">Ajouter au panier</button>
+    <button onclick="addToCart('Bougies fond vert', 3, 'images/carte bougies verte.png')">Ajouter au panier</button>
   </div>
 </div>
 </main>
@@ -164,7 +219,7 @@ h2 {
 <div id="cartOverlay">
   <h3>Panier</h3>
   <div id="cartItems"></div>
-  <button onclick="location.href='paiement.html'">Payer</button>
+  <button class="cart-button" onclick="finaliserCommande()">Finaliser la commande</button>
 </div>
 
 <script>
@@ -173,25 +228,77 @@ const cartCount = document.getElementById('cartCount');
 const cartOverlay = document.getElementById('cartOverlay');
 const cartItems = document.getElementById('cartItems');
 
-cartCount.textContent = `Panier : ${cart.length}`;
+updateCartCount();
 renderCart();
 
-function addToCart(name, price, imgSrc){
-  cart.push({name, price, imgSrc});
-  cartCount.textContent = `Panier : ${cart.length}`;
-  localStorage.setItem('cart', JSON.stringify(cart));
+function addToCart(name, price, imgSrc) {
+  const existingItem = cart.find(item => item.name === name);
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({name, price, imgSrc, quantity:1});
+  }
+  saveCart();
   renderCart();
 }
 
-function renderCart(){
+function removeFromCart(name) {
+  cart = cart.filter(item => item.name !== name);
+  saveCart();
+  renderCart();
+}
+
+function changeQuantity(name, delta) {
+  const item = cart.find(i => i.name === name);
+  if (!item) return;
+  item.quantity += delta;
+  if(item.quantity < 1){
+    removeFromCart(name);
+  } else {
+    saveCart();
+  }
+  renderCart();
+}
+
+function saveCart() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartCount();
+}
+
+function updateCartCount() {
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  cartCount.textContent = `Panier : ${totalItems}`;
+}
+
+function renderCart() {
   cartItems.innerHTML = '';
   cart.forEach(item => {
-    cartItems.innerHTML += `<div>${item.name} - ${item.price}€</div>`;
+    const div = document.createElement('div');
+    div.classList.add('cart-item');
+    div.innerHTML = `
+      <img src="${item.imgSrc}" alt="${item.name}">
+      <div class="cart-item-details">${item.name} - ${item.price}€</div>
+      <div class="cart-item-controls">
+        <button onclick="changeQuantity('${item.name}', -1)">-</button>
+        <span>${item.quantity}</span>
+        <button onclick="changeQuantity('${item.name}', 1)">+</button>
+        <span class="cart-item-remove" onclick="removeFromCart('${item.name}')">×</span>
+      </div>
+    `;
+    cartItems.appendChild(div);
   });
 }
 
-function toggleCart(){
+function toggleCart() {
   cartOverlay.style.display = cartOverlay.style.display === 'block' ? 'none' : 'block';
+}
+
+function finaliserCommande() {
+  // Calculer total
+  let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  localStorage.setItem('totalCommande', total.toFixed(2));
+  // Redirection vers page paiement
+  window.location.href = 'payement.html';
 }
 </script>
 
