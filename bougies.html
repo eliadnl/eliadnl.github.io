@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Colombe - L'Atelier d'Elia</title>
+<title>Bougies - L'Atelier d'Elia</title>
 
-<!-- Google Fonts élégantes -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
@@ -27,34 +26,26 @@ header {
   border-bottom: 1px solid #eee;
 }
 
-header a {
+header nav a {
   text-decoration: none;
   color: #2d2d2d;
-  margin-right: 30px;
+  margin-left: 25px;
   font-size: 14px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  transition: opacity 0.3s ease;
 }
 
-header a:hover {
+header nav a:hover {
   opacity: 0.6;
 }
 
-/* PANIER */
 .cart-indicator {
   background-color: #c89b5e;
   color: white;
   padding: 8px 20px;
   border-radius: 30px;
   font-size: 13px;
-  letter-spacing: 1px;
   cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.cart-indicator:hover {
-  background-color: #b58345;
 }
 
 /* TITRES */
@@ -64,7 +55,6 @@ h1 {
   font-weight: 400;
   text-align: center;
   margin-top: 50px;
-  margin-bottom: 10px;
 }
 
 h2 {
@@ -87,7 +77,6 @@ h2 {
 .product {
   width: 240px;
   text-align: center;
-  cursor: pointer;
   transition: transform 0.3s ease;
 }
 
@@ -95,11 +84,10 @@ h2 {
   width: 100%;
   border-radius: 8px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  transition: opacity 0.3s ease;
 }
 
 .product p {
-  margin-top: 12px;
+  margin-top: 10px;
   font-family: 'Playfair Display', serif;
   font-size: 18px;
 }
@@ -108,11 +96,7 @@ h2 {
   transform: translateY(-6px);
 }
 
-.product:hover img {
-  opacity: 0.9;
-}
-
-.product button{
+.product button {
   margin-top: 12px;
   background-color: #c89b5e;
   color: white;
@@ -120,15 +104,13 @@ h2 {
   padding: 10px 25px;
   border-radius: 30px;
   cursor: pointer;
-  letter-spacing: 1px;
-  transition: background 0.3s ease;
 }
 
-.product button:hover{
+.product button:hover {
   background-color: #b58345;
 }
 
-/* PANIER OVERLAY */
+/* PANIER */
 #cartOverlay {
   display: none;
   position: fixed;
@@ -147,15 +129,12 @@ h2 {
 #cartOverlay h3 {
   font-family: 'Playfair Display', serif;
   text-align: center;
-  font-weight: 400;
-  margin-top: 0;
 }
 
 .cart-item {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
-  font-size: 14px;
 }
 
 .cart-item img {
@@ -172,10 +151,7 @@ h2 {
   color: white;
   border: none;
   border-radius: 30px;
-  font-size: 13px;
-  letter-spacing: 1px;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
 
 #payButton:hover {
@@ -184,3 +160,85 @@ h2 {
 
 </style>
 </head>
+
+<body>
+
+<header>
+  <div>
+    <a href="index.html">Accueil</a>
+    <a href="boutique.html">Boutique</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="cart-indicator" id="cartCount" onclick="toggleCart()">Panier : 0</div>
+</header>
+
+<main>
+<h1>Bougies - L'Atelier d'Elia</h1>
+<h2>Choisissez votre bougie</h2>
+
+<div class="products-grid">
+  <div class="product">
+    <img src="images/bougie1.png" alt="Bougie 1">
+    <p>Bougie 1</p>
+    <p>Prix : 5€</p>
+    <button onclick="addToCart('Bougie 1', 5, 'images/bougie1.png')">Ajouter au panier</button>
+  </div>
+
+  <div class="product">
+    <img src="images/bougie2.png" alt="Bougie 2">
+    <p>Bougie 2</p>
+    <p>Prix : 5€</p>
+    <button onclick="addToCart('Bougie 2', 5, 'images/bougie2.png')">Ajouter au panier</button>
+  </div>
+
+  <div class="product">
+    <img src="images/bougie3.png" alt="Bougie 3">
+    <p>Bougie 3</p>
+    <p>Prix : 5€</p>
+    <button onclick="addToCart('Bougie 3', 5, 'images/bougie3.png')">Ajouter au panier</button>
+  </div>
+</div>
+</main>
+
+<div id="cartOverlay">
+  <h3>Panier</h3>
+  <div id="cartItems"></div>
+  <button id="payButton" onclick="location.href='paiement.html'">Payer</button>
+</div>
+
+<script>
+let cart = [];
+const cartCount = document.getElementById('cartCount');
+const cartOverlay = document.getElementById('cartOverlay');
+const cartItems = document.getElementById('cartItems');
+
+if(localStorage.getItem('cart')) {
+  cart = JSON.parse(localStorage.getItem('cart'));
+  cartCount.textContent = `Panier : ${cart.length}`;
+  renderCart();
+}
+
+function addToCart(name, price, imgSrc){
+  cart.push({name, price, imgSrc});
+  cartCount.textContent = `Panier : ${cart.length}`;
+  renderCart();
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function renderCart(){
+  cartItems.innerHTML = '';
+  cart.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `<img src="${item.imgSrc}" alt="${item.name}"><div>${item.name} - ${item.price}€</div>`;
+    cartItems.appendChild(div);
+  });
+}
+
+function toggleCart(){
+  cartOverlay.style.display = (cartOverlay.style.display === 'block') ? 'none' : 'block';
+}
+</script>
+
+</body>
+</html>
