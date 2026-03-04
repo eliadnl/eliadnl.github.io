@@ -78,7 +78,8 @@ button {background:#c89b5e; color:white; border:none; padding:12px 25px; border-
 <!-- Inclure EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-emailjs.init("YOUR_PUBLIC_KEY"); // Remplace par ta clé publique EmailJS
+// Initialiser EmailJS avec ta clé publique
+emailjs.init("dc3TyqsgD03Ugf4_8");
 
 // Récupérer panier
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -145,7 +146,7 @@ function submitOrder() {
     panierTexte += `${item.name} x${item.quantity} - ${(item.price*item.quantity).toFixed(2)}€\n`;
   });
 
-  // Envoyer email via EmailJS (ton mail reste caché côté client)
+  // Paramètres EmailJS
   const templateParams = {
     prenom: firstName,
     nom: lastName,
@@ -156,12 +157,11 @@ function submitOrder() {
     total: (total - discount).toFixed(2) + '€'
   };
 
-  emailjs.send('YOUR_SERVICE_ID','YOUR_TEMPLATE_ID', templateParams)
+  // Envoyer l'email
+  emailjs.send('service_9fdb3is','template_72wi0b9', templateParams)
     .then(function(response) {
       alert('Commande envoyée avec succès ! Vous allez être redirigé vers le paiement.');
-      // vider le panier
-      localStorage.removeItem('cart');
-      // Redirection vers PayPal
+      localStorage.removeItem('cart'); // vider le panier
       const amount = (total - discount).toFixed(2);
       window.location.href = `https://www.paypal.com/paypalme/latelierdelia/${amount}`;
     }, function(error) {
