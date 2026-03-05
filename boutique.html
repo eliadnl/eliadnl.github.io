@@ -356,16 +356,7 @@ function toggleDropdown() {
   const dropdown = document.getElementById('filterContent');
   dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 }
-
-/* Faire disparaître le menu filtre quand on scroll */
-const filterDropdown = document.querySelector('.filter-dropdown');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {  // Change 50 pour ajuster quand le menu disparaît
-    filterDropdown.style.display = 'none';
-  } else {
-    filterDropdown.style.display = 'block';
-  }
-});
 </script>
+
 </body>
 </html>
