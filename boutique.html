@@ -16,11 +16,36 @@
 
 <style>
 /* Filtre complètement fixe */
-.filter-dropdown {
-  position: fixed;   /* reste toujours à la même place */
-  top: 180px;        /* distance depuis le haut de la page */
-  left: 30px;        /* distance depuis la gauche */
-  z-index: 1000;
+.filter-dropdown-content {
+  display: none;
+  position: fixed;
+  top: 190px;
+  left: 30px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  min-width: 250px;
+  z-index: 1001;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* croix fermer filtre */
+.close-filter{
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* effet survol */
+.close-filter:hover{
+  transform: scale(1.2);
+  opacity: 0.7;
+  color:#c89b5e;
 }
 
 .close-filter:hover {
