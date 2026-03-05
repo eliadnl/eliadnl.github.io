@@ -70,43 +70,25 @@ h2 {
   color: #c89b5e;
 }
 
-/* FILTRE DÉROULANT */
-
+/* Bouton Filtrer flottant à gauche */
 .filter-dropdown {
+  position: fixed;       /* rend le filtre flottant sur la page */
+  top: 120px;            /* distance depuis le haut, ajuste selon besoin */
+  left: 30px;            /* distance depuis la gauche */
+  z-index: 1000;         /* au-dessus des autres éléments */
   text-align: left;
-  margin: 40px 0;
 }
 
+/* Bouton Filtrer */
 .filter-dropdown button {
-  background: #c89b5e;
+  background-color: #c89b5e;
   color: white;
   padding: 10px 25px;
-  border: none;
   border-radius: 30px;
+  border: none;
   cursor: pointer;
-}
-
-.filter-dropdown-content {
-  display: none;
-  background: white;
-  width: 260px;
-  margin: 15px auto;
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-.filter-dropdown-content h4 {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  margin-bottom: 8px;
-}
-
-.filter-dropdown-content label {
-  display: block;
-  margin-bottom: 6px;
-  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 /* PRODUITS */
