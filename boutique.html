@@ -15,14 +15,15 @@
 <script src="script.js" defer></script>
 
 <style>
-/* ------------------ FILTRE DÉROULANT FIXE ------------------ */
+/* Filtre complètement fixe */
 .filter-dropdown {
-  position: fixed;   /* reste fixe même quand on scroll */
-  top: 170px;         /* à 140px du haut */
-  left: 30px;        /* à 20px du bord gauche */
-  z-index: 100;
+  position: fixed;   /* reste toujours à la même place */
+  top: 140px;        /* distance depuis le haut de la page */
+  left: 30px;        /* distance depuis la gauche */
+  z-index: 1000;
 }
 
+/* Bouton */
 .filter-dropdown button {
   background-color: #c89b5e;
   color: white;
@@ -33,19 +34,14 @@
   font-weight: bold;
   font-size: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.filter-dropdown button:hover {
-  opacity: 0.85;
-  transform: translateY(-2px);
-}
-
+/* Contenu du filtre complètement fixe */
 .filter-dropdown-content {
   display: none;
-  position: absolute;  /* attaché au bouton */
-  top: 50px;
-  left: 0;
+  position: fixed;    /* <-- clé pour ne pas bouger en scroll */
+  top: 190px;         /* position juste en dessous du bouton */
+  left: 30px;         /* même alignement que le bouton */
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -54,25 +50,6 @@
   z-index: 1001;
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
-
-.filter-dropdown-content h4 {
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  margin: 10px 0 5px 0;
-}
-
-.filter-dropdown-content label {
-  display: block;
-  margin: 5px 0;
-  cursor: pointer;
-  font-family: 'Playfair Display', serif;
-}
-
-.filter-dropdown-content .cart-button {
-  margin-top: 10px;
-  width: 100%;
-}
-
 /* ------------------ PANIER FLOTTANT ------------------ */
 .cart-indicator {
   position: fixed;
