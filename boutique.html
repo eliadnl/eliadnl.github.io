@@ -5,245 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boutique - L'Atelier d'Elia</title>
 
+<!-- Polices -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  background-color: #f6f1ea;
-  color: #2d2d2d;
-}
-
-/* HEADER */
-header {
-  background-color: #ffffff;
-  padding: 20px 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #eee;
-}
-
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-}
-
-nav {
-  display: flex;
-  gap: 30px;
-}
-
-nav a {
-  text-decoration: none;
-  color: #2d2d2d;
-  font-size: 14px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-nav a:hover {
-  opacity: 0.6;
-}
-
-.cart-indicator {
-  background-color: #c89b5e;
-  color: white;
-  padding: 8px 22px;
-  border-radius: 30px;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-/* MAIN */
-main {
-  padding: 40px 20px;
-}
-
-/* TITRES */
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 42px;
-  font-weight: 400;
-  text-align: center;
-  margin-top: 40px;
-  margin-bottom: 10px;
-}
-
-h2 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 400;
-  text-align: center;
-  color: #c89b5e;
-  margin-bottom: 50px;
-}
-
-/* FILTRE DÉROULANT */
-.filter-dropdown {
-  position: relative;
-  display: inline-block;
-  margin: 30px auto;
-  text-align: center;
-}
-
-.filter-dropdown button {
-  background: #c89b5e;
-  color: white;
-  padding: 10px 25px;
-  font-size: 16px;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.filter-dropdown-content {
-  display: none;
-  position: absolute;
-  background: #fff;
-  min-width: 250px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 15px;
-  z-index: 10;
-  text-align: left;
-}
-
-.filter-dropdown-content h4 {
-  margin: 5px 0;
-  font-family: 'Playfair Display', serif;
-  font-weight: 400;
-}
-
-.filter-dropdown-content label {
-  display: block;
-  margin: 5px 0;
-  cursor: pointer;
-  font-family: 'Playfair Display', serif;
-}
-
-.filter-dropdown-content input[type="checkbox"] {
-  margin-right: 8px;
-}
-
-/* PRODUITS */
-.products-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 60px;
-  justify-content: center;
-}
-
-.product {
-  width: 220px;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.product img {
-  width: 100%;
-  border-radius: 6px;
-  transition: opacity 0.3s ease;
-}
-
-.product p {
-  margin-top: 15px;
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  letter-spacing: 1px;
-}
-
-.product:hover {
-  transform: translateY(-6px);
-}
-
-.product:hover img {
-  opacity: 0.85;
-}
-
-/* PANIER OVERLAY */
-#cartOverlay {
-  display: none;
-  position: fixed;
-  top: 90px;
-  right: 30px;
-  width: 300px;
-  max-height: 400px;
-  overflow-y: auto;
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-  z-index: 100;
-}
-
-#cartOverlay h3 {
-  font-family: 'Playfair Display', serif;
-  text-align: center;
-  font-weight: 400;
-  margin-top: 0;
-}
-
-.cart-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  font-size: 14px;
-}
-
-.cart-item img {
-  width: 45px;
-  margin-right: 10px;
-  border-radius: 5px;
-}
-
-/* BOUTON PAYER */
-#payButton, .cart-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  background: #c89b5e;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  font-size: 13px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-#payButton:hover, .cart-button:hover {
-  background: #b58345;
-}
-
-/* FOOTER */
-footer {
-  background-color: #f6f1ea;
-  padding: 20px;
-  text-align: center;
-  border-top: 1px solid #eee;
-}
-
-footer a {
-  text-decoration: none;
-  color: #2d2d2d;
-  display: inline-flex;
-  align-items: center;
-  gap: 15px;
-}
-
-footer a img {
-  width: 70px;
-  height: 70px;
-}
-
-footer a span {
-  font-size: 20px;
-  font-weight: bold;
-}
-</style>
+<!-- Lien vers le style complet -->
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -261,7 +27,7 @@ footer a span {
 <h1>Boutique</h1>
 <h2>Découvrez notre collection</h2>
 
-<!-- FILTRE DÉROULANT UNIQUE -->
+<!-- FILTRE DÉROULANT -->
 <div class="filter-dropdown">
   <button onclick="toggleDropdown()">Filtrer</button>
 
@@ -285,10 +51,108 @@ footer a span {
 </div>
 
 <div class="products-grid">
-<!-- Les produits avec les mêmes données que ton script original -->
-<!-- ... copier ici tous les produits comme dans ton script initial ... -->
+  <!-- Carte colombe -->
+  <div class="product" data-color="bleu" data-type="colombe" data-format="carte">
+    <img src="images/carte colombe bleu.png" alt="Carte colombe fond bleu">
+    <p>Carte colombe fond bleu<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Carte colombe fond bleu',3,'images/carte colombe bleu.png')">Ajouter au panier</button>
+  </div>
+  <div class="product" data-color="rose" data-type="colombe" data-format="carte">
+    <img src="images/carte colombe rose.png" alt="Carte colombe fond rose">
+    <p>Carte colombe fond rose<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Carte colombe fond rose',3,'images/carte colombe rose.png')">Ajouter au panier</button>
+  </div>
+  <div class="product" data-color="verte" data-type="colombe" data-format="carte">
+    <img src="images/carte colombe verte.png" alt="Carte colombe fond vert">
+    <p>Carte colombe fond vert<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Carte colombe fond vert',3,'images/carte colombe verte.png')">Ajouter au panier</button>
+  </div>
+
+  <!-- Carte adoration -->
+  <div class="product" data-color="bleu" data-type="adoration" data-format="carte">
+    <img src="images/carte adoration bleu.png" alt="Carte adoration fond bleu">
+    <p>Carte adoration fond bleu<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Carte adoration fond bleu',3,'images/carte adoration bleu.png')">Ajouter au panier</button>
+  </div>
+  <div class="product" data-color="rose" data-type="adoration" data-format="carte">
+    <img src="images/carte adoration rose.png" alt="Carte adoration fond rose">
+    <p>Carte adoration fond rose<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Carte adoration fond rose',3,'images/carte adoration rose.png')">Ajouter au panier</button>
+  </div>
+  <div class="product" data-color="verte" data-type="adoration" data-format="carte">
+    <img src="images/carte adoration verte.png" alt="Carte adoration fond vert">
+    <p>Carte adoration fond vert<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Carte adoration fond verte',3,'images/carte adoration verte.png')">Ajouter au panier</button>
+  </div>
+
+  <!-- Carte bougies -->
+  <div class="product" data-color="bleu" data-type="bougies" data-format="carte">
+    <img src="images/carte bougies bleu.png" alt="Carte bougies fond bleu">
+    <p>Carte bougies fond bleu<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Carte bougies fond bleu',3,'images/carte bougies bleu.png')">Ajouter au panier</button>
+  </div>
+  <div class="product" data-color="rose" data-type="bougies" data-format="carte">
+    <img src="images/carte bougies rose.png" alt="Carte bougies fond rose">
+    <p>Carte bougies fond rose<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Carte bougies fond rose',3,'images/carte bougies rose.png')">Ajouter au panier</button>
+  </div>
+  <div class="product" data-color="verte" data-type="bougies" data-format="carte">
+    <img src="images/carte bougies verte.png" alt="Carte bougies fond vert">
+    <p>Carte bougies fond vert<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Carte bougies fond vert',3,'images/carte bougies verte.png')">Ajouter au panier</button>
+  </div>
+
+  <!-- Stickers colombe -->
+  <div class="product" data-color="bleu" data-type="colombe" data-format="stickers">
+    <img src="images/stickers colombe bleu.png" alt="Stickers colombe fond bleu">
+    <p>Stickers colombe fond bleu<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Stickers colombe fond bleu',3,'images/stickers colombe bleu.png')">Ajouter au panier</button>
+  </div>
+  <div class="product" data-color="rose" data-type="colombe" data-format="stickers">
+    <img src="images/stickers colombe rose.png" alt="Stickers colombe fond rose">
+    <p>Stickers colombe fond rose<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Stickers colombe fond rose',3,'images/stickers colombe rose.png')">Ajouter au panier</button>
+  </div>
+  <div class="product" data-color="verte" data-type="colombe" data-format="stickers">
+    <img src="images/stickers colombe vert.png" alt="Stickers colombe fond vert">
+    <p>Stickers colombe fond vert<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Stickers colombe fond vert',3,'images/stickers colombe vert.png')">Ajouter au panier</button>
+  </div>
+
+  <!-- Stickers adoration -->
+  <div class="product" data-color="bleu" data-type="adoration" data-format="stickers">
+    <img src="images/stickers adoration bleu.png" alt="Stickers adoration fond bleu">
+    <p>Stickers adoration fond bleu<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Stickers adoration fond bleu',3,'images/stickers adoration bleu.png')">Ajouter au panier</button>
+  </div>
+  <div class="product" data-color="rose" data-type="adoration" data-format="stickers">
+    <img src="images/stickers adoration rose.png" alt="Stickers adoration fond rose">
+    <p>Stickers adoration fond rose<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Stickers adoration fond rose',3,'images/stickers adoration rose.png')">Ajouter au panier</button>
+  </div>
+  <div class="product" data-color="verte" data-type="adoration" data-format="stickers">
+    <img src="images/stickers adoration vert.png" alt="Stickers adoration fond vert">
+    <p>Stickers adoration fond vert<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Stickers adoration fond vert',3,'images/stickers adoration vert.png')">Ajouter au panier</button>
+  </div>
+
+  <!-- Stickers bougies -->
+  <div class="product" data-color="bleu" data-type="bougies" data-format="stickers">
+    <img src="images/stickers bougies bleu.png" alt="Stickers bougies fond bleu">
+    <p>Stickers bougies fond bleu<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Stickers bougies fond bleu',3,'images/stickers bougies bleu.png')">Ajouter au panier</button>
+  </div>
+  <div class="product" data-color="rose" data-type="bougies" data-format="stickers">
+    <img src="images/stickers bougies rose.png" alt="Stickers bougies fond rose">
+    <p>Stickers bougies fond rose<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Stickers bougies fond rose',3,'images/stickers bougies rose.png')">Ajouter au panier</button>
+  </div>
+  <div class="product" data-color="verte" data-type="bougies" data-format="stickers">
+    <img src="images/stickers bougies vert.png" alt="Stickers bougies fond vert">
+    <p>Stickers bougies fond vert<br><span class="product-price">3€</span></p>
+    <button onclick="addToCart('Stickers bougies fond vert',3,'images/stickers bougies vert.png')">Ajouter au panier</button>
+  </div>
 </div>
-</main>
 
 <!-- PANIER -->
 <div id="cartOverlay">
@@ -297,8 +161,17 @@ footer a span {
   <button id="payButton" class="cart-button" onclick="location.href='paiement.html'">Payer</button>
 </div>
 
+<!-- FOOTER -->
+<footer>
+  <a href="https://www.instagram.com/latelier_delia" target="_blank">
+    <img src="images/logo instagram.png" alt="Instagram">
+    <span>@latelier_delia</span>
+  </a>
+  <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
+</footer>
+
+<!-- SCRIPT PANIER + FILTRES -->
 <script>
-// Panier et filtres : copier le script existant intact
 let cart = JSON.parse(localStorage.getItem('cart'))||[];
 const cartCount=document.getElementById('cartCount');
 const cartOverlay=document.getElementById('cartOverlay');
@@ -307,16 +180,47 @@ const cartItems=document.getElementById('cartItems');
 updateCartCount();
 renderCart();
 
-function addToCart(name,price,imgSrc){const existing=cart.find(i=>i.name===name);if(existing)existing.quantity++;else cart.push({name,price,imgSrc,quantity:1});saveCart();renderCart();}
+function addToCart(name,price,imgSrc){
+  const existing=cart.find(i=>i.name===name);
+  if(existing) existing.quantity++;
+  else cart.push({name,price,imgSrc,quantity:1});
+  saveCart(); renderCart();
+}
+
 function removeFromCart(name){cart=cart.filter(i=>i.name!==name);saveCart();renderCart();}
-function changeQuantity(name,delta){const item=cart.find(i=>i.name===name);if(!item)return;item.quantity+=delta;if(item.quantity<1)removeFromCart(name);else saveCart();renderCart();}
+function changeQuantity(name,delta){
+  const item=cart.find(i=>i.name===name);
+  if(!item) return;
+  item.quantity+=delta;
+  if(item.quantity<1) removeFromCart(name);
+  else saveCart(); renderCart();
+}
+
 function saveCart(){localStorage.setItem('cart',JSON.stringify(cart));updateCartCount();}
-function updateCartCount(){cartCount.textContent=`Panier : ${cart.reduce((sum,i)=>sum+i.quantity,0)}`;}
-function renderCart(){cartItems.innerHTML='';cart.forEach(item=>{const div=document.createElement('div');div.classList.add('cart-item');div.innerHTML=`<img src="${item.imgSrc}" alt="${item.name}"><div>${item.name} - ${item.price}€</div><div class="cart-item-controls"><button onclick="changeQuantity('${item.name}',-1)">-</button><span>${item.quantity}</span><button onclick="changeQuantity('${item.name}',1)">+</button><span class="cart-item-remove" onclick="removeFromCart('${item.name}')">×</span></div>`;cartItems.appendChild(div);});}
+function updateCartCount(){cartCount.textContent=`Panier : ${cart.reduce((sum,i)=>sum+i.quantity,0)`;}
+function renderCart(){
+  cartItems.innerHTML='';
+  cart.forEach(item=>{
+    const div=document.createElement('div');
+    div.classList.add('cart-item');
+    div.innerHTML=`<img src="${item.imgSrc}" alt="${item.name}"><div>${item.name} - ${item.price}€</div>
+    <div class="cart-item-controls">
+      <button onclick="changeQuantity('${item.name}',-1)">-</button>
+      <span>${item.quantity}</span>
+      <button onclick="changeQuantity('${item.name}',1)">+</button>
+      <span class="cart-item-remove" onclick="removeFromCart('${item.name}')">×</span>
+    </div>`;
+    cartItems.appendChild(div);
+  });
+}
+
 function toggleCart(){cartOverlay.style.display=cartOverlay.style.display==='block'?'none':'block';}
 
-// Filtre
-function toggleDropdown(){document.getElementById('filterContent').style.display=document.getElementById('filterContent').style.display==='block'?'none':'block';}
+// FILTRES
+function toggleDropdown(){
+  document.getElementById('filterContent').style.display=document.getElementById('filterContent').style.display==='block'?'none':'block';
+}
+
 function applyFilter(){
   const selectedColors=Array.from(document.querySelectorAll('.filter-color:checked')).map(cb=>cb.value);
   const selectedTypes=Array.from(document.querySelectorAll('.filter-type:checked')).map(cb=>cb.value);
@@ -329,123 +233,14 @@ function applyFilter(){
     prod.style.display=(matchColor && matchType && matchFormat)?'block':'none';
   });
 }
+
 document.querySelectorAll('.filter-color,.filter-type,.filter-format').forEach(cb=>cb.addEventListener('change',applyFilter));
-function resetFilters(){document.querySelectorAll('.filter-color,.filter-type,.filter-format').forEach(cb=>cb.checked=false);applyFilter();}
+
+function resetFilters(){
+  document.querySelectorAll('.filter-color,.filter-type,.filter-format').forEach(cb=>cb.checked=false);
+  applyFilter();
+}
 </script>
-
-  <div class="products-grid">
-<!-- Carte colombe -->
-<div class="product" data-color="bleu" data-type="colombe" data-format="carte">
-  <img src="images/carte colombe bleu.png" alt="Carte colombe fond bleu">
-  <p>Carte colombe fond bleu<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Carte colombe fond bleu',3,'images/carte colombe bleu.png')">Ajouter au panier</button>
-</div>
-<div class="product" data-color="rose" data-type="colombe" data-format="carte">
-  <img src="images/carte colombe rose.png" alt="Carte colombe fond rose">
-  <p>Carte colombe fond rose<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Carte colombe fond rose',3,'images/carte colombe rose.png')">Ajouter au panier</button>
-</div>
-<div class="product" data-color="verte" data-type="colombe" data-format="carte">
-  <img src="images/carte colombe verte.png" alt="Carte colombe fond vert">
-  <p>Carte colombe fond vert<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Carte colombe fond vert',3,'images/carte colombe verte.png')">Ajouter au panier</button>
-</div>
-
-<!-- Carte adoration -->
-<div class="product" data-color="bleu" data-type="adoration" data-format="carte">
-  <img src="images/carte adoration bleu.png" alt="Carte adoration fond bleu">
-  <p>Carte adoration fond bleu<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Carte adoration fond bleu',3,'images/carte adoration bleu.png')">Ajouter au panier</button>
-</div>
-<div class="product" data-color="rose" data-type="adoration" data-format="carte">
-  <img src="images/carte adoration rose.png" alt="Carte adoration fond rose">
-  <p>Carte adoration fond rose<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Carte adoration fond rose',3,'images/carte adoration rose.png')">Ajouter au panier</button>
-</div>
-<div class="product" data-color="verte" data-type="adoration" data-format="carte">
-  <img src="images/carte adoration verte.png" alt="Carte adoration fond vert">
-  <p>Carte adoration fond vert<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Carte adoration fond verte',3,'images/carte adoration verte.png')">Ajouter au panier</button>
-</div>
-
-<!-- Carte bougies -->
-<div class="product" data-color="bleu" data-type="bougies" data-format="carte">
-  <img src="images/carte bougies bleu.png" alt="Carte bougies fond bleu">
-  <p>Carte bougies fond bleu<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Carte bougies fond bleu',3,'images/carte bougies bleu.png')">Ajouter au panier</button>
-</div>
-<div class="product" data-color="rose" data-type="bougies" data-format="carte">
-  <img src="images/carte bougies rose.png" alt="Carte bougies fond rose">
-  <p>Carte bougies fond rose<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Carte bougies fond rose',3,'images/carte bougies rose.png')">Ajouter au panier</button>
-</div>
-<div class="product" data-color="verte" data-type="bougies" data-format="carte">
-  <img src="images/carte bougies verte.png" alt="Carte bougies fond vert">
-  <p>Carte bougies fond vert<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Carte bougies fond vert',3,'images/carte bougies verte.png')">Ajouter au panier</button>
-</div>
-
-<!-- Stickers colombe -->
-<div class="product" data-color="bleu" data-type="colombe" data-format="stickers">
-  <img src="images/stickers colombe bleu.png" alt="Stickers colombe fond bleu">
-  <p>Stickers colombe fond bleu<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Stickers colombe fond bleu',3,'images/stickers colombe bleu.png')">Ajouter au panier</button>
-</div>
-<div class="product" data-color="rose" data-type="colombe" data-format="stickers">
-  <img src="images/stickers colombe rose.png" alt="Stickers colombe fond rose">
-  <p>Stickers colombe fond rose<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Stickers colombe fond rose',3,'images/stickers colombe rose.png')">Ajouter au panier</button>
-</div>
-<div class="product" data-color="verte" data-type="colombe" data-format="stickers">
-  <img src="images/stickers colombe vert.png" alt="Stickers colombe fond vert">
-  <p>Stickers colombe fond vert<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Stickers colombe fond vert',3,'images/stickers colombe vert.png')">Ajouter au panier</button>
-</div>
-
-<!-- Stickers adoration -->
-<div class="product" data-color="bleu" data-type="adoration" data-format="stickers">
-  <img src="images/stickers adoration bleu.png" alt="Stickers adoration fond bleu">
-  <p>Stickers adoration fond bleu<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Stickers adoration fond bleu',3,'images/stickers adoration bleu.png')">Ajouter au panier</button>
-</div>
-<div class="product" data-color="rose" data-type="adoration" data-format="stickers">
-  <img src="images/stickers adoration rose.png" alt="Stickers adoration fond rose">
-  <p>Stickers adoration fond rose<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Stickers adoration fond rose',3,'images/stickers adoration rose.png')">Ajouter au panier</button>
-</div>
-<div class="product" data-color="verte" data-type="adoration" data-format="stickers">
-  <img src="images/stickers adoration vert.png" alt="Stickers adoration fond vert">
-  <p>Stickers adoration fond vert<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Stickers adoration fond vert',3,'images/stickers adoration vert.png')">Ajouter au panier</button>
-</div>
-
-<!-- Stickers bougies -->
-<div class="product" data-color="bleu" data-type="bougies" data-format="stickers">
-  <img src="images/stickers bougies bleu.png" alt="Stickers bougies fond bleu">
-  <p>Stickers bougies fond bleu<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Stickers bougies fond bleu',3,'images/stickers bougies bleu.png')">Ajouter au panier</button>
-</div>
-<div class="product" data-color="rose" data-type="bougies" data-format="stickers">
-  <img src="images/stickers bougies rose.png" alt="Stickers bougies fond rose">
-  <p>Stickers bougies fond rose<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Stickers bougies fond rose',3,'images/stickers bougies rose.png')">Ajouter au panier</button>
-</div>
-<div class="product" data-color="verte" data-type="bougies" data-format="stickers">
-  <img src="images/stickers bougies vert.png" alt="Stickers bougies fond vert">
-  <p>Stickers bougies fond vert<br><span class="product-price">3€</span></p>
-  <button onclick="addToCart('Stickers bougies fond vert',3,'images/stickers bougies vert.png')">Ajouter au panier</button>
-</div>
-</div>
-
-<!-- BANNIÈRE INSTAGRAM -->
-<footer>
-  <a href="https://www.instagram.com/latelier_delia" target="_blank">
-    <img src="images/logo instagram.png" alt="Instagram">
-    <span>@latelier_delia</span>
-  </a>
-  <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
-</footer>
 
 </body>
 </html>
-
