@@ -18,7 +18,7 @@
 /* ------------------ FILTRE DÉROULANT FLOTTANT ------------------ */
 .filter-dropdown {
   position: fixed;     /* bouton flottant */
-  top: 120px;          /* ajustable : plus petit = plus haut */
+  top: 120px;          /* ajuste pour remonter ou descendre */
   left: 30px;          /* distance depuis la gauche */
   z-index: 1000;
   text-align: left;
@@ -44,8 +44,8 @@
 
 .filter-dropdown-content {
   display: none;
-  position: absolute;  /* reste attaché au bouton */
-  top: 50px;           /* distance depuis le bouton */
+  position: absolute;  /* attaché au bouton */
+  top: 50px;           /* distance sous le bouton */
   left: 0;
   background: #fff;
   border: 1px solid #ccc;
@@ -69,14 +69,12 @@
   font-family: 'Playfair Display', serif;
 }
 
-/* Bouton de réinitialisation dans le menu */
 .filter-dropdown-content .cart-button {
   margin-top: 10px;
   width: 100%;
-};
 }
 
-/* Panier en haut à droite */
+/* ------------------ PANIER FLOTTANT ------------------ */
 .cart-indicator {
   position: fixed;
   top: 20px;
@@ -89,6 +87,7 @@
   cursor: pointer;
   z-index: 100;
 }
+
 #cartOverlay {
   display: none;
   position: fixed;
@@ -103,17 +102,20 @@
   box-shadow: 0 15px 35px rgba(0,0,0,0.12);
   z-index: 100;
 }
+
 .cart-item {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
   font-size: 14px;
 }
+
 .cart-item img {
   width: 45px;
   margin-right: 10px;
   border-radius: 5px;
 }
+
 .cart-item-controls button {
   margin: 0 3px;
   padding: 2px 6px;
@@ -122,6 +124,7 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
 .cart-button {
   width: 100%;
   padding: 12px;
@@ -135,7 +138,10 @@
   cursor: pointer;
   transition: background 0.3s ease;
 }
-.cart-button:hover { background: #b58345; }
+
+.cart-button:hover { 
+  background: #b58345; 
+}
 </style>
 </head>
 <body>
@@ -161,6 +167,7 @@
 <h1>Boutique</h1>
 <h2>Découvrez notre collection</h2>
 
+<!-- Bouton filtre flottant -->
 <div class="filter-dropdown">
   <button onclick="toggleDropdown()">Filtrer</button>
   <div class="filter-dropdown-content" id="filterContent">
@@ -180,8 +187,8 @@
 
     <button onclick="resetFilters()" class="cart-button">Réinitialiser</button>
   </div>
-  
-<div class="products-grid">
+
+  <div class="products-grid">
 <!-- PRODUITS -->
 
 <!-- Carte colombe -->
@@ -284,7 +291,9 @@
   <img src="images/stickers bougies vert.png" alt="Stickers bougies fond vert">
   <p>Stickers bougies fond vert<br><span class="product-price">3€</span></p>
   <button onclick="addToCart('Stickers bougies fond vert',3,'images/stickers bougies vert.png')">Ajouter au panier</button>
+
 </div>
+
 </main>
 
 <footer>
@@ -294,6 +303,14 @@
   </a>
   <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
 </footer>
+
+<script>
+/* Toggle filtre */
+function toggleDropdown() {
+  const dropdown = document.getElementById('filterContent');
+  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+}
+</script>
 
 </body>
 </html>
