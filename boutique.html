@@ -15,19 +15,36 @@
 <script src="script.js" defer></script>
 
 <style>
-/* ------------------ FILTRE DÉROULANT FLOTTANT ------------------ */
+/* ------------------ FILTRE DÉROULANT FIXE ------------------ */
 .filter-dropdown {
-  position: fixed;     
-  top: 120px;          
-  left: 20px;          
+  position: fixed;   /* reste fixe même quand on scroll */
+  top: 20px;         /* à 20px du haut */
+  left: 20px;        /* à 20px du bord gauche */
   z-index: 1000;
-  text-align: left;
+}
+
+.filter-dropdown button {
+  background-color: #c89b5e;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.filter-dropdown button:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
 }
 
 .filter-dropdown-content {
   display: none;
-  position: absolute;
-  top: 50px;   
+  position: absolute;  /* attaché au bouton */
+  top: 50px;
   left: 0;
   background: #fff;
   border: 1px solid #ccc;
