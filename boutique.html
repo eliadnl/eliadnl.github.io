@@ -19,8 +19,9 @@
 .filter-dropdown {
   position: fixed;     
   top: 120px;          
-  left: 10px;          
+  left: 20px;          
   z-index: 1000;
+  text-align: left;
 }
 
 .filter-dropdown button {
@@ -84,7 +85,7 @@
   border-radius: 30px;
   font-size: 13px;
   cursor: pointer;
-  z-index: 1001; /* au-dessus de la grille */
+  z-index: 100;
 }
 
 #cartOverlay {
@@ -99,7 +100,7 @@
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-  z-index: 1001;
+  z-index: 100;
 }
 
 .cart-item {
@@ -146,9 +147,19 @@
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 5px;          /* écart de 5px entre produits */
+  gap: 15px;            /* espace uniforme entre produits */
   padding: 20px;
-  margin-left: 0;     /* pas d'espace inutile */
+  margin-left: 300px;   /* espace pour le filtre flottant */
+  justify-items: center; /* centre chaque produit dans sa cellule */
+}
+
+.product {
+  text-align: center;
+}
+
+.product img {
+  max-width: 100%;
+  border-radius: 8px;
 }
 </style>
 </head>
@@ -175,7 +186,7 @@
 <h1>Boutique</h1>
 <h2>Découvrez notre collection</h2>
 
-<!-- Bouton filtre flottant -->
+<!-- Bouton filtre flottant sticky -->
 <div class="filter-dropdown">
   <button onclick="toggleDropdown()">Filtrer</button>
   <div class="filter-dropdown-content" id="filterContent">
@@ -199,7 +210,6 @@
 
 <!-- Grille de produits -->
 <div class="products-grid">
-  <!-- PRODUITS -->
   <!-- Carte colombe -->
   <div class="product" data-color="bleu" data-type="colombe" data-format="carte">
     <img src="images/carte colombe bleu.png" alt="Carte colombe fond bleu">
@@ -301,8 +311,7 @@
     <p>Stickers bougies fond vert<br><span class="product-price">3€</span></p>
     <button onclick="addToCart('Stickers bougies fond vert',3,'images/stickers bougies vert.png')">Ajouter au panier</button>
   </div>
-
-</div> <!-- fin products-grid -->
+</div>
 
 </main>
 
