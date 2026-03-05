@@ -60,25 +60,80 @@ nav a:hover { opacity:0.6; }
 <main>
 <h1>Boutique</h1>
 
-<!-- Filtre unique déroulant -->
-<div class="filter-dropdown">
-  <button onclick="toggleDropdown()">Filtrer</button>
-  <div class="filter-dropdown-content" id="filterContent">
-    <h4>Couleur</h4>
-    <label><input type="checkbox" class="filter-color" value="bleu"> Bleu</label>
-    <label><input type="checkbox" class="filter-color" value="rose"> Rose</label>
+<!-- FILTRE DÉROULANT UNIQUE -->
+<div class="filter-dropdown" style="text-align:center; margin:30px 0;">
+  <button onclick="toggleDropdown()" style="
+    padding:8px 16px; border-radius:25px; border:1px solid #c89b5e;
+    background:white; cursor:pointer; font-weight:bold;
+  ">Filtrer</button>
+
+  <div class="filter-dropdown-content" id="filterContent" style="
+    display:none; text-align:left; margin-top:10px; padding:10px;
+    border:1px solid #ccc; border-radius:8px; background:white;
+  ">
+    <h4 style="margin:5px 0;">Couleur</h4>
+    <label><input type="checkbox" class="filter-color" value="bleu"> Bleu</label><br>
+    <label><input type="checkbox" class="filter-color" value="rose"> Rose</label><br>
     <label><input type="checkbox" class="filter-color" value="verte"> Verte</label>
-    <h4>Illustration</h4>
-    <label><input type="checkbox" class="filter-type" value="colombe"> Colombe</label>
-    <label><input type="checkbox" class="filter-type" value="adoration"> Adoration</label>
+
+    <h4 style="margin:10px 0 5px;">Illustration</h4>
+    <label><input type="checkbox" class="filter-type" value="colombe"> Colombe</label><br>
+    <label><input type="checkbox" class="filter-type" value="adoration"> Adoration</label><br>
     <label><input type="checkbox" class="filter-type" value="bougies"> Bougies</label>
-    <h4>Format</h4>
-    <label><input type="checkbox" class="filter-format" value="carte"> Carte</label>
+
+    <h4 style="margin:10px 0 5px;">Format</h4>
+    <label><input type="checkbox" class="filter-format" value="carte"> Carte</label><br>
     <label><input type="checkbox" class="filter-format" value="stickers"> Stickers</label>
-    <button onclick="resetFilters()" style="margin-top:10px; padding:5px 10px; border-radius:20px; border:1px solid #c89b5e; background:white; cursor:pointer;">Réinitialiser</button>
+
+    <br>
+    <button onclick="resetFilters()" style="
+      margin-top:10px; padding:5px 10px; border-radius:20px;
+      border:1px solid #c89b5e; background:white; cursor:pointer; font-weight:bold;
+    ">Réinitialiser</button>
   </div>
 </div>
 
+<script>
+// Toggle l'affichage du menu déroulant
+function toggleDropdown() {
+  const content = document.getElementById('filterContent');
+  content.style.display = content.style.display === 'block' ? 'none' : 'block';
+}
+
+// Récupérer les produits
+const products = document.querySelectorAll('.products-grid .product');
+
+// Appliquer le filtre
+function applyFilter() {
+  const selectedColors = Array.from(document.querySelectorAll('.filter-color:checked')).map(cb => cb.value.toLowerCase());
+  const selectedTypes = Array.from(document.querySelectorAll('.filter-type:checked')).map(cb => cb.value.toLowerCase());
+  const selectedFormats = Array.from(document.querySelectorAll('.filter-format:checked')).map(cb => cb.value.toLowerCase());
+
+  products.forEach(prod => {
+    const color = prod.getAttribute('data-color')?.toLowerCase();
+    const type = prod.getAttribute('data-type')?.toLowerCase();
+    const format = prod.getAttribute('data-format')?.toLowerCase();
+
+    const colorMatch = selectedColors.length === 0 || selectedColors.includes(color);
+    const typeMatch = selectedTypes.length === 0 || selectedTypes.includes(type);
+    const formatMatch = selectedFormats.length === 0 || selectedFormats.includes(format);
+
+    prod.style.display = (colorMatch && typeMatch && formatMatch) ? "block" : "none";
+  });
+}
+
+// Réinitialiser tous les filtres
+function resetFilters() {
+  document.querySelectorAll('.filter-color, .filter-type, .filter-format').forEach(cb => cb.checked = false);
+  applyFilter();
+}
+
+// Ajouter des écouteurs aux checkboxes
+document.querySelectorAll('.filter-color, .filter-type, .filter-format').forEach(cb => {
+  cb.addEventListener('change', applyFilter);
+});
+</script>
+  
 <div class="products-grid">
 
 <!-- Tous les produits -->
