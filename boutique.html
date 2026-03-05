@@ -14,23 +14,24 @@
 <!-- SCRIPT JS -->
 <script src="script.js" defer></script>
 
-<style>
-/* Filtre complètement fixe */
+/* Bouton filtre et menu déroulant défilent avec la page */
+.filter-dropdown {
+  position: relative; /* ou supprimer cette ligne si tu veux */
+}
+
 .filter-dropdown-content {
   display: none;
-  position: fixed;
-  top: 190px;
-  left: 30px;
+  position: relative; /* au lieu de fixed */
+  top: auto;
+  left: auto;
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 20px;
+  padding: 15px;
   min-width: 250px;
-  z-index: 1001;
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  margin-top: 10px; /* espace entre bouton et menu */
 }
-
-<style>
 /* Filtre complètement fixe */
 .filter-dropdown-content {
   display: none;
