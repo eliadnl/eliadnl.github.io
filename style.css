@@ -1,73 +1,118 @@
-/* --- Police élégante --- */
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+/* POLICES */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap');
 
 body {
-  font-family: 'Great Vibes', cursive;
-  background-color: #fff8f0;
   margin: 0;
-  padding: 0;
+  background-color: #f6f1ea;
+  font-family: 'Montserrat', sans-serif;
+  color: #2d2d2d;
 }
+
+/* HEADER */
 
 header {
-  background-color: #446D92;
-  color: white;
-  padding: 15px;
-  text-align: center;
+  background-color: #ffffff;
+  padding: 20px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
 }
 
-header nav a {
-  color: white;
-  margin: 0 10px;
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+}
+
+nav {
+  display: flex;
+  gap: 40px;
+}
+
+nav a {
   text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1em;
+  color: #2d2d2d;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-header nav a:hover {
-  text-decoration: underline;
+nav a:hover {
+  opacity: 0.6;
 }
 
-main {
-  padding: 20px;
+/* TITRES */
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
   text-align: center;
+  margin-top: 50px;
 }
 
-footer {
-  background-color: #446D92;
-  color: white;
-  padding: 10px;
+h2 {
+  font-family: 'Playfair Display', serif;
   text-align: center;
+  color: #c89b5e;
+}
+
+/* PRODUITS */
+
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  justify-content: center;
+  padding-bottom: 80px;
 }
 
 .product {
-  display: inline-block;
-  margin: 15px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff5e6;
+  width: 240px;
   text-align: center;
-  width: 220px;
+  transition: transform 0.3s ease;
 }
 
 .product img {
-  width: 200px;
-  height: auto;
-  border-radius: 5px;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
+.product:hover {
+  transform: translateY(-6px);
+}
+
+/* PRIX */
+
+.product-price {
+  display: block;
+  margin-top: 5px;
+  color: #c89b5e;
+  font-weight: bold;
+}
+
+/* BOUTONS */
+
 button {
-  background-color: #446D92;
+  margin-top: 12px;
+  background-color: #c89b5e;
   color: white;
   border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
+  padding: 10px 25px;
+  border-radius: 30px;
   cursor: pointer;
-  font-family: 'Great Vibes', cursive;
-  font-size: 1em;
-  margin-top: 5px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 button:hover {
-  background-color: #36587a;
+  opacity: 0.8;
+}
+
+/* FOOTER */
+
+footer {
+  background-color: #f6f1ea;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #eee;
 }
