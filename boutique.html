@@ -14,64 +14,15 @@
 <!-- SCRIPT JS -->
 <script src="script.js" defer></script>
 
-  <style>
-/* Bouton filtre et menu déroulant défilent avec la page */
-.filter-dropdown {
-  position: relative; /* ou supprimer cette ligne si tu veux */
-}
-
-.filter-dropdown-content {
-  display: none;
-  position: relative; /* au lieu de fixed */
-  top: 140;
-  left: auto;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 15px;
-  min-width: 250px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  margin-top: 10px; /* espace entre bouton et menu */
-}
-/* Filtre complètement fixe */
-.filter-dropdown-content {
-  display: none;
-  position: fixed;
-  top: 140px;
-  left: 30px;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 20px;
-  min-width: 250px;
-  z-index: 1001;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-}
 <style>
-    
-/* croix fermer filtre */
-.close-filter{
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+/* ------------------ FILTRE ------------------ */
+/* Conteneur filtre */
+.filter-dropdown {
+  position: relative;
+  margin-bottom: 20px; /* espace sous le bouton pour ne pas chevaucher les produits */
 }
 
-/* effet survol */
-.close-filter:hover{
-  transform: scale(1.2);
-  opacity: 0.7;
-  color:#c89b5e;
-}
-
-.close-filter:hover {
-  color: #c89b5e;
-}
-
-/* Bouton */
+/* Bouton filtre */
 .filter-dropdown button {
   background-color: #c89b5e;
   color: white;
@@ -82,23 +33,38 @@
   font-weight: bold;
   font-size: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin-top: 90px; /* <-- ajoute cette ligne pour le descendre */
 }
 
-/* Contenu du filtre complètement fixe */
+/* Menu déroulant qui défile normalement */
 .filter-dropdown-content {
   display: none;
-  position: fixed;    /* <-- clé pour ne pas bouger en scroll */
-  top: 140px;         /* position juste en dessous du bouton */
-  left: 30px;         /* même alignement que le bouton */
+  position: relative; /* important pour que le menu suive le flux de la page */
+  margin-top: 10px;  /* espace entre bouton et menu */
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 15px;
   min-width: 250px;
-  z-index: 1001;
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  z-index: 1001;
 }
+
+/* Croix fermer filtre */
+.close-filter{
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.close-filter:hover{
+  transform: scale(1.2);
+  opacity: 0.7;
+  color:#c89b5e;
+}
+
 /* ------------------ PANIER FLOTTANT ------------------ */
 .cart-indicator {
   position: fixed;
@@ -215,6 +181,7 @@
 <h1>Boutique</h1>
 <h2>Découvrez notre collection</h2>
 
+<!-- Filtre -->
 <div class="filter-dropdown">
   <button onclick="toggleDropdown()">Filtrer</button>
 
@@ -237,6 +204,8 @@
 
     <button onclick="resetFilters()" class="cart-button">Réinitialiser</button>
   </div>
+</div>
+
 </div>
 
 <!-- Grille de produits -->
