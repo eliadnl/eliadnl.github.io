@@ -144,7 +144,7 @@ h2 {
   font-weight: bold;
 }
 
-/* BOUTONS */
+/* BOUTONS GÉNÉRAUX */
 
 button {
   margin-top: 12px;
@@ -194,6 +194,15 @@ button:hover {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+/* BOUTONS + ET - DU PANIER (CORRECTION) */
+
+.cart-item-controls button {
+  margin-top: 0;
+  padding: 3px 8px;
+  font-size: 12px;
+  border-radius: 6px;
 }
 
 .cart-item-remove {
