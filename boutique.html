@@ -15,11 +15,11 @@
 <script src="script.js" defer></script>
 
 <style>
-/* ------------------ FILTRE DÉROULANT FLOTTANT ------------------ */
+/* ------------------ FILTRE DÉROULANT FLOTTANT STICKY ------------------ */
 .filter-dropdown {
-  position: fixed;     /* bouton flottant */
-  top: 120px;          /* ajuste pour remonter ou descendre */
-  left: 30px;          /* distance depuis la gauche */
+  position: sticky;     /* reste visible lors du scroll */
+  top: 20px;            /* distance depuis le haut de la page */
+  left: 30px;
   z-index: 1000;
   text-align: left;
 }
@@ -44,8 +44,8 @@
 
 .filter-dropdown-content {
   display: none;
-  position: absolute;  /* attaché au bouton */
-  top: 50px;           /* distance sous le bouton */
+  position: absolute;
+  top: 50px;   /* distance sous le bouton */
   left: 0;
   background: #fff;
   border: 1px solid #ccc;
@@ -142,6 +142,15 @@
 .cart-button:hover { 
   background: #b58345; 
 }
+
+/* ------------------ GRILLE DE PRODUITS ------------------ */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  margin-left: 320px; /* espace pour le filtre flottant */
+  padding: 20px;
+}
 </style>
 </head>
 <body>
@@ -167,7 +176,7 @@
 <h1>Boutique</h1>
 <h2>Découvrez notre collection</h2>
 
-<!-- Bouton filtre flottant -->
+<!-- Bouton filtre flottant sticky -->
 <div class="filter-dropdown">
   <button onclick="toggleDropdown()">Filtrer</button>
   <div class="filter-dropdown-content" id="filterContent">
