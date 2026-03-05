@@ -133,21 +133,36 @@ h2 {
   flex-wrap: wrap;
   gap: 60px;
   justify-content: center;
+  padding-bottom: 80px;
 }
 
 .product {
-  width: 220px;
+  width: 240px;
   text-align: center;
-  cursor: pointer;
   transition: transform 0.3s ease;
 }
 
 .product img {
   width: 100%;
-  border-radius: 6px;
-  transition: opacity 0.3s ease;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
+.product:hover {
+  transform: translateY(-6px);
+}
+
+.product button {
+  margin-top: 12px;
+  background-color: #c89b5e;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+/* NOM PRODUIT */
 .product p {
   margin-top: 15px;
   font-family: 'Playfair Display', serif;
@@ -155,12 +170,12 @@ h2 {
   letter-spacing: 1px;
 }
 
-.product:hover {
-  transform: translateY(-6px);
-}
-
-.product:hover img {
-  opacity: 0.85;
+/* PRIX DORÉ SUR LIGNE SÉPARÉE */
+.product-price {
+  display: block;
+  margin-top: 5px;
+  color: #c89b5e;
+  font-weight: bold;
 }
 
 /* PANIER OVERLAY */
