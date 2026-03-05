@@ -8,10 +8,10 @@
   <!-- POLICES -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
-  <!-- TON STYLE CSS -->
+  <!-- STYLE CSS -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- TON SCRIPT JS -->
+  <!-- SCRIPT JS -->
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -30,26 +30,32 @@
 <h1>Boutique</h1>
 <h2>Découvrez notre collection</h2>
 
+<!-- FILTRE DÉROULANT -->
 <div class="filter-dropdown">
   <button onclick="toggleDropdown()">Filtrer</button>
   <div class="filter-dropdown-content" id="filterContent">
-    <h4>Couleur</h4>
+    <h4 style="font-size:18px;">Couleur</h4>
     <label><input type="checkbox" class="filter-color" value="bleu"> Bleu</label>
     <label><input type="checkbox" class="filter-color" value="rose"> Rose</label>
     <label><input type="checkbox" class="filter-color" value="verte"> Verte</label>
-    <h4>Illustration</h4>
+
+    <h4 style="font-size:18px;">Illustration</h4>
     <label><input type="checkbox" class="filter-type" value="colombe"> Colombe</label>
     <label><input type="checkbox" class="filter-type" value="adoration"> Adoration</label>
     <label><input type="checkbox" class="filter-type" value="bougies"> Bougies</label>
-    <h4>Format</h4>
+
+    <h4 style="font-size:18px;">Format</h4>
     <label><input type="checkbox" class="filter-format" value="carte"> Carte</label>
     <label><input type="checkbox" class="filter-format" value="stickers"> Stickers</label>
+
     <button onclick="resetFilters()" class="cart-button">Réinitialiser</button>
   </div>
 </div>
 
+<!-- PRODUITS -->
 <div class="products-grid">
-<!-- PRODUITS COMPLÈTES -->
+
+<!-- Carte colombe -->
 <div class="product" data-color="bleu" data-type="colombe" data-format="carte">
   <img src="images/carte colombe bleu.png" alt="Carte colombe fond bleu">
   <p>Carte colombe fond bleu<br><span class="product-price">3€</span></p>
@@ -66,6 +72,7 @@
   <button onclick="addToCart('Carte colombe fond vert',3,'images/carte colombe verte.png')">Ajouter au panier</button>
 </div>
 
+<!-- Carte adoration -->
 <div class="product" data-color="bleu" data-type="adoration" data-format="carte">
   <img src="images/carte adoration bleu.png" alt="Carte adoration fond bleu">
   <p>Carte adoration fond bleu<br><span class="product-price">3€</span></p>
@@ -82,6 +89,7 @@
   <button onclick="addToCart('Carte adoration fond verte',3,'images/carte adoration verte.png')">Ajouter au panier</button>
 </div>
 
+<!-- Carte bougies -->
 <div class="product" data-color="bleu" data-type="bougies" data-format="carte">
   <img src="images/carte bougies bleu.png" alt="Carte bougies fond bleu">
   <p>Carte bougies fond bleu<br><span class="product-price">3€</span></p>
@@ -148,14 +156,16 @@
   <p>Stickers bougies fond vert<br><span class="product-price">3€</span></p>
   <button onclick="addToCart('Stickers bougies fond vert',3,'images/stickers bougies vert.png')">Ajouter au panier</button>
 </div>
+
 </div>
 
 </main>
 
+<!-- PANIER -->
 <div id="cartOverlay">
   <h3>Panier</h3>
   <div id="cartItems"></div>
-  <button id="payButton" class="cart-button" onclick="location.href='paiement.html'">Payer</button>
+  <button id="payButton" class="cart-button">Finaliser la commande</button>
 </div>
 
 <footer>
@@ -165,101 +175,6 @@
   </a>
   <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
 </footer>
-
-<script>
-// PANIER
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-const cartCount = document.getElementById('cartCount');
-const cartOverlay = document.getElementById('cartOverlay');
-const cartItems = document.getElementById('cartItems');
-
-function updateCartCount(){
-  cartCount.textContent = `Panier : ${cart.reduce((sum,i)=>sum+i.quantity,0)}`;
-}
-
-function saveCart(){
-  localStorage.setItem('cart',JSON.stringify(cart));
-  updateCartCount();
-}
-
-function renderCart(){
-  cartItems.innerHTML = '';
-  cart.forEach(item=>{
-    const div = document.createElement('div');
-    div.classList.add('cart-item');
-    div.innerHTML = `
-      <img src="${item.imgSrc}" alt="${item.name}">
-      <div>${item.name} - ${item.price}€</div>
-      <div class="cart-item-controls">
-        <button onclick="changeQuantity('${item.name}',-1)">-</button>
-        <span>${item.quantity}</span>
-        <button onclick="changeQuantity('${item.name}',1)">+</button>
-        <span class="cart-item-remove" onclick="removeFromCart('${item.name}')">×</span>
-      </div>
-    `;
-    cartItems.appendChild(div);
-  });
-}
-
-function addToCart(name, price, imgSrc){
-  const existing = cart.find(i=>i.name===name);
-  if(existing) existing.quantity++;
-  else cart.push({name,price,imgSrc,quantity:1});
-  saveCart();
-  renderCart();
-}
-
-function removeFromCart(name){
-  cart = cart.filter(i=>i.name!==name);
-  saveCart();
-  renderCart();
-}
-
-function changeQuantity(name, delta){
-  const item = cart.find(i=>i.name===name);
-  if(!item) return;
-  item.quantity += delta;
-  if(item.quantity < 1) removeFromCart(name);
-  else saveCart();
-  renderCart();
-}
-
-function toggleCart(){
-  cartOverlay.style.display = cartOverlay.style.display==='block'?'none':'block';
-}
-
-// FILTRE
-function toggleDropdown(){
-  const content = document.getElementById('filterContent');
-  content.style.display = content.style.display==='block'?'none':'block';
-}
-
-function applyFilter(){
-  const selectedColors = Array.from(document.querySelectorAll('.filter-color:checked')).map(cb=>cb.value);
-  const selectedTypes = Array.from(document.querySelectorAll('.filter-type:checked')).map(cb=>cb.value);
-  const selectedFormats = Array.from(document.querySelectorAll('.filter-format:checked')).map(cb=>cb.value);
-  document.querySelectorAll('.products-grid .product').forEach(prod=>{
-    const color=prod.dataset.color, type=prod.dataset.type, format=prod.dataset.format;
-    const matchColor = selectedColors.length===0 || selectedColors.includes(color);
-    const matchType = selectedTypes.length===0 || selectedTypes.includes(type);
-    const matchFormat = selectedFormats.length===0 || selectedFormats.includes(format);
-    prod.style.display = (matchColor && matchType && matchFormat)?'block':'none';
-  });
-}
-
-document.querySelectorAll('.filter-color,.filter-type,.filter-format').forEach(cb=>{
-  cb.addEventListener('change',applyFilter);
-});
-
-function resetFilters(){
-  document.querySelectorAll('.filter-color,.filter-type,.filter-format').forEach(cb=>cb.checked=false);
-  applyFilter();
-}
-
-// Initial render
-updateCartCount();
-renderCart();
-</script>
 
 </body>
 </html>
