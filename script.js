@@ -54,16 +54,19 @@ function renderCart() {
   cart.forEach(item => {
     const div = document.createElement('div');
     div.classList.add('cart-item');
+    div.style.display = 'flex';
+    div.style.alignItems = 'center';
+    div.style.marginBottom = '10px';
     div.innerHTML = `
-      <img src="${item.imgSrc}" alt="${item.name}">
-      <div style="flex:1;margin-right:10px;">
+      <img src="${item.imgSrc}" alt="${item.name}" style="width:45px; border-radius:5px; margin-right:10px;">
+      <div style="flex:1; font-size:14px;">
         ${item.name} - ${item.price}€
       </div>
-      <div class="cart-item-controls">
+      <div style="display:flex; align-items:center; gap:5px;">
         <button onclick="changeQuantity('${item.name}', -1)">-</button>
         <span>${item.quantity}</span>
         <button onclick="changeQuantity('${item.name}', 1)">+</button>
-        <span style="cursor:pointer; margin-left:5px;" onclick="removeFromCart('${item.name}')">×</span>
+        <span style="cursor:pointer; font-weight:bold;" onclick="removeFromCart('${item.name}')">×</span>
       </div>
     `;
     cartItems.appendChild(div);
@@ -121,4 +124,5 @@ updateCartCount();
 renderCart();
 
 // Bouton finaliser la commande
-document.getElementById('payButton').addEventListener('click', finalizeOrder);
+const payBtn = document.getElementById('payButton');
+if (payBtn) payBtn.addEventListener('click', finalizeOrder);
