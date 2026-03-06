@@ -229,10 +229,12 @@ footer a span {
 </main>
 
 <!-- PANIER -->
+<!-- Panier flottant -->
+<div class="cart-indicator" id="cartCount" onclick="toggleCart()">Panier : 0</div>
 <div id="cartOverlay">
   <h3>Panier</h3>
   <div id="cartItems"></div>
-  <button id="payButton" onclick="location.href='paiement.html'">Payer</button>
+  <button id="payButton" class="cart-button">Finaliser la commande</button>
 </div>
 
 <script>
