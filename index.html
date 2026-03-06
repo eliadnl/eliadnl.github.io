@@ -115,24 +115,11 @@ h2 {
   opacity: 0.85;
 }
 
-/* ------------------ PANIER FLOTTANT ------------------ */
-.cart-indicator {
-  position: fixed;
-  top: 20px;
-  right: 30px;
-  background-color: #c89b5e;
-  color: white;
-  padding: 8px 22px;
-  border-radius: 30px;
-  font-size: 13px;
-  cursor: pointer;
-  z-index: 100;
-}
-
+/* PANIER OVERLAY */
 #cartOverlay {
   display: none;
   position: fixed;
-  top: 60px;
+  top: 90px;
   right: 30px;
   width: 300px;
   max-height: 400px;
@@ -142,6 +129,13 @@ h2 {
   padding: 20px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.12);
   z-index: 100;
+}
+
+#cartOverlay h3 {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  font-weight: 400;
+  margin-top: 0;
 }
 
 .cart-item {
@@ -157,21 +151,8 @@ h2 {
   border-radius: 5px;
 }
 
-.cart-item-controls button {
-  margin: 0 2px;
-  padding: 1px 5px;
-  font-size: 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cart-button {
+/* BOUTON PAYER */
+#payButton {
   width: 100%;
   padding: 12px;
   margin-top: 15px;
@@ -185,9 +166,35 @@ h2 {
   transition: background 0.3s ease;
 }
 
-.cart-button:hover { 
-  background: #b58345; 
+#payButton:hover {
+  background: #b58345;
 }
+
+/* FOOTER */
+footer {
+  background-color: #f6f1ea;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+footer a {
+  text-decoration: none;
+  color: #2d2d2d;
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+}
+footer a img {
+  width: 70px;
+  height: 70px;
+}
+footer a span {
+  font-size: 20px;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
 
 <header>
   <div class="logo">L'Atelier d'Elia</div>
@@ -227,6 +234,7 @@ h2 {
 <div id="cartOverlay">
   <h3>Panier</h3>
   <div id="cartItems"></div>
+  <button id="payButton" onclick="location.href='paiement.html'">Payer</button>
   <button id="payButton" class="cart-button">Finaliser la commande</button>
 </div>
 
