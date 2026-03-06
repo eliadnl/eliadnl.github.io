@@ -14,18 +14,26 @@
 
 /* ALIGNEMENT TITRE + FILTRE */
 .title-filter{
+position:relative;
 display:flex;
-justify-content:space-between;
 align-items:center;
 margin-bottom:20px;
 }
 
-/* FILTRE */
-.filter-dropdown {
-position: relative;
+/* titre centré */
+.title-filter h2{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+margin:0;
 }
 
-/* Bouton filtre */
+/* bouton filtre à gauche */
+.filter-dropdown{
+position:relative;
+}
+
+/* FILTRE */
 .filter-dropdown button {
 background-color:#c89b5e;
 color:white;
@@ -190,8 +198,6 @@ border-radius:8px;
 
 <div class="title-filter">
 
-<h2>Découvrez notre collection</h2>
-
 <div class="filter-dropdown">
 
 <button onclick="toggleDropdown()">Filtrer</button>
@@ -218,6 +224,9 @@ border-radius:8px;
 
 </div>
 </div>
+
+<h2>Découvrez notre collection</h2>
+
 </div>
 
 <!-- PRODUITS -->
