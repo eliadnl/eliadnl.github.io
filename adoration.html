@@ -57,6 +57,7 @@ nav a:hover {
 }
 
 /* TITRES */
+
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 42px;
@@ -72,6 +73,7 @@ h2 {
 }
 
 /* PRODUITS */
+
 .products-grid {
   display: flex;
   flex-wrap: wrap;
@@ -106,7 +108,17 @@ h2 {
   cursor: pointer;
 }
 
+/* PRIX DORÉ */
+
+.product-price {
+  display: block;
+  color: #c89b5e;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
 /* PANIER */
+
 #cartOverlay {
   display: none;
   position: fixed;
@@ -161,7 +173,8 @@ h2 {
   margin-left: 5px;
 }
 
-/* BOUTON FINALISER LA COMMANDE */
+/* BOUTON COMMANDE */
+
 .cart-button {
   margin-top: 12px;
   background-color: #c89b5e;
@@ -192,38 +205,59 @@ h2 {
 </header>
 
 <main>
+
 <h1>Adoration</h1>
 <h2>Choisissez votre illustration</h2>
 
 <div class="products-grid">
-  <div class="product">
-    <img src="images/carte adoration bleu.png">
-    <p>Adoration fond bleu - 3€</p>
-    <button onclick="addToCart('Adoration fond bleu', 3, 'images/carte adoration bleu.png')">Ajouter au panier</button>
-  </div>
 
-  <div class="product">
-    <img src="images/carte adoration rose.png">
-    <p>Adoration fond rose - 3€</p>
-    <button onclick="addToCart('Adoration fond rose', 3, 'images/carte adoration rose.png')">Ajouter au panier</button>
-  </div>
-
-  <div class="product">
-    <img src="images/carte adoration verte.png">
-    <p>Adoration fond verte - 3€</p>
-    <button onclick="addToCart('Adoration fond verte', 3, 'images/carte adoration verte.png')">Ajouter au panier</button>
-  </div>
+<div class="product">
+<img src="images/carte adoration bleu.png">
+<p>
+Adoration fond bleu
+<span class="product-price">3€</span>
+</p>
+<button onclick="addToCart('Adoration fond bleu',3,'images/carte adoration bleu.png')">
+Ajouter au panier
+</button>
 </div>
+
+<div class="product">
+<img src="images/carte adoration rose.png">
+<p>
+Adoration fond rose
+<span class="product-price">3€</span>
+</p>
+<button onclick="addToCart('Adoration fond rose',3,'images/carte adoration rose.png')">
+Ajouter au panier
+</button>
+</div>
+
+<div class="product">
+<img src="images/carte adoration verte.png">
+<p>
+Adoration fond verte
+<span class="product-price">3€</span>
+</p>
+<button onclick="addToCart('Adoration fond verte',3,'images/carte adoration verte.png')">
+Ajouter au panier
+</button>
+</div>
+
+</div>
+
 </main>
 
 <div id="cartOverlay">
-  <h3>Panier</h3>
-  <div id="cartItems"></div>
-  <button class="cart-button" onclick="finaliserCommande()">Finaliser la commande</button>
+<h3>Panier</h3>
+<div id="cartItems"></div>
+<button class="cart-button" onclick="finaliserCommande()">Finaliser la commande</button>
 </div>
 
 <script>
+
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
 const cartCount = document.getElementById('cartCount');
 const cartOverlay = document.getElementById('cartOverlay');
 const cartItems = document.getElementById('cartItems');
@@ -232,143 +266,96 @@ updateCartCount();
 renderCart();
 
 function addToCart(name, price, imgSrc) {
-  const existingItem = cart.find(item => item.name === name);
-  if (existingItem) {
-    existingItem.quantity += 1;
-  } else {
-    cart.push({name, price, imgSrc, quantity: 1});
-  }
-  saveCart();
-  renderCart();
+
+const existingItem = cart.find(item => item.name === name);
+
+if (existingItem) {
+existingItem.quantity += 1;
+} else {
+cart.push({name, price, imgSrc, quantity: 1});
+}
+
+saveCart();
+renderCart();
+
 }
 
 function removeFromCart(name) {
-  cart = cart.filter(item => item.name !== name);
-  saveCart();
-  renderCart();
+cart = cart.filter(item => item.name !== name);
+saveCart();
+renderCart();
 }
 
 function changeQuantity(name, delta) {
-  const item = cart.find(i => i.name === name);
-  if (!item) return;
-  item.quantity += delta;
-  if (item.quantity < 1) {
-    removeFromCart(name);
-  } else {
-    saveCart();
-  }
-  renderCart();
+
+const item = cart.find(i => i.name === name);
+
+if (!item) return;
+
+item.quantity += delta;
+
+if (item.quantity < 1) {
+removeFromCart(name);
+} else {
+saveCart();
+}
+
+renderCart();
+
 }
 
 function saveCart() {
-  localStorage.setItem('cart', JSON.stringify(cart));
-  updateCartCount();
+localStorage.setItem('cart', JSON.stringify(cart));
+updateCartCount();
 }
 
 function updateCartCount() {
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  cartCount.textContent = `Panier : ${totalItems}`;
+const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+cartCount.textContent = `Panier : ${totalItems}`;
 }
 
 function renderCart() {
-  cartItems.innerHTML = '';
-  cart.forEach(item => {
-    const div = document.createElement('div');
-    div.classList.add('cart-item');
-    div.innerHTML = `
-      <img src="${item.imgSrc}" alt="${item.name}">
-      <div class="cart-item-details">
-        ${item.name} - ${item.price}€
-      </div>
-      <div class="cart-item-controls">
-        <button onclick="changeQuantity('${item.name}', -1)">-</button>
-        <span>${item.quantity}</span>
-        <button onclick="changeQuantity('${item.name}', 1)">+</button>
-        <span class="cart-item-remove" onclick="removeFromCart('${item.name}')">×</span>
-      </div>
-    `;
-    cartItems.appendChild(div);
-  });
+
+cartItems.innerHTML = '';
+
+cart.forEach(item => {
+
+const div = document.createElement('div');
+div.classList.add('cart-item');
+
+div.innerHTML = `
+<img src="${item.imgSrc}">
+<div class="cart-item-details">
+${item.name} - ${item.price}€
+</div>
+<div class="cart-item-controls">
+<button onclick="changeQuantity('${item.name}', -1)">-</button>
+<span>${item.quantity}</span>
+<button onclick="changeQuantity('${item.name}', 1)">+</button>
+<span class="cart-item-remove" onclick="removeFromCart('${item.name}')">×</span>
+</div>
+`;
+
+cartItems.appendChild(div);
+
+});
+
 }
 
 function toggleCart() {
-  cartOverlay.style.display = cartOverlay.style.display === 'block' ? 'none' : 'block';
+
+cartOverlay.style.display =
+cartOverlay.style.display === 'block'
+? 'none'
+: 'block';
+
 }
 
-// Nouvelle fonction pour rediriger vers la page commande.html
 function finaliserCommande() {
-  window.location.href = 'commande.html';
+window.location.href = 'commande.html';
 }
+
 </script>
-
-<!-- Fin du contenu principal -->
-
-<!-- BANNIÈRE COLLECTION -->
-<section style="background-color:#fff8f0; padding:40px 20px; border-top:1px solid #eee;">
-  <h2 style="text-align:center; color:#c89b5e; margin-bottom:30px;">Autres illustrations de la collection</h2>
-  <div style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap;">
-    
-    <div style="text-align:center; width:120px;">
-      <a href="bougies.html">
-        <img src="images/carte bougies bleu.png" alt="Bougies fond bleu" style="width:100%; border-radius:5px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-      </a>
-      <p style="margin:5px 0; font-size:14px;">Bougies fond bleu</p>
-      <p style="color:#c89b5e; font-weight:bold; margin:0;">3€</p>
-    </div>
-    
-    <div style="text-align:center; width:120px;">
-      <a href="bougies.html">
-        <img src="images/carte bougies rose.png" alt="Bougies fond rose" style="width:100%; border-radius:5px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-      </a>
-      <p style="margin:5px 0; font-size:14px;">Bougies fond rose</p>
-      <p style="color:#c89b5e; font-weight:bold; margin:0;">3€</p>
-    </div>
-    
-    <div style="text-align:center; width:120px;">
-      <a href="bougies.html">
-        <img src="images/carte bougies verte.png" alt="Bougies fond vert" style="width:100%; border-radius:5px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-      </a>
-      <p style="margin:5px 0; font-size:14px;">Bougies fond vert</p>
-      <p style="color:#c89b5e; font-weight:bold; margin:0;">3€</p>
-    </div>
-
-    <div style="text-align:center; width:120px;">
-      <a href="colombe.html">
-        <img src="images/carte colombe bleu.png" alt="Colombe fond bleu" style="width:100%; border-radius:5px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-      </a>
-      <p style="margin:5px 0; font-size:14px;">Colombe fond bleu</p>
-      <p style="color:#c89b5e; font-weight:bold; margin:0;">3€</p>
-    </div>
-    
-    <div style="text-align:center; width:120px;">
-      <a href="colombe.html">
-        <img src="images/carte colombe rose.png" alt="Colombe fond rose" style="width:100%; border-radius:5px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-      </a>
-      <p style="margin:5px 0; font-size:14px;">Colombe fond rose</p>
-      <p style="color:#c89b5e; font-weight:bold; margin:0;">3€</p>
-    </div>
-
-   <div style="text-align:center; width:120px;">
-      <a href="colombe.html">
-        <img src="images/carte colombe verte.png" alt="Colombe fond vert" style="width:100%; border-radius:5px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-      </a>
-      <p style="margin:5px 0; font-size:14px;">Colombe fond vert</p>
-      <p style="color:#c89b5e; font-weight:bold; margin:0;">3€</p>
-   </div> 
-
-  </div>
-</section>
-
-<!-- BANNIÈRE INSTAGRAM -->
-<footer style="background-color:#f6f1ea; padding:20px; text-align:center; border-top:1px solid #eee;">
-  <a href="https://www.instagram.com/latelier_delia" target="_blank" style="text-decoration:none; color:#2d2d2d; display:inline-flex; align-items:center; gap:15px;">
-    <img src="images/logo instagram.png" alt="Instagram" style="width:70px; height:70px;">
-    <span style="font-size:20px; font-weight:bold;">@latelier_delia</span>
-  </a>
-  
-<footer>
-  <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
-</footer>
 
 </body>
 </html>
