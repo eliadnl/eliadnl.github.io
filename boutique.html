@@ -17,16 +17,11 @@
 <style>
 /* ------------------ FILTRE ------------------ */
 /* Conteneur filtre */
-/* Filtre : aligné à gauche et dans le flux */
 .filter-dropdown {
   position: relative;
-  margin: 20px 0 40px 20px; /* espace sous le bouton */
+  margin-bottom: 20px; /* espace sous le bouton pour ne pas chevaucher les produits */
 }
-/* Ajuste l'espace sous le h2 pour que le bouton soit juste en dessous */
-h2 {
-  margin-top: 0;
-  margin-bottom: 10px; /* espace minimal sous le titre */
-}
+
 /* Bouton filtre */
 .filter-dropdown button {
   background-color: #c89b5e;
@@ -41,6 +36,18 @@ h2 {
 }
 
 /* Menu déroulant qui défile normalement */
+.filter-dropdown-content {
+  display: none;
+  position: relative; /* important pour que le menu suive le flux de la page */
+  margin-top: 10px;  /* espace entre bouton et menu */
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  min-width: 250px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  z-index: 1001;
+}
 
 /* Croix fermer filtre */
 .close-filter{
@@ -68,19 +75,7 @@ h2 {
   padding: 8px 22px;
   border-radius: 30px;
   font-size: 13px;
-  cu.filter-dropdown-content {
-  display: none;
-  position: absolute;
-  top: 50px; /* distance sous le bouton */
-  left: 0;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 15px;
-  width: 250px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  z-index: 1001;
-  }rsor: pointer;
+  cursor: pointer;
   z-index: 100;
 }
 
@@ -337,4 +332,4 @@ function toggleDropdown() {
 </script>
 
 </body>
-</html> 
+</html>
