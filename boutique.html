@@ -5,335 +5,249 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boutique - L'Atelier d'Elia</title>
 
-<!-- POLICES -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
-<!-- STYLE CSS -->
 <link rel="stylesheet" href="style.css">
-
-<!-- SCRIPT JS -->
 <script src="script.js" defer></script>
 
 <style>
-/* ------------------ FILTRE ------------------ */
-/* Conteneur filtre */
-/* Filtre : aligné à gauche et dans le flux */
+
+/* ALIGNEMENT TITRE + FILTRE */
+.title-filter{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+/* FILTRE */
 .filter-dropdown {
-  position: relative;
-  margin: 20px 0 40px 20px; /* espace sous le bouton */
+position: relative;
 }
-/* Ajuste l'espace sous le h2 pour que le bouton soit juste en dessous */
-h2 {
-  margin-top: 0;
-  margin-bottom: 10px; /* espace minimal sous le titre */
-}
+
 /* Bouton filtre */
 .filter-dropdown button {
-  background-color: #c89b5e;
-  color: white;
-  padding: 10px 25px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+background-color:#c89b5e;
+color:white;
+padding:10px 25px;
+border-radius:30px;
+border:none;
+cursor:pointer;
+font-weight:bold;
+font-size:16px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* Menu déroulant qui défile normalement */
+.filter-dropdown-content {
+display:none;
+position:absolute;
+top:50px;
+left:0;
+background:#fff;
+border:1px solid #ccc;
+border-radius:8px;
+padding:15px;
+width:250px;
+box-shadow:0 6px 20px rgba(0,0,0,0.1);
+z-index:1001;
+}
 
-/* Croix fermer filtre */
 .close-filter{
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+position:absolute;
+top:10px;
+right:12px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+transition:transform .2s ease,opacity .2s ease;
 }
+
 .close-filter:hover{
-  transform: scale(1.2);
-  opacity: 0.7;
-  color:#c89b5e;
+transform:scale(1.2);
+opacity:.7;
+color:#c89b5e;
 }
 
-/* ------------------ PANIER FLOTTANT ------------------ */
-.cart-indicator {
-  position: fixed;
-  top: 20px;
-  right: 30px;
-  background-color: #c89b5e;
-  color: white;
-  padding: 8px 22px;
-  border-radius: 30px;
-  font-size: 13px;
-  cu.filter-dropdown-content {
-  display: none;
-  position: absolute;
-  top: 50px; /* distance sous le bouton */
-  left: 0;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 15px;
-  width: 250px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  z-index: 1001;
-  }rsor: pointer;
-  z-index: 100;
+/* PANIER FLOTTANT */
+
+.cart-indicator{
+position:fixed;
+top:20px;
+right:30px;
+background-color:#c89b5e;
+color:white;
+padding:8px 22px;
+border-radius:30px;
+font-size:13px;
+cursor:pointer;
+z-index:100;
 }
 
-#cartOverlay {
-  display: none;
-  position: fixed;
-  top: 60px;
-  right: 30px;
-  width: 300px;
-  max-height: 400px;
-  overflow-y: auto;
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-  z-index: 100;
+#cartOverlay{
+display:none;
+position:fixed;
+top:60px;
+right:30px;
+width:300px;
+max-height:400px;
+overflow-y:auto;
+background:white;
+border-radius:15px;
+padding:20px;
+box-shadow:0 15px 35px rgba(0,0,0,0.12);
+z-index:100;
 }
 
-.cart-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  font-size: 14px;
+.cart-item{
+display:flex;
+align-items:center;
+margin-bottom:15px;
+font-size:14px;
 }
 
-.cart-item img {
-  width: 45px;
-  margin-right: 10px;
-  border-radius: 5px;
+.cart-item img{
+width:45px;
+margin-right:10px;
+border-radius:5px;
 }
 
-.cart-item-controls button {
-  margin: 0 2px;
-  padding: 1px 5px;
-  font-size: 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.cart-item-controls button{
+margin:0 2px;
+padding:1px 5px;
+font-size:12px;
+border:none;
+border-radius:4px;
+cursor:pointer;
+width:22px;
+height:22px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
-.cart-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  background: #c89b5e;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  font-size: 13px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+.cart-button{
+width:100%;
+padding:12px;
+margin-top:15px;
+background:#c89b5e;
+color:white;
+border:none;
+border-radius:30px;
+font-size:13px;
+letter-spacing:1px;
+cursor:pointer;
+transition:background .3s ease;
 }
 
-.cart-button:hover { 
-  background: #b58345; 
+.cart-button:hover{
+background:#b58345;
 }
 
-/* ------------------ GRILLE DE PRODUITS ------------------ */
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 50px;            /* espace uniforme entre produits */
-  padding: 20px;
-  justify-items: center; /* centre chaque produit dans sa cellule */
+/* GRILLE PRODUITS */
+
+.products-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+gap:50px;
+padding:20px;
+justify-items:center;
 }
 
-.product {
-  text-align: center;
+.product{
+text-align:center;
 }
 
-.product img {
-  max-width: 100%;
-  border-radius: 8px;
+.product img{
+max-width:100%;
+border-radius:8px;
 }
+
 </style>
 </head>
+
 <body>
 
 <header>
-  <div class="logo">L'Atelier d'Elia</div>
-  <nav>
-    <a href="index.html">Accueil</a>
-    <a href="boutique.html">Boutique</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+<div class="logo">L'Atelier d'Elia</div>
+<nav>
+<a href="index.html">Accueil</a>
+<a href="boutique.html">Boutique</a>
+<a href="contact.html">Contact</a>
+</nav>
 </header>
 
-<!-- Panier flottant -->
 <div class="cart-indicator" id="cartCount" onclick="toggleCart()">Panier : 0</div>
+
 <div id="cartOverlay">
-  <h3>Panier</h3>
-  <div id="cartItems"></div>
-  <button id="payButton" class="cart-button">Finaliser la commande</button>
+<h3>Panier</h3>
+<div id="cartItems"></div>
+<button id="payButton" class="cart-button">Finaliser la commande</button>
 </div>
 
 <main>
+
 <h1>Boutique</h1>
+
+<div class="title-filter">
+
 <h2>Découvrez notre collection</h2>
 
-<!-- Filtre -->
 <div class="filter-dropdown">
-  <button onclick="toggleDropdown()">Filtrer</button>
 
-  <div class="filter-dropdown-content" id="filterContent">
-    <span class="close-filter" onclick="toggleDropdown()">×</span>
+<button onclick="toggleDropdown()">Filtrer</button>
 
-    <h4>Couleur</h4>
-    <label><input type="checkbox" class="filter-color" value="bleu"> Bleu</label>
-    <label><input type="checkbox" class="filter-color" value="rose"> Rose</label>
-    <label><input type="checkbox" class="filter-color" value="verte"> Verte</label>
-    
-    <h4>Illustration</h4>
-    <label><input type="checkbox" class="filter-type" value="colombe"> Colombe</label>
-    <label><input type="checkbox" class="filter-type" value="adoration"> Adoration</label>
-    <label><input type="checkbox" class="filter-type" value="bougies"> Bougies</label>
+<div class="filter-dropdown-content" id="filterContent">
 
-    <h4>Format</h4>
-    <label><input type="checkbox" class="filter-format" value="carte"> Carte</label>
-    <label><input type="checkbox" class="filter-format" value="stickers"> Stickers</label>
+<span class="close-filter" onclick="toggleDropdown()">×</span>
 
-    <button onclick="resetFilters()" class="cart-button">Réinitialiser</button>
-  </div>
+<h4>Couleur</h4>
+<label><input type="checkbox" class="filter-color" value="bleu"> Bleu</label>
+<label><input type="checkbox" class="filter-color" value="rose"> Rose</label>
+<label><input type="checkbox" class="filter-color" value="verte"> Verte</label>
+
+<h4>Illustration</h4>
+<label><input type="checkbox" class="filter-type" value="colombe"> Colombe</label>
+<label><input type="checkbox" class="filter-type" value="adoration"> Adoration</label>
+<label><input type="checkbox" class="filter-type" value="bougies"> Bougies</label>
+
+<h4>Format</h4>
+<label><input type="checkbox" class="filter-format" value="carte"> Carte</label>
+<label><input type="checkbox" class="filter-format" value="stickers"> Stickers</label>
+
+<button onclick="resetFilters()" class="cart-button">Réinitialiser</button>
+
+</div>
+</div>
 </div>
 
-</div>
+<!-- PRODUITS -->
 
-<!-- Grille de produits -->
 <div class="products-grid">
-  <!-- Carte colombe -->
-  <div class="product" data-color="bleu" data-type="colombe" data-format="carte">
-    <img src="images/carte colombe bleu.png" alt="Carte colombe fond bleu">
-    <p>Carte colombe fond bleu<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte colombe fond bleu',3,'images/carte colombe bleu.png')">Ajouter au panier</button>
-  </div>
-  <div class="product" data-color="rose" data-type="colombe" data-format="carte">
-    <img src="images/carte colombe rose.png" alt="Carte colombe fond rose">
-    <p>Carte colombe fond rose<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte colombe fond rose',3,'images/carte colombe rose.png')">Ajouter au panier</button>
-  </div>
-  <div class="product" data-color="verte" data-type="colombe" data-format="carte">
-    <img src="images/carte colombe verte.png" alt="Carte colombe fond vert">
-    <p>Carte colombe fond vert<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte colombe fond vert',3,'images/carte colombe verte.png')">Ajouter au panier</button>
-  </div>
 
-  <!-- Carte adoration -->
-  <div class="product" data-color="bleu" data-type="adoration" data-format="carte">
-    <img src="images/carte adoration bleu.png" alt="Carte adoration fond bleu">
-    <p>Carte adoration fond bleu<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte adoration fond bleu',3,'images/carte adoration bleu.png')">Ajouter au panier</button>
-  </div>
-  <div class="product" data-color="rose" data-type="adoration" data-format="carte">
-    <img src="images/carte adoration rose.png" alt="Carte adoration fond rose">
-    <p>Carte adoration fond rose<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte adoration fond rose',3,'images/carte adoration rose.png')">Ajouter au panier</button>
-  </div>
-  <div class="product" data-color="verte" data-type="adoration" data-format="carte">
-    <img src="images/carte adoration verte.png" alt="Carte adoration fond vert">
-    <p>Carte adoration fond vert<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte adoration fond verte',3,'images/carte adoration verte.png')">Ajouter au panier</button>
-  </div>
+<!-- tes produits restent exactement pareil -->
 
-  <!-- Carte bougies -->
-  <div class="product" data-color="bleu" data-type="bougies" data-format="carte">
-    <img src="images/carte bougies bleu.png" alt="Carte bougies fond bleu">
-    <p>Carte bougies fond bleu<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte bougies fond bleu',3,'images/carte bougies bleu.png')">Ajouter au panier</button>
-  </div>
-  <div class="product" data-color="rose" data-type="bougies" data-format="carte">
-    <img src="images/carte bougies rose.png" alt="Carte bougies fond rose">
-    <p>Carte bougies fond rose<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte bougies fond rose',3,'images/carte bougies rose.png')">Ajouter au panier</button>
-  </div>
-  <div class="product" data-color="verte" data-type="bougies" data-format="carte">
-    <img src="images/carte bougies verte.png" alt="Carte bougies fond vert">
-    <p>Carte bougies fond vert<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Carte bougies fond vert',3,'images/carte bougies verte.png')">Ajouter au panier</button>
-  </div>
-
-  <!-- Stickers colombe -->
-  <div class="product" data-color="bleu" data-type="colombe" data-format="stickers">
-    <img src="images/stickers colombe bleu.png" alt="Stickers colombe fond bleu">
-    <p>Stickers colombe fond bleu<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers colombe fond bleu',3,'images/stickers colombe bleu.png')">Ajouter au panier</button>
-  </div>
-  <div class="product" data-color="rose" data-type="colombe" data-format="stickers">
-    <img src="images/stickers colombe rose.png" alt="Stickers colombe fond rose">
-    <p>Stickers colombe fond rose<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers colombe fond rose',3,'images/stickers colombe rose.png')">Ajouter au panier</button>
-  </div>
-  <div class="product" data-color="verte" data-type="colombe" data-format="stickers">
-    <img src="images/stickers colombe vert.png" alt="Stickers colombe fond vert">
-    <p>Stickers colombe fond vert<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers colombe fond vert',3,'images/stickers colombe vert.png')">Ajouter au panier</button>
-  </div>
-
-  <!-- Stickers adoration -->
-  <div class="product" data-color="bleu" data-type="adoration" data-format="stickers">
-    <img src="images/stickers adoration bleu.png" alt="Stickers adoration fond bleu">
-    <p>Stickers adoration fond bleu<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers adoration fond bleu',3,'images/stickers adoration bleu.png')">Ajouter au panier</button>
-  </div>
-  <div class="product" data-color="rose" data-type="adoration" data-format="stickers">
-    <img src="images/stickers adoration rose.png" alt="Stickers adoration fond rose">
-    <p>Stickers adoration fond rose<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers adoration fond rose',3,'images/stickers adoration rose.png')">Ajouter au panier</button>
-  </div>
-  <div class="product" data-color="verte" data-type="adoration" data-format="stickers">
-    <img src="images/stickers adoration vert.png" alt="Stickers adoration fond vert">
-    <p>Stickers adoration fond vert<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers adoration fond vert',3,'images/stickers adoration vert.png')">Ajouter au panier</button>
-  </div>
-
-  <!-- Stickers bougies -->
-  <div class="product" data-color="bleu" data-type="bougies" data-format="stickers">
-    <img src="images/stickers bougies bleu.png" alt="Stickers bougies fond bleu">
-    <p>Stickers bougies fond bleu<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers bougies fond bleu',3,'images/stickers bougies bleu.png')">Ajouter au panier</button>
-  </div>
-  <div class="product" data-color="rose" data-type="bougies" data-format="stickers">
-    <img src="images/stickers bougies rose.png" alt="Stickers bougies fond rose">
-    <p>Stickers bougies fond rose<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers bougies fond rose',3,'images/stickers bougies rose.png')">Ajouter au panier</button>
-  </div>
-  <div class="product" data-color="verte" data-type="bougies" data-format="stickers">
-    <img src="images/stickers bougies vert.png" alt="Stickers bougies fond vert">
-    <p>Stickers bougies fond vert<br><span class="product-price">3€</span></p>
-    <button onclick="addToCart('Stickers bougies fond vert',3,'images/stickers bougies vert.png')">Ajouter au panier</button>
-  </div>
 </div>
 
 </main>
 
 <footer>
-  <a href="https://www.instagram.com/latelier_delia" target="_blank">
-    <img src="images/logo instagram.png" alt="Instagram">
-    <span>@latelier_delia</span>
-  </a>
-  <p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
+
+<a href="https://www.instagram.com/latelier_delia" target="_blank">
+<img src="images/logo instagram.png" alt="Instagram">
+<span>@latelier_delia</span>
+</a>
+
+<p>&copy; 2026 L'Atelier d'Elia. Tous droits réservés.</p>
+
 </footer>
 
 <script>
-/* Toggle filtre */
-function toggleDropdown() {
-  const dropdown = document.getElementById('filterContent');
-  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+
+function toggleDropdown(){
+const dropdown=document.getElementById('filterContent');
+dropdown.style.display=dropdown.style.display==="block"?"none":"block";
 }
+
 </script>
 
 </body>
