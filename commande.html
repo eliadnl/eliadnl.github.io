@@ -162,7 +162,9 @@ function shippingCalc(w) {
   if (w <= 500) return 7.45;
   if (w <= 1000) return 9.30;
   if (w <= 2000) return 11.15;
-  return 0;
+
+  // sécurité si dépassement
+  return 15.00;
 }
 
 /* ---------------- RENDER ---------------- */
