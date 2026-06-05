@@ -217,6 +217,7 @@ function submitOrder() {
   let final = total + ship;
 
   let list = "";
+
   cart.forEach(i => {
     list += i.name + " x" + i.quantity + "\n";
   });
@@ -230,22 +231,47 @@ function submitOrder() {
     panier: list,
     poids: w + "g",
     livraison: ship + "€",
-    total: final + "€"
+    total: final.toFixed(2) + "€"
   };
 
-  // EMAIL ADMIN
-  emailjs.send("service_9fdb3is","template_admin",params);
+  // Vérification champs obligatoires
+  if(
+    !params.prenom ||
+    !params.nom ||
+    !params.email_client ||
+    !params.adresse
+  ){
+    alert("Veuillez remplir tous les champs obligatoires.");
+    return;
+  }
 
-  // EMAIL CLIENT
-  emailjs.send("service_9fdb3is","template_client",params);
+  // Sauvegarde du montant pour payement.html
+  localStorage.setItem("totalCommande", final.toFixed(2));
 
-  alert("Commande envoyée !");
-  localStorage.removeItem("cart");
-  window.location.href = "payement.html";
+  // Sauvegarde du détail commande (optionnel mais utile)
+  localStorage.setItem("poidsCommande", w);
+  localStorage.setItem("livraisonCommande", ship);
+
+  // Envoi emails
+  Promise.all([
+    emailjs.send("service_9fdb3is","template_admin",params),
+    emailjs.send("service_9fdb3is","template_client",params)
+  ])
+  .then(() => {
+
+    alert("Commande envoyée avec succès !");
+
+    // IMPORTANT : on garde totalCommande
+    localStorage.removeItem("cart");
+
+    window.location.href = "payement.html";
+
+  })
+  .catch(error => {
+
+    console.error(error);
+    alert("Erreur lors de l'envoi de la commande.");
+
+  });
+
 }
-
-render();
-</script>
-
-</body>
-</html>
