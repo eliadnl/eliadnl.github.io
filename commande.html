@@ -15,51 +15,65 @@ body {
   color:#2d2d2d;
 }
 
+/* HEADER */
 header {
   background:#fff;
   padding:20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  position:relative;
 }
 
-.logo {font-family:'Playfair Display';font-size:24px;}
+.logo {
+  font-family:'Playfair Display';
+  font-size:24px;
+}
 
-.close {
-  position:absolute;
-  right:15px;
-  top:10px;
-  font-size:22px;
-  cursor:pointer;
+.header-right {
+  display:flex;
+  gap:10px;
+  align-items:center;
 }
 
 button {
   background:#c89b5e;
   color:white;
   border:none;
-  padding:10px 20px;
-  border-radius:25px;
+  padding:10px 15px;
+  border-radius:20px;
   cursor:pointer;
 }
 
-.cart {
+.close {
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* TABLE */
+table {
   width:90%;
   margin:auto;
   border-collapse:collapse;
 }
 
-.cart th, .cart td {
+th,td {
   border-bottom:1px solid #ddd;
   padding:10px;
   text-align:center;
 }
 
+img {
+  width:60px;
+  border-radius:5px;
+}
+
 .delete {
   color:red;
   cursor:pointer;
+  font-size:18px;
 }
 
+/* FORM */
 input, textarea {
   width:90%;
   margin:10px auto;
@@ -73,16 +87,24 @@ input, textarea {
 
 <header>
   <div class="logo">L'Atelier d'Elia</div>
-  <div class="close" onclick="window.location.href='index.html'">✖</div>
+
+  <div class="header-right">
+    <button onclick="window.location.href='index.html'">
+      Continuer le shopping
+    </button>
+
+    <div class="close" onclick="window.location.href='index.html'">✖</div>
+  </div>
 </header>
 
 <main>
 
 <h2 style="text-align:center;">Votre commande</h2>
 
-<table class="cart">
+<table>
   <thead>
     <tr>
+      <th>Image</th>
       <th>Article</th>
       <th>Prix</th>
       <th>Qté</th>
@@ -106,7 +128,6 @@ input, textarea {
 
 <div style="text-align:center;">
 <button onclick="submitOrder()">Commander</button>
-<button onclick="window.location.href='shop.html'">Continuer le shopping</button>
 </div>
 
 </main>
@@ -122,11 +143,13 @@ let total = 0;
 // ---------------- POIDS ----------------
 function weightCalc() {
   let w = 0;
+
   cart.forEach(i => {
     const n = i.name.toLowerCase();
     if(n.includes("carte")) w += i.quantity * 10;
     if(n.includes("sticker")) w += i.quantity * 5;
   });
+
   return w;
 }
 
@@ -141,18 +164,19 @@ function shippingCalc(w) {
   return 0;
 }
 
-// ---------------- AFFICHAGE ----------------
+// ---------------- RENDER ----------------
 function render() {
   const body = document.getElementById("cartBody");
   body.innerHTML = "";
   total = 0;
 
-  cart.forEach((i, index) => {
+  cart.forEach((i,index) => {
     let sub = i.price * i.quantity;
     total += sub;
 
     body.innerHTML += `
       <tr>
+        <td><img src="${i.imgSrc}"></td>
         <td>${i.name}</td>
         <td>${i.price}€</td>
         <td>${i.quantity}</td>
@@ -165,7 +189,7 @@ function render() {
   update();
 }
 
-// ---------------- SUPPRIMER ----------------
+// ---------------- DELETE ----------------
 function remove(i) {
   cart.splice(i,1);
   localStorage.setItem("cart", JSON.stringify(cart));
@@ -179,13 +203,13 @@ function update() {
   let final = total + ship;
 
   document.getElementById("info").innerHTML =
-    "Poids : " + w + "g | Livraison : " + ship + "€";
+    "Poids : " + w + "g | Livraison : " + ship.toFixed(2) + "€";
 
   document.getElementById("total").innerHTML =
     "Total : " + final.toFixed(2) + "€";
 }
 
-// ---------------- COMMANDE ----------------
+// ---------------- ORDER ----------------
 function submitOrder() {
 
   let w = weightCalc();
@@ -209,12 +233,10 @@ function submitOrder() {
     total: final + "€"
   };
 
-  // EMAIL TOI + CLIENT (2 envois)
+  // EMAIL ADMIN
+  emailjs.send("service_9fdb3is","template_admin",params);
 
-  // 1 → TOI
-  emailjs.send("service_9fdb3is","template_72wi0b9",params);
-
-  // 2 → CLIENT (template différent)
+  // EMAIL CLIENT
   emailjs.send("service_9fdb3is","template_client",params);
 
   alert("Commande envoyée !");
