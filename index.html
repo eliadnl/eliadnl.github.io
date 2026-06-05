@@ -1,6 +1,3 @@
-## 📁 `index.html`
-
-```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,292 +6,187 @@
 
 <title>L'Atelier d'Elia</title>
 
-<!-- POLICES -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<!-- ===== HEADER ===== -->
-<header>
-
-  <div class="logo">L'Atelier d'Elia</div>
-
-  <nav>
-    <a href="index.html">Accueil</a>
-    <a href="boutique.html">Boutique</a>
-    <a href="newsletter.html">Newsletter</a>
-    <a href="apropos.html">À propos</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-
-  <div class="cart-indicator" id="cartCount" onclick="toggleCart()">
-    Panier : 0
-  </div>
-
-</header>
-
-<!-- ===== MAIN ===== -->
-<main>
-
-<h1>DERNIÈRE COLLECTION</h1>
-<h2>Découvrez les nouveautés de l’atelier</h2>
-
-<div class="collection-layout">
-
-  <!-- VIDEO -->
-  <div class="video-box">
-    <video controls>
-      <source src="video.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <!-- PRODUITS -->
-  <div class="products-grid">
-
-    <div class="product" onclick="addToCart('Colombe', 29, 'images/carte colombe bleu.png')">
-      <img src="images/carte colombe bleu.png">
-      <p>Colombe</p>
-    </div>
-
-    <div class="product" onclick="addToCart('Adoration', 39, 'images/carte adoration rose.png')">
-      <img src="images/carte adoration rose.png">
-      <p>Adoration</p>
-    </div>
-
-    <div class="product" onclick="addToCart('Bougies', 25, 'images/carte bougies verte.png')">
-      <img src="images/carte bougies verte.png">
-      <p>Bougies</p>
-    </div>
-
-  </div>
-
-</div>
-
-</main>
-
-<!-- ===== PANIER ===== -->
-<div id="cartOverlay">
-
-  <h3>Votre panier</h3>
-  <div id="cartItems"></div>
-
-  <button id="payButton">Payer</button>
-
-</div>
-
-<!-- ===== FOOTER ===== -->
-<footer>
-  <a href="https://www.instagram.com/latelier_delia" target="_blank">
-    <img src="images/logo instagram.png">
-    <span>@latelier_delia</span>
-  </a>
-  <p>&copy; 2026 L'Atelier d'Elia</p>
-</footer>
-
-<script src="script.js"></script>
-</body>
-</html>
-```
-
----
-
-## 🎨 `style.css`
-
-```css
+<style>
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  background-color: #f6f1ea;
-  color: #2d2d2d;
+  background: #f6f1ea;
 }
 
 /* HEADER */
 header {
-  background-color: #ffffff;
-  padding: 20px 60px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  padding: 20px 60px;
+  background: white;
   border-bottom: 1px solid #eee;
 }
 
 .logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-}
-
-nav {
-  display: flex;
-  gap: 30px;
+  font-family: 'Playfair Display';
+  font-size: 22px;
 }
 
 nav a {
+  margin: 0 15px;
   text-decoration: none;
-  color: #2d2d2d;
-  font-size: 14px;
+  color: black;
+  font-size: 13px;
   text-transform: uppercase;
 }
 
-.cart-indicator {
-  background-color: #c89b5e;
+.cart {
+  background: #c89b5e;
   color: white;
-  padding: 8px 22px;
-  border-radius: 30px;
+  padding: 8px 18px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
 /* TITRES */
 h1 {
-  font-family: 'Playfair Display';
   text-align: center;
-  font-size: 42px;
+  font-family: 'Playfair Display';
   margin-top: 40px;
 }
 
 h2 {
-  font-family: 'Playfair Display';
   text-align: center;
   color: #c89b5e;
 }
 
-/* LAYOUT */
-.collection-layout {
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-  padding: 40px;
-}
-
-/* VIDEO */
-.video-box video {
-  width: 350px;
-  border-radius: 10px;
-}
-
 /* PRODUITS */
-.products-grid {
+.products {
   display: flex;
+  justify-content: center;
   gap: 40px;
+  margin-top: 40px;
 }
 
 .product {
   width: 180px;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.product:hover {
-  transform: translateY(-5px);
 }
 
 .product img {
   width: 100%;
-  border-radius: 6px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.product:hover img {
+  transform: scale(1.05);
 }
 
 /* PANIER */
-#cartOverlay {
-  display: none;
+#cartBox {
   position: fixed;
+  right: 20px;
   top: 90px;
-  right: 30px;
-  width: 300px;
+  width: 280px;
   background: white;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  display: none;
 }
 
-.cart-item {
+.item {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
 }
 
-.cart-item img {
+.item img {
   width: 40px;
   border-radius: 5px;
 }
 
-#payButton {
-  width: 100%;
-  padding: 10px;
+button {
   background: #c89b5e;
-  border: none;
   color: white;
-  border-radius: 30px;
+  border: none;
+  padding: 8px;
+  width: 100%;
+  border-radius: 20px;
+  cursor: pointer;
 }
+</style>
+</head>
 
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 20px;
-}
+<body>
 
-footer a {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  text-decoration: none;
-  color: black;
-}
-footer img {
-  width: 50px;
-}
-```
+<header>
+  <div class="logo">L'Atelier d'Elia</div>
 
----
+  <nav>
+    <a href="#">Accueil</a>
+    <a href="#">Boutique</a>
+    <a href="#">Contact</a>
+  </nav>
 
-## ⚙️ `script.js`
+  <div class="cart" onclick="toggleCart()">
+    Panier : <span id="count">0</span>
+  </div>
+</header>
 
-```javascript
+<h1>Dernière collection</h1>
+<h2>Découvrez les nouveautés</h2>
+
+<div class="products">
+
+  <div class="product" onclick="addToCart('Colombe', 29, 'https://via.placeholder.com/150')">
+    <img src="https://via.placeholder.com/150">
+    <p>Colombe</p>
+  </div>
+
+  <div class="product" onclick="addToCart('Adoration', 39, 'https://via.placeholder.com/150')">
+    <img src="https://via.placeholder.com/150">
+    <p>Adoration</p>
+  </div>
+
+</div>
+
+<!-- PANIER -->
+<div id="cartBox">
+  <h3>Panier</h3>
+  <div id="items"></div>
+</div>
+
+<script>
 let cart = [];
 
-const cartCount = document.getElementById('cartCount');
-const cartOverlay = document.getElementById('cartOverlay');
-const cartItems = document.getElementById('cartItems');
-
-if(localStorage.getItem('cart')){
-  cart = JSON.parse(localStorage.getItem('cart'));
-  updateCart();
-  renderCart();
-}
-
 function addToCart(name, price, img){
-  cart.push({name, price, img, quantity:1});
-  saveCart();
-}
 
-function saveCart(){
-  localStorage.setItem('cart', JSON.stringify(cart));
+  cart.push({name, price, img});
   updateCart();
-  renderCart();
 }
 
 function updateCart(){
-  let total = cart.reduce((sum,i)=> sum + i.quantity, 0);
-  cartCount.textContent = "Panier : " + total;
-}
 
-function renderCart(){
-  cartItems.innerHTML = "";
-  cart.forEach(item=>{
-    let div = document.createElement("div");
-    div.className = "cart-item";
-    div.innerHTML = `
-      <img src="${item.img}">
-      <div>${item.name} - ${item.price}€</div>
+  document.getElementById("count").textContent = cart.length;
+
+  let box = document.getElementById("items");
+  box.innerHTML = "";
+
+  cart.forEach(p => {
+    box.innerHTML += `
+      <div class="item">
+        <img src="${p.img}">
+        <div>${p.name} - ${p.price}€</div>
+      </div>
     `;
-    cartItems.appendChild(div);
   });
 }
 
 function toggleCart(){
-  cartOverlay.style.display =
-    cartOverlay.style.display === "block" ? "none" : "block";
+  let box = document.getElementById("cartBox");
+  box.style.display = box.style.display === "block" ? "none" : "block";
 }
-```
+</script>
+
+</body>
+</html>
