@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -57,8 +56,7 @@ table {
   border-collapse:collapse;
 }
 
-th,
-td {
+th,td {
   border-bottom:1px solid #ddd;
   padding:10px;
   text-align:center;
@@ -76,8 +74,7 @@ img {
 }
 
 /* FORM */
-input,
-textarea {
+input, textarea {
   width:90%;
   margin:10px auto;
   padding:10px;
@@ -96,9 +93,7 @@ textarea {
       Continuer le shopping
     </button>
 
-    <div class="close" onclick="window.location.href='index.html'">
-      ✖
-    </div>
+    <div class="close" onclick="window.location.href='index.html'">✖</div>
   </div>
 </header>
 
@@ -117,12 +112,10 @@ textarea {
       <th></th>
     </tr>
   </thead>
-
   <tbody id="cartBody"></tbody>
 </table>
 
 <div id="info" style="text-align:right;margin-right:5%;"></div>
-
 <div id="total" style="text-align:right;margin-right:5%;font-weight:bold;"></div>
 
 <h3 style="text-align:center;">Infos client</h3>
@@ -131,11 +124,10 @@ textarea {
 <input id="lastName" placeholder="Nom">
 <input id="email" placeholder="Email">
 <input id="address" placeholder="Adresse">
-
 <textarea id="comment" placeholder="Message"></textarea>
 
 <div style="text-align:center;">
-  <button onclick="submitOrder()">Commander</button>
+<button onclick="submitOrder()">Commander</button>
 </div>
 
 </main>
@@ -143,58 +135,43 @@ textarea {
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script>
-
 emailjs.init("dc3TyqsgD03Ugf4_8");
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let total = 0;
 
 // ---------------- POIDS ----------------
-
 function weightCalc() {
-
   let w = 0;
 
   cart.forEach(i => {
-
     const n = i.name.toLowerCase();
-
     if(n.includes("carte")) w += i.quantity * 10;
     if(n.includes("sticker")) w += i.quantity * 5;
-
   });
 
   return w;
 }
 
 // ---------------- LIVRAISON ----------------
-
 function shippingCalc(w) {
-
   if(w <= 20) return 1.55;
   if(w <= 100) return 3.10;
   if(w <= 250) return 5.25;
   if(w <= 500) return 7.45;
   if(w <= 1000) return 9.30;
   if(w <= 2000) return 11.15;
-
   return 0;
 }
 
 // ---------------- RENDER ----------------
-
 function render() {
-
   const body = document.getElementById("cartBody");
-
   body.innerHTML = "";
-
   total = 0;
 
   cart.forEach((i,index) => {
-
     let sub = i.price * i.quantity;
-
     total += sub;
 
     body.innerHTML += `
@@ -204,36 +181,25 @@ function render() {
         <td>${i.price}€</td>
         <td>${i.quantity}</td>
         <td>${sub.toFixed(2)}€</td>
-        <td>
-          <span class="delete" onclick="remove(${index})">✖</span>
-        </td>
+        <td><span class="delete" onclick="remove(${index})">✖</span></td>
       </tr>
     `;
-
   });
 
   update();
 }
 
 // ---------------- DELETE ----------------
-
 function remove(i) {
-
   cart.splice(i,1);
-
   localStorage.setItem("cart", JSON.stringify(cart));
-
   render();
 }
 
 // ---------------- UPDATE ----------------
-
 function update() {
-
   let w = weightCalc();
-
   let ship = shippingCalc(w);
-
   let final = total + ship;
 
   document.getElementById("info").innerHTML =
@@ -244,25 +210,18 @@ function update() {
 }
 
 // ---------------- ORDER ----------------
-
 function submitOrder() {
 
   let w = weightCalc();
-
   let ship = shippingCalc(w);
-
   let final = total + ship;
 
   let list = "";
-
   cart.forEach(i => {
-
     list += i.name + " x" + i.quantity + "\n";
-
   });
 
   let params = {
-
     prenom: document.getElementById("firstName").value,
     nom: document.getElementById("lastName").value,
     email_client: document.getElementById("email").value,
@@ -272,36 +231,21 @@ function submitOrder() {
     poids: w + "g",
     livraison: ship + "€",
     total: final + "€"
-
   };
 
   // EMAIL ADMIN
-
-  emailjs.send(
-    "service_9fdb3is",
-    "template_admin",
-    params
-  );
+  emailjs.send("service_9fdb3is","template_admin",params);
 
   // EMAIL CLIENT
-
-  emailjs.send(
-    "service_9fdb3is",
-    "template_client",
-    params
-  );
+  emailjs.send("service_9fdb3is","template_client",params);
 
   alert("Commande envoyée !");
-
   localStorage.removeItem("cart");
-
   window.location.href = "payement.html";
 }
 
 render();
-
 </script>
 
 </body>
 </html>
-```
