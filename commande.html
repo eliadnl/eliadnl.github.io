@@ -121,7 +121,7 @@ input, textarea {
 <textarea id="comment" placeholder="Message"></textarea>
 
 <div style="text-align:center;">
-<button onclick="submitOrder()">Commander</button>
+<button onclick="submitOrder()">Payer</button>
 </div>
 
 </main>
@@ -142,13 +142,8 @@ function weightCalc() {
   cart.forEach(i => {
     const name = (i.name || "").toLowerCase();
 
-    if (name.includes("carte")) {
-      w += i.quantity * 10;
-    }
-
-    if (name.includes("sticker")) {
-      w += i.quantity * 5;
-    }
+    if (name.includes("carte")) w += i.quantity * 10;
+    if (name.includes("sticker")) w += i.quantity * 5;
   });
 
   return w;
@@ -162,8 +157,6 @@ function shippingCalc(w) {
   if (w <= 500) return 7.45;
   if (w <= 1000) return 9.30;
   if (w <= 2000) return 11.15;
-
-  // sécurité si dépassement
   return 15.00;
 }
 
@@ -213,7 +206,7 @@ function update() {
     `Total : ${final.toFixed(2)}€`;
 }
 
-/* ---------------- ORDER ---------------- */
+/* ---------------- ORDER + PAYPAL ---------------- */
 function submitOrder() {
 
   let w = weightCalc();
@@ -234,7 +227,8 @@ function submitOrder() {
     panier: list,
     poids: w + "g",
     livraison: ship.toFixed(2) + "€",
-    total: final.toFixed(2) + "€"
+    total: final.toFixed(2) + "€",
+    admin_email: "eliadnlpro@outlook.com"
   };
 
   if (!cart.length) {
@@ -253,7 +247,9 @@ function submitOrder() {
   ]).then(() => {
 
     localStorage.removeItem("cart");
-    window.location.href = "payement.html";
+
+    // REDIRECTION PAYPAL
+    window.location.href = "https://www.paypal.com/paypalme/EliaDNL/";
 
   }).catch(err => {
     console.log(err);
