@@ -1,0 +1,300 @@
+## 📁 `index.html`
+
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>L'Atelier d'Elia</title>
+
+<!-- POLICES -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+
+  <div class="logo">L'Atelier d'Elia</div>
+
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="boutique.html">Boutique</a>
+    <a href="newsletter.html">Newsletter</a>
+    <a href="apropos.html">À propos</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="cart-indicator" id="cartCount" onclick="toggleCart()">
+    Panier : 0
+  </div>
+
+</header>
+
+<!-- ===== MAIN ===== -->
+<main>
+
+<h1>DERNIÈRE COLLECTION</h1>
+<h2>Découvrez les nouveautés de l’atelier</h2>
+
+<div class="collection-layout">
+
+  <!-- VIDEO -->
+  <div class="video-box">
+    <video controls>
+      <source src="video.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- PRODUITS -->
+  <div class="products-grid">
+
+    <div class="product" onclick="addToCart('Colombe', 29, 'images/carte colombe bleu.png')">
+      <img src="images/carte colombe bleu.png">
+      <p>Colombe</p>
+    </div>
+
+    <div class="product" onclick="addToCart('Adoration', 39, 'images/carte adoration rose.png')">
+      <img src="images/carte adoration rose.png">
+      <p>Adoration</p>
+    </div>
+
+    <div class="product" onclick="addToCart('Bougies', 25, 'images/carte bougies verte.png')">
+      <img src="images/carte bougies verte.png">
+      <p>Bougies</p>
+    </div>
+
+  </div>
+
+</div>
+
+</main>
+
+<!-- ===== PANIER ===== -->
+<div id="cartOverlay">
+
+  <h3>Votre panier</h3>
+  <div id="cartItems"></div>
+
+  <button id="payButton">Payer</button>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <a href="https://www.instagram.com/latelier_delia" target="_blank">
+    <img src="images/logo instagram.png">
+    <span>@latelier_delia</span>
+  </a>
+  <p>&copy; 2026 L'Atelier d'Elia</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
+```
+
+---
+
+## 🎨 `style.css`
+
+```css
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f6f1ea;
+  color: #2d2d2d;
+}
+
+/* HEADER */
+header {
+  background-color: #ffffff;
+  padding: 20px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #2d2d2d;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.cart-indicator {
+  background-color: #c89b5e;
+  color: white;
+  padding: 8px 22px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+/* TITRES */
+h1 {
+  font-family: 'Playfair Display';
+  text-align: center;
+  font-size: 42px;
+  margin-top: 40px;
+}
+
+h2 {
+  font-family: 'Playfair Display';
+  text-align: center;
+  color: #c89b5e;
+}
+
+/* LAYOUT */
+.collection-layout {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* VIDEO */
+.video-box video {
+  width: 350px;
+  border-radius: 10px;
+}
+
+/* PRODUITS */
+.products-grid {
+  display: flex;
+  gap: 40px;
+}
+
+.product {
+  width: 180px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+}
+
+.product img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+/* PANIER */
+#cartOverlay {
+  display: none;
+  position: fixed;
+  top: 90px;
+  right: 30px;
+  width: 300px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.cart-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cart-item img {
+  width: 40px;
+  border-radius: 5px;
+}
+
+#payButton {
+  width: 100%;
+  padding: 10px;
+  background: #c89b5e;
+  border: none;
+  color: white;
+  border-radius: 30px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+}
+
+footer a {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  color: black;
+}
+footer img {
+  width: 50px;
+}
+```
+
+---
+
+## ⚙️ `script.js`
+
+```javascript
+let cart = [];
+
+const cartCount = document.getElementById('cartCount');
+const cartOverlay = document.getElementById('cartOverlay');
+const cartItems = document.getElementById('cartItems');
+
+if(localStorage.getItem('cart')){
+  cart = JSON.parse(localStorage.getItem('cart'));
+  updateCart();
+  renderCart();
+}
+
+function addToCart(name, price, img){
+  cart.push({name, price, img, quantity:1});
+  saveCart();
+}
+
+function saveCart(){
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCart();
+  renderCart();
+}
+
+function updateCart(){
+  let total = cart.reduce((sum,i)=> sum + i.quantity, 0);
+  cartCount.textContent = "Panier : " + total;
+}
+
+function renderCart(){
+  cartItems.innerHTML = "";
+  cart.forEach(item=>{
+    let div = document.createElement("div");
+    div.className = "cart-item";
+    div.innerHTML = `
+      <img src="${item.img}">
+      <div>${item.name} - ${item.price}€</div>
+    `;
+    cartItems.appendChild(div);
+  });
+}
+
+function toggleCart(){
+  cartOverlay.style.display =
+    cartOverlay.style.display === "block" ? "none" : "block";
+}
+```
