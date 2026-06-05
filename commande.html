@@ -216,58 +216,51 @@ function submitOrder() {
   let ship = shippingCalc(w);
   let final = total + ship;
 
-  let list = "";
+  const prenom = document.getElementById("firstName").value.trim();
+  const nom = document.getElementById("lastName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const adresse = document.getElementById("address").value.trim();
+  const commentaire = document.getElementById("comment").value.trim();
 
-  cart.forEach(i => {
-    list += i.name + " x" + i.quantity + "\n";
-  });
-
-  let params = {
-    prenom: document.getElementById("firstName").value,
-    nom: document.getElementById("lastName").value,
-    email_client: document.getElementById("email").value,
-    adresse: document.getElementById("address").value,
-    commentaire: document.getElementById("comment").value,
-    panier: list,
-    poids: w + "g",
-    livraison: ship + "€",
-    total: final.toFixed(2) + "€"
-  };
-
-  // Vérification champs obligatoires
-  if(
-    !params.prenom ||
-    !params.nom ||
-    !params.email_client ||
-    !params.adresse
-  ){
+  if (!prenom || !nom || !email || !adresse) {
     alert("Veuillez remplir tous les champs obligatoires.");
     return;
   }
 
-  // Sauvegarde du montant pour payement.html
-  localStorage.setItem("totalCommande", final.toFixed(2));
+  let list = "";
 
-  // Sauvegarde du détail commande (optionnel mais utile)
-  localStorage.setItem("poidsCommande", w);
-  localStorage.setItem("livraisonCommande", ship);
+  cart.forEach(i => {
+    list += `${i.name} x${i.quantity}\n`;
+  });
 
-  // Envoi emails
+  let params = {
+    prenom: prenom,
+    nom: nom,
+    email_client: email,
+    adresse: adresse,
+    commentaire: commentaire,
+    panier: list,
+    poids: w + "g",
+    livraison: ship.toFixed(2) + "€",
+    total: final.toFixed(2) + "€"
+  };
+
   Promise.all([
-    emailjs.send("service_9fdb3is","template_admin",params),
-    emailjs.send("service_9fdb3is","template_client",params)
+    emailjs.send("service_9fdb3is", "template_admin", params),
+    emailjs.send("service_9fdb3is", "template_client", params)
   ])
   .then(() => {
 
-    alert("Commande envoyée avec succès !");
-
-    // IMPORTANT : on garde totalCommande
+    // Vider le panier
     localStorage.removeItem("cart");
 
-    window.location.href = "payement.html";
+    // Redirection PayPal avec montant total
+    window.location.href =
+      "https://www.paypal.com/paypalme/EliaDNL/" +
+      final.toFixed(2);
 
   })
-  .catch(error => {
+  .catch((error) => {
 
     console.error(error);
     alert("Erreur lors de l'envoi de la commande.");
