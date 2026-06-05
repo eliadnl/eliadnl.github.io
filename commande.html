@@ -14,6 +14,7 @@ body {
   font-family:'Montserrat',sans-serif;
   color:#2d2d2d;
 }
+
 header, footer {
   background:#fff;
   padding:20px 40px;
@@ -22,10 +23,25 @@ header, footer {
   align-items:center;
   border-bottom:1px solid #eee;
 }
-.logo {font-family:'Playfair Display',serif;font-size:24px;}
-h1,h2 {text-align:center;}
-h1 {font-size:36px;margin-top:40px;}
-h2 {color:#c89b5e;margin-bottom:20px;}
+
+.logo {
+  font-family:'Playfair Display',serif;
+  font-size:24px;
+}
+
+h1,h2 {
+  text-align:center;
+}
+
+h1 {
+  font-size:36px;
+  margin-top:40px;
+}
+
+h2 {
+  color:#c89b5e;
+  margin-bottom:20px;
+}
 
 .cart-table {
   width:90%;
@@ -33,12 +49,17 @@ h2 {color:#c89b5e;margin-bottom:20px;}
   margin:0 auto 20px;
   border-collapse:collapse;
 }
+
 .cart-table th, .cart-table td {
   border-bottom:1px solid #ddd;
   padding:10px;
   text-align:center;
 }
-.cart-table img {width:50px;border-radius:5px;}
+
+.cart-table img {
+  width:50px;
+  border-radius:5px;
+}
 
 input[type="text"], input[type="email"], textarea {
   width:90%;
@@ -141,23 +162,45 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let total = 0;
 let discount = 0;
 
-let weight = 0;
-let shipping = 0;
+// ================== POIDS ==================
+function calculateWeight() {
+  let weight = 0;
 
-// ---------------- CART ----------------
+  cart.forEach(item => {
+    const qty = item.quantity || 0;
+
+    if (item.type === "carte") {
+      weight += qty * 10;
+    }
+
+    if (item.type === "sticker") {
+      weight += qty * 5;
+    }
+  });
+
+  return weight;
+}
+
+// ================== LIVRAISON ==================
+function calculateShipping(weight) {
+  if (weight <= 20) return 1.55;
+  if (weight <= 100) return 3.10;
+  if (weight <= 250) return 5.25;
+  if (weight <= 500) return 7.45;
+  if (weight <= 1000) return 9.30;
+  if (weight <= 2000) return 11.15;
+  return 0;
+}
+
+// ================== PANIER ==================
 function renderCart() {
   const tbody = document.querySelector('#cartTable tbody');
   tbody.innerHTML = '';
   total = 0;
-  weight = 0;
 
   cart.forEach(item => {
     const subtotal = item.price * item.quantity;
     total += subtotal;
-
-    // POIDS (nouveau système)
-    if(item.type === "carte") weight += item.quantity * 10;
-    if(item.type === "sticker") weight += item.quantity * 5;
 
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -170,34 +213,24 @@ function renderCart() {
     tbody.appendChild(tr);
   });
 
-  calculateShipping();
-  updateTotal();
+  updateDisplay();
 }
 
-// ---------------- SHIPPING ----------------
-function calculateShipping() {
-  if(weight <= 20) shipping = 1.55;
-  else if(weight <= 100) shipping = 3.10;
-  else if(weight <= 250) shipping = 5.25;
-  else if(weight <= 500) shipping = 7.45;
-  else if(weight <= 1000) shipping = 9.30;
-  else if(weight <= 2000) shipping = 11.15;
-  else shipping = 0;
-}
+// ================== AFFICHAGE ==================
+function updateDisplay() {
+  const weight = calculateWeight();
+  const shipping = calculateShipping(weight);
 
-// ---------------- TOTAL ----------------
-function updateTotal() {
-  const base = total - discount;
-  const final = base + shipping;
+  const finalTotal = (total - discount + shipping);
 
   document.getElementById('details').innerHTML =
-    `Poids : ${weight} g | Livraison : ${shipping.toFixed(2)} €`;
+    `Poids total : ${weight} g | Livraison : ${shipping.toFixed(2)} €`;
 
   document.getElementById('total').textContent =
-    `Total : ${final.toFixed(2)} €`;
+    `Total : ${finalTotal.toFixed(2)} €`;
 }
 
-// ---------------- PROMO ----------------
+// ================== PROMO ==================
 function applyPromo() {
   const code = document.getElementById('promoCode').value.trim();
 
@@ -209,10 +242,10 @@ function applyPromo() {
     if(code) alert('Code invalide');
   }
 
-  updateTotal();
+  updateDisplay();
 }
 
-// ---------------- ORDER ----------------
+// ================== COMMANDE ==================
 function submitOrder() {
   const firstName = document.getElementById('firstName').value.trim();
   const lastName = document.getElementById('lastName').value.trim();
@@ -221,7 +254,7 @@ function submitOrder() {
   const comment = document.getElementById('comment').value.trim();
 
   if(!firstName || !lastName || !email || !address) {
-    alert('Remplis tous les champs obligatoires');
+    alert('Remplis tous les champs');
     return;
   }
 
@@ -235,6 +268,8 @@ function submitOrder() {
     panierTexte += `${item.name} x${item.quantity}\n`;
   });
 
+  const weight = calculateWeight();
+  const shipping = calculateShipping(weight);
   const finalTotal = (total - discount + shipping).toFixed(2);
 
   const templateParams = {
