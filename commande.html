@@ -15,7 +15,6 @@ body {
   color:#2d2d2d;
 }
 
-/* HEADER */
 header {
   background:#fff;
   padding:20px;
@@ -49,7 +48,6 @@ button {
   cursor:pointer;
 }
 
-/* TABLE */
 table {
   width:90%;
   margin:auto;
@@ -73,7 +71,6 @@ img {
   font-size:18px;
 }
 
-/* FORM */
 input, textarea {
   width:90%;
   margin:10px auto;
@@ -89,10 +86,7 @@ input, textarea {
   <div class="logo">L'Atelier d'Elia</div>
 
   <div class="header-right">
-    <button onclick="window.location.href='index.html'">
-      Continuer le shopping
-    </button>
-
+    <button onclick="window.location.href='index.html'">Continuer le shopping</button>
     <div class="close" onclick="window.location.href='index.html'">✖</div>
   </div>
 </header>
@@ -135,48 +129,56 @@ input, textarea {
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script>
+
 emailjs.init("dc3TyqsgD03Ugf4_8");
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let total = 0;
 
-// ---------------- POIDS ----------------
+/* ---------------- POIDS ---------------- */
 function weightCalc() {
   let w = 0;
 
   cart.forEach(i => {
-    const n = i.name.toLowerCase();
-    if(n.includes("carte")) w += i.quantity * 10;
-    if(n.includes("sticker")) w += i.quantity * 5;
+    const name = (i.name || "").toLowerCase();
+
+    if (name.includes("carte")) {
+      w += i.quantity * 10;
+    }
+
+    if (name.includes("sticker")) {
+      w += i.quantity * 5;
+    }
   });
 
   return w;
 }
 
-// ---------------- LIVRAISON ----------------
+/* ---------------- LIVRAISON ---------------- */
 function shippingCalc(w) {
-  if(w <= 20) return 1.55;
-  if(w <= 100) return 3.10;
-  if(w <= 250) return 5.25;
-  if(w <= 500) return 7.45;
-  if(w <= 1000) return 9.30;
-  if(w <= 2000) return 11.15;
+  if (w <= 20) return 1.55;
+  if (w <= 100) return 3.10;
+  if (w <= 250) return 5.25;
+  if (w <= 500) return 7.45;
+  if (w <= 1000) return 9.30;
+  if (w <= 2000) return 11.15;
   return 0;
 }
 
-// ---------------- RENDER ----------------
+/* ---------------- RENDER ---------------- */
 function render() {
   const body = document.getElementById("cartBody");
   body.innerHTML = "";
   total = 0;
 
-  cart.forEach((i,index) => {
-    let sub = i.price * i.quantity;
+  cart.forEach((i, index) => {
+
+    let sub = (i.price || 0) * (i.quantity || 1);
     total += sub;
 
     body.innerHTML += `
       <tr>
-        <td><img src="${i.imgSrc}"></td>
+        <td><img src="${i.imgSrc || ''}"></td>
         <td>${i.name}</td>
         <td>${i.price}€</td>
         <td>${i.quantity}</td>
@@ -189,27 +191,27 @@ function render() {
   update();
 }
 
-// ---------------- DELETE ----------------
+/* ---------------- DELETE ---------------- */
 function remove(i) {
-  cart.splice(i,1);
+  cart.splice(i, 1);
   localStorage.setItem("cart", JSON.stringify(cart));
   render();
 }
 
-// ---------------- UPDATE ----------------
+/* ---------------- UPDATE ---------------- */
 function update() {
   let w = weightCalc();
   let ship = shippingCalc(w);
   let final = total + ship;
 
   document.getElementById("info").innerHTML =
-    "Poids : " + w + "g | Livraison : " + ship.toFixed(2) + "€";
+    `Poids : ${w}g | Livraison : ${ship.toFixed(2)}€`;
 
   document.getElementById("total").innerHTML =
-    "Total : " + final.toFixed(2) + "€";
+    `Total : ${final.toFixed(2)}€`;
 }
 
-// ---------------- ORDER ----------------
+/* ---------------- ORDER ---------------- */
 function submitOrder() {
 
   let w = weightCalc();
@@ -218,7 +220,7 @@ function submitOrder() {
 
   let list = "";
   cart.forEach(i => {
-    list += i.name + " x" + i.quantity + "\n";
+    list += `${i.name} x${i.quantity}\n`;
   });
 
   let params = {
@@ -229,22 +231,36 @@ function submitOrder() {
     commentaire: document.getElementById("comment").value,
     panier: list,
     poids: w + "g",
-    livraison: ship + "€",
-    total: final + "€"
+    livraison: ship.toFixed(2) + "€",
+    total: final.toFixed(2) + "€"
   };
 
-  // EMAIL ADMIN
-  emailjs.send("service_9fdb3is","template_admin",params);
+  if (!cart.length) {
+    alert("Panier vide !");
+    return;
+  }
 
-  // EMAIL CLIENT
-  emailjs.send("service_9fdb3is","template_client",params);
+  if (!params.email_client) {
+    alert("Email requis !");
+    return;
+  }
 
-  alert("Commande envoyée !");
-  localStorage.removeItem("cart");
-  window.location.href = "payement.html";
+  Promise.all([
+    emailjs.send("service_9fdb3is", "template_admin", params),
+    emailjs.send("service_9fdb3is", "template_client", params)
+  ]).then(() => {
+
+    localStorage.removeItem("cart");
+    window.location.href = "payement.html";
+
+  }).catch(err => {
+    console.log(err);
+    alert("Erreur envoi commande");
+  });
 }
 
 render();
+
 </script>
 
 </body>
